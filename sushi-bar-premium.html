@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sushi Bar — Färsk sushi i Örnsköldsvik</title>
+<meta name="description" content="Sushi Bar på Skolgatan 4B i Örnsköldsvik. Färsk sushi till bra pris — ät på plats, hämta eller beställ hemkörning via Foodora. Ring 076-446 40 90.">
+<meta property="og:title" content="Sushi Bar — Färsk sushi i Örnsköldsvik">
+<meta property="og:description" content="4,6 av 5 på Foodora. Ät på plats, take away eller hemkörning.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Marcellus&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     SUSHI BAR — PREMIUM DARK
+     Palett: nori-mörkgrön / laxrosa-korall / risvit / wasabi
+     ============================================================ */
+  :root{
+    --bg:#0D1512;
+    --bg-2:#121B17;
+    --surface:rgba(245,241,232,.045);
+    --surface-strong:rgba(245,241,232,.08);
+    --line:rgba(255,159,124,.14);
+    --salmon:#F97B5C;
+    --salmon-bright:#FF8F70;
+    --coral:#EF5D6F;
+    --salmon-soft:#FFC9B3;
+    --wasabi:#9DBF6E;
+    --text:#F5F1E8;
+    --text-dim:rgba(245,241,232,.62);
+    --radius:18px;
+    --radius-sm:12px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; line-height:1.1;}
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--salmon); outline-offset:3px; border-radius:4px;}
+  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
+
+  /* =============== LOADER =============== */
+  .loader{
+    position:fixed; inset:0; z-index:200;
+    background:var(--bg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+    transition:opacity .6s ease, visibility .6s;
+  }
+  .loader.done{opacity:0; visibility:hidden;}
+  .loader svg{width:70px; height:70px;}
+  .loader .ring-draw{
+    stroke-dasharray:170; stroke-dashoffset:170;
+    animation:draw 1s var(--ease) .1s forwards;
+  }
+  .loader .center-dot{opacity:0; animation:fadeIn .4s ease .9s forwards;}
+  .loader .word{
+    font-family:'Marcellus', serif; font-size:1.05rem; letter-spacing:.3em;
+    text-transform:uppercase; color:var(--salmon-soft);
+    opacity:0; animation:fadeIn .6s ease .6s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  /* =============== REVEALS =============== */
+  .reveal{
+    opacity:0; transform:translateY(30px);
+    transition:opacity .85s var(--ease), transform .85s var(--ease);
+    transition-delay:var(--d,0s);
+  }
+  .reveal.in{opacity:1; transform:none;}
+  .reveal-scale{transform:scale(.94) translateY(18px);}
+  .reveal-scale.in{transform:none;}
+
+  /* =============== NAVBAR =============== */
+  header.site{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    transition:background .35s, box-shadow .35s, border-color .35s;
+    border-bottom:1px solid transparent;
+  }
+  header.site.scrolled{
+    background:rgba(13,21,18,.74);
+    backdrop-filter:blur(16px) saturate(1.3);
+    -webkit-backdrop-filter:blur(16px) saturate(1.3);
+    border-bottom-color:var(--line);
+    box-shadow:0 12px 40px -20px rgba(0,0,0,.8);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; transition:padding .3s;}
+  header.site.scrolled nav.wrap{padding-top:12px; padding-bottom:12px;}
+  .brandmark{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .maki{width:36px; height:36px; flex:none; transition:transform .5s var(--ease);}
+  .brandmark:hover .maki{transform:rotate(120deg);}
+  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:1.3rem; color:var(--salmon-soft);}
+  .brand-sub{font-family:'IBM Plex Mono', monospace; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim);}
+  nav ul{list-style:none; display:flex; gap:6px;}
+  nav ul a{
+    text-decoration:none; font-size:.9rem; font-weight:500; color:var(--text-dim);
+    padding:8px 14px; border-radius:999px;
+    transition:color .25s, background .25s;
+  }
+  nav ul a:hover{color:var(--text);}
+  nav ul a.active{
+    color:var(--salmon-soft);
+    background:var(--surface-strong);
+    box-shadow:inset 0 0 0 1px var(--line);
+  }
+  .nav-cta{
+    background:linear-gradient(120deg, var(--salmon-bright), var(--coral)); color:#fff; text-decoration:none;
+    padding:11px 22px; border-radius:999px; font-weight:600; font-size:.87rem;
+    position:relative; overflow:hidden; white-space:nowrap;
+    transition:transform .25s var(--ease), box-shadow .25s;
+    box-shadow:0 8px 24px -10px rgba(249,123,92,.7);
+  }
+  .nav-cta::before{
+    content:""; position:absolute; top:0; left:-80%; width:55%; height:100%;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
+    transform:skewX(-20deg); transition:left .55s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+  .nav-cta:hover::before{left:135%;}
+  .nav-toggle{display:none;}
+
+  /* =============== HERO =============== */
+  .hero{
+    min-height:100svh;
+    display:flex; align-items:center;
+    position:relative; overflow:hidden;
+    padding:140px 0 100px;
+    background:
+      radial-gradient(1100px 600px at 82% -10%, rgba(249,123,92,.26), transparent 60%),
+      radial-gradient(800px 500px at 8% 110%, rgba(157,191,110,.1), transparent 60%),
+      var(--bg);
+  }
+  .hero-grid-lines{
+    position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,201,179,.04) 0 1px, transparent 1px 72px),
+      repeating-linear-gradient(90deg, rgba(255,201,179,.04) 0 1px, transparent 1px 72px);
+  }
+  .hero-orb{position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none; will-change:transform;}
+  .orb-1{width:460px; height:460px; background:rgba(249,123,92,.28); top:-140px; right:-100px;}
+  .orb-2{width:380px; height:380px; background:rgba(157,191,110,.12); bottom:-160px; left:-120px;}
+  .hero-glyph{
+    position:absolute; right:4%; top:50%; transform:translateY(-50%);
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(13rem,26vw,24rem);
+    color:transparent;
+    -webkit-text-stroke:1.5px rgba(255,201,179,.13);
+    line-height:1; pointer-events:none; user-select:none; will-change:transform;
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .stage{opacity:0; transform:translateY(28px); animation:rise .95s var(--ease) forwards;}
+  .stage.s1{animation-delay:1.1s;} .stage.s2{animation-delay:1.25s;}
+  .stage.s3{animation-delay:1.4s;} .stage.s4{animation-delay:1.55s;}
+  .stage.s5{animation-delay:1.75s;}
+  @keyframes rise{to{opacity:1; transform:none;}}
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:.75rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--salmon-soft);
+    padding:9px 18px; border-radius:999px;
+    background:var(--surface); border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    margin-bottom:28px;
+  }
+  .hero-eyebrow .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--wasabi);
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(157,191,110,.5);}
+    70%{box-shadow:0 0 0 9px rgba(157,191,110,0);}
+    100%{box-shadow:0 0 0 0 rgba(157,191,110,0);}
+  }
+  .hero h1{
+    font-family:'Marcellus', serif;
+    font-size:clamp(2.6rem, 5.8vw, 4.6rem);
+    font-weight:400; letter-spacing:.04em; text-transform:uppercase;
+    max-width:15ch; margin-bottom:26px; line-height:1.12;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(105deg, var(--salmon-soft), var(--salmon-bright) 55%, var(--coral));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lede{font-size:1.15rem; color:var(--text-dim); max-width:46ch; margin-bottom:40px;}
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:56px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 30px; border-radius:999px; font-weight:600; font-size:.96rem;
+    text-decoration:none; position:relative; overflow:hidden;
+    transition:transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+  }
+  .btn::before{
+    content:""; position:absolute; top:0; left:-80%; width:55%; height:100%;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.32), transparent);
+    transform:skewX(-20deg); transition:left .55s ease;
+  }
+  .btn:hover::before{left:135%;}
+  .btn:hover{transform:translateY(-3px);}
+  .btn:active{transform:translateY(-1px);}
+  .btn .ico{transition:transform .3s var(--ease);}
+  .btn:hover .ico{transform:translateX(4px);}
+  .btn-primary{
+    background:linear-gradient(120deg, var(--salmon-bright), var(--coral));
+    color:#fff; box-shadow:0 16px 40px -14px rgba(249,123,92,.7);
+  }
+  .btn-primary:hover{box-shadow:0 20px 50px -14px rgba(255,143,112,.85);}
+  .btn-glass{
+    background:var(--surface); border:1px solid var(--line); color:var(--text);
+    backdrop-filter:blur(8px);
+  }
+  .btn-glass:hover{background:var(--surface-strong); border-color:rgba(255,201,179,.3);}
+  .hero-stats{
+    display:flex; flex-wrap:wrap;
+    border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--surface); backdrop-filter:blur(10px);
+    max-width:680px; overflow:hidden;
+  }
+  .hero-stats>div{flex:1; min-width:170px; padding:22px 26px; border-right:1px solid var(--line);}
+  .hero-stats>div:last-child{border-right:none;}
+  .hero-stats strong{
+    display:block; font-family:'Fraunces', serif; font-weight:600;
+    font-size:1.5rem; color:var(--salmon-soft); font-variant-numeric:tabular-nums;
+  }
+  .hero-stats span{font-family:'IBM Plex Mono', monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim);}
+  .scroll-hint{
+    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color:var(--text-dim); font-family:'IBM Plex Mono', monospace; font-size:.66rem;
+    letter-spacing:.2em; text-transform:uppercase; z-index:2;
+    opacity:0; animation:fadeIn 1s ease 2.4s forwards;
+  }
+  .scroll-hint .line{
+    width:1px; height:44px; background:linear-gradient(var(--salmon-soft), transparent);
+    animation:drip 2s ease-in-out infinite; transform-origin:top;
+  }
+  @keyframes drip{0%,100%{transform:scaleY(.4); opacity:.4;} 50%{transform:scaleY(1); opacity:1;}}
+
+  /* =============== SECTION SHELL =============== */
+  section{padding:110px 0; position:relative;}
+  .eyebrow{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--salmon);
+    padding:7px 16px; border-radius:999px;
+    border:1px solid var(--line); background:var(--surface);
+    margin-bottom:20px;
+  }
+  .section-head{max-width:660px; margin-bottom:60px;}
+  .section-head h2{font-size:clamp(2rem,3.4vw,2.9rem); font-weight:600; margin-bottom:18px; letter-spacing:-.01em;}
+  .section-head p{font-size:1.06rem; color:var(--text-dim); max-width:54ch;}
+  .divider{height:1px; width:100%; background:linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);}
+
+  /* =============== SERVICES =============== */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .service-card{
+    background:linear-gradient(160deg, var(--surface-strong), var(--surface));
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px 30px; backdrop-filter:blur(10px);
+    position:relative; overflow:hidden;
+    transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
+  }
+  .service-card::after{
+    content:""; position:absolute; inset:0; border-radius:var(--radius);
+    background:radial-gradient(320px 200px at var(--mx,50%) var(--my,0%), rgba(249,123,92,.14), transparent 70%);
+    opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .service-card:hover{transform:translateY(-8px); border-color:rgba(255,201,179,.32); box-shadow:0 30px 60px -30px rgba(0,0,0,.8);}
+  .service-card:hover::after{opacity:1;}
+  .service-ico{
+    width:56px; height:56px; border-radius:14px;
+    background:linear-gradient(140deg, rgba(249,123,92,.3), rgba(249,123,92,.08));
+    border:1px solid rgba(255,143,112,.35);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; margin-bottom:24px;
+    transition:transform .4s var(--ease);
+  }
+  .service-card:hover .service-ico{transform:scale(1.12) rotate(-6deg);}
+  .service-card h3{font-size:1.35rem; font-weight:600; margin-bottom:12px; color:var(--salmon-soft);}
+  .service-card p{font-size:.96rem; color:var(--text-dim); margin-bottom:18px;}
+  .service-card .meta{font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--salmon); letter-spacing:.06em;}
+  .service-card .meta a{color:inherit;}
+
+  /* =============== GALLERY =============== */
+  .gallery{background:var(--bg-2);}
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:18px;}
+  .g-item{
+    border-radius:var(--radius); overflow:hidden; position:relative;
+    border:1px solid var(--line); cursor:default;
+    display:flex; align-items:flex-end; padding:22px;
+    transition:transform .45s var(--ease), box-shadow .45s;
+  }
+  .g-item:hover{transform:translateY(-6px) scale(1.015); box-shadow:0 28px 56px -26px rgba(0,0,0,.85); z-index:2;}
+  .g-item .bg{position:absolute; inset:0; transition:transform .8s var(--ease);}
+  .g-item:hover .bg{transform:scale(1.08);}
+  .g-item .shade{position:absolute; inset:0; background:linear-gradient(180deg, transparent 30%, rgba(13,21,18,.85));}
+  .g-item .label{position:relative; z-index:2;}
+  .g-item .label .t{font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem;}
+  .g-item .label .p{font-family:'IBM Plex Mono', monospace; font-size:.75rem; color:var(--salmon-soft); margin-top:4px;}
+  .g-wide{grid-column:span 2;}
+  .g-tall{grid-row:span 2;}
+  /* sushi-gradienter (byts mot riktiga foton) */
+  .bg-lax{background:radial-gradient(circle at 30% 30%, #FF9C74, #C2513A 70%);}
+  .bg-tonfisk{background:radial-gradient(circle at 70% 25%, #E85D6C, #8C2333 75%);}
+  .bg-avokado{background:radial-gradient(circle at 40% 60%, #A8C877, #4E6B33 75%);}
+  .bg-tamago{background:radial-gradient(circle at 60% 40%, #F5CE72, #B78A2C 70%);}
+  .bg-raka{background:radial-gradient(circle at 30% 70%, #FFB39A, #C96A4D 75%);}
+  .bg-mix{background:radial-gradient(circle at 65% 60%, #F98D6B, #6E3A2B 78%);}
+  .g-item .bg::after{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.1) 1px, transparent 1.5px);
+    background-size:14px 14px; opacity:.35;
+  }
+  .gallery-note{margin-top:26px; font-size:.86rem; color:var(--text-dim); max-width:64ch;}
+
+  /* =============== REVIEWS =============== */
+  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .review-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:32px 28px; backdrop-filter:blur(10px);
+    display:flex; flex-direction:column; gap:16px;
+    transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
+  }
+  .review-card:hover{transform:translateY(-8px); border-color:rgba(255,201,179,.3); box-shadow:0 28px 56px -28px rgba(0,0,0,.8);}
+  .review-card .q{font-family:'Fraunces', serif; font-size:2.6rem; line-height:0; color:var(--salmon); height:16px;}
+  .review-card .stars{color:var(--salmon-bright); letter-spacing:2px; font-size:.92rem;}
+  .review-card blockquote{font-size:.99rem; font-style:italic; opacity:.9;}
+  .review-card .who{
+    margin-top:auto; padding-top:14px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--text-dim);
+  }
+  .rating-strip{
+    margin-top:44px;
+    display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+    background:linear-gradient(120deg, rgba(249,123,92,.2), rgba(157,191,110,.08));
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 32px; backdrop-filter:blur(10px);
+  }
+  .rating-strip .block{display:flex; align-items:center; gap:14px;}
+  .rating-strip .score{font-family:'Fraunces', serif; font-size:2.7rem; font-weight:600; color:var(--salmon-soft); line-height:1; font-variant-numeric:tabular-nums;}
+  .rating-strip .lbl{font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--text-dim); line-height:1.5;}
+  .rating-strip .src{margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--text-dim);}
+
+  /* =============== ABOUT + MAKI-VISUAL =============== */
+  .about{background:var(--bg-2);}
+  .about-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;}
+  .about-copy p{color:var(--text-dim); font-size:1.04rem; margin-bottom:20px;}
+  .about-copy p strong{color:var(--salmon-soft); font-weight:600;}
+  .maki-visual{
+    aspect-ratio:1/1; max-width:420px; margin:0 auto; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    animation:floaty 8s ease-in-out infinite;
+  }
+  @keyframes floaty{0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);}}
+  .maki-visual svg{width:100%; height:100%; filter:drop-shadow(0 40px 60px rgba(0,0,0,.7));}
+  .maki-spin{transform-origin:50% 50%; animation:spin 60s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .about-badges{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;}
+  .badge{
+    font-family:'IBM Plex Mono', monospace; font-size:.74rem;
+    padding:10px 16px; border-radius:999px;
+    background:var(--surface); border:1px solid var(--line);
+    transition:background .3s, border-color .3s, transform .3s var(--ease);
+  }
+  .badge:hover{background:rgba(249,123,92,.22); border-color:rgba(255,143,112,.4); transform:translateY(-2px);}
+
+  /* =============== CONTACT =============== */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px 32px; backdrop-filter:blur(10px);
+  }
+  .panel h3{font-size:1.3rem; color:var(--salmon-soft); margin-bottom:24px; font-weight:600;}
+  .hours-table{width:100%; border-collapse:collapse;}
+  .hours-table tr{border-bottom:1px solid var(--line); transition:background .2s;}
+  .hours-table tr:last-child{border-bottom:none;}
+  .hours-table tr:hover{background:var(--surface);}
+  .hours-table td{padding:13px 8px; font-size:.95rem;}
+  .hours-table td:first-child{font-weight:500;}
+  .hours-table td:last-child{text-align:right; font-family:'IBM Plex Mono', monospace; font-size:.86rem; color:var(--text-dim);}
+  .hours-table tr.today td{color:var(--salmon-soft);}
+  .hours-table tr.today td:first-child::after{
+    content:"idag"; font-family:'IBM Plex Mono', monospace; font-size:.62rem;
+    margin-left:10px; padding:3px 9px; border-radius:999px;
+    background:rgba(249,123,92,.18); border:1px solid rgba(255,143,112,.35);
+    vertical-align:middle;
+  }
+  .hours-table tr.closed td{opacity:.45;}
+  .contact-links{display:flex; flex-direction:column;}
+  .contact-links a{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 8px; border-bottom:1px solid var(--line);
+    text-decoration:none; font-weight:500; font-size:1rem;
+    transition:background .25s, padding-left .25s var(--ease);
+    border-radius:8px;
+  }
+  .contact-links a:hover{background:var(--surface); padding-left:16px;}
+  .contact-links a:last-child{border-bottom:none;}
+  .contact-links .arrow{font-family:'IBM Plex Mono', monospace; color:var(--salmon); transition:transform .3s var(--ease);}
+  .contact-links a:hover .arrow{transform:translateX(6px);}
+  .map-note{
+    margin-top:24px; padding:20px 22px; border-radius:var(--radius-sm);
+    background:linear-gradient(120deg, rgba(249,123,92,.18), transparent);
+    border:1px solid rgba(255,143,112,.25);
+    font-size:.92rem; color:var(--text-dim);
+  }
+  .map-note strong{color:var(--text); display:block; font-family:'Fraunces', serif; font-size:1.15rem; margin-bottom:4px;}
+
+  /* =============== CTA BAND =============== */
+  .cta-band{
+    padding:90px 0;
+    background:
+      radial-gradient(700px 340px at 50% 0%, rgba(249,123,92,.32), transparent 70%),
+      var(--bg-2);
+    text-align:center;
+  }
+  .cta-band h2{font-size:clamp(1.9rem,3.4vw,2.8rem); font-weight:600; margin-bottom:16px;}
+  .cta-band h2 em{font-style:italic; color:var(--salmon-soft); font-weight:500;}
+  .cta-band p{color:var(--text-dim); margin-bottom:36px;}
+
+  /* =============== FOOTER =============== */
+  footer{background:var(--bg); border-top:1px solid var(--line); padding:64px 0 30px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:44px; margin-bottom:48px;}
+  .footer-brand p{margin-top:14px; font-size:.92rem; color:var(--text-dim); max-width:32ch;}
+  footer h4{font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--salmon); margin-bottom:18px;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:11px; font-size:.92rem;}
+  footer li a{text-decoration:none; color:var(--text-dim); transition:color .2s, padding-left .25s var(--ease);}
+  footer li a:hover{color:var(--salmon-soft); padding-left:6px;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    padding-top:26px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:.73rem; color:var(--text-dim);
+  }
+
+  /* =============== TO TOP =============== */
+  .to-top{
+    position:fixed; right:26px; bottom:26px; z-index:110;
+    width:50px; height:50px; border-radius:50%;
+    background:var(--surface-strong); color:var(--salmon-soft);
+    border:1px solid var(--line); cursor:pointer; font-size:1.15rem;
+    backdrop-filter:blur(10px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transform:translateY(14px);
+    transition:opacity .35s, transform .35s var(--ease), background .25s, border-color .25s;
+  }
+  .to-top.show{opacity:1; pointer-events:auto; transform:none;}
+  .to-top:hover{background:rgba(249,123,92,.35); border-color:rgba(255,143,112,.5);}
+
+  /* =============== RESPONSIVE =============== */
+  @media (max-width:960px){
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr; grid-auto-rows:190px;}
+    .review-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr; gap:48px;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:32px;}
+  }
+  @media (max-width:760px){
+    nav ul{
+      position:fixed; top:66px; left:16px; right:16px;
+      background:rgba(13,21,18,.95); backdrop-filter:blur(20px);
+      border:1px solid var(--line); border-radius:var(--radius);
+      flex-direction:column; padding:18px; gap:6px;
+      transform:translateY(-16px); opacity:0; pointer-events:none;
+      transition:transform .3s var(--ease), opacity .3s;
+      z-index:90;
+    }
+    nav ul.open{transform:none; opacity:1; pointer-events:auto;}
+    nav ul a{display:block;}
+    .nav-toggle{
+      display:block; background:var(--surface); border:1px solid var(--line);
+      color:var(--text); border-radius:999px; padding:9px 16px;
+      font-family:'IBM Plex Mono', monospace; font-size:.78rem; cursor:pointer;
+    }
+    .services-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:1fr; grid-auto-rows:200px;}
+    .g-wide{grid-column:span 1;}
+    .g-tall{grid-row:span 1;}
+    .hero-stats{flex-direction:column;}
+    .hero-stats>div{border-right:none; border-bottom:1px solid var(--line);}
+    .hero-stats>div:last-child{border-bottom:none;}
+    section{padding:76px 0;}
+    .hero{padding:120px 0 80px;}
+    .hero-glyph{display:none;}
+    .rating-strip .src{margin-left:0;}
+  }
+
+  /* =============== REDUCED MOTION =============== */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *, *::before, *::after{
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;
+    }
+    .reveal, .stage{opacity:1; transform:none;}
+    .loader{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER: maki-rulle som ritas fram -->
+<div class="loader" id="loader" aria-hidden="true">
+  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle class="ring-draw" cx="30" cy="30" r="26" stroke="#F97B5C" stroke-width="4"/>
+    <circle class="center-dot" cx="30" cy="30" r="17" fill="#F5F1E8"/>
+    <circle class="center-dot" cx="30" cy="30" r="8" fill="#F97B5C"/>
+  </svg>
+  <div class="word">Sushi Bar</div>
+</div>
+
+<!-- NAV -->
+<header class="site" id="siteHeader">
+  <nav class="wrap">
+    <a class="brandmark" href="#hem" aria-label="Sushi Bar, till toppen">
+      <svg class="maki" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="30" cy="30" r="27" fill="#182420" stroke="#F97B5C" stroke-width="2"/>
+        <circle cx="30" cy="30" r="18" fill="#F5F1E8"/>
+        <circle cx="30" cy="30" r="8.5" fill="#F97B5C"/>
+        <circle cx="24" cy="25" r="2.6" fill="#9DBF6E"/>
+        <circle cx="37" cy="33" r="2.2" fill="#EF5D6F"/>
+      </svg>
+      <div>
+        <div class="brand-name">Sushi Bar</div>
+        <div class="brand-sub">Örnsköldsvik · Skolgatan 4B</div>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList">Meny</button>
+    <ul id="navList">
+      <li><a href="#bestall" data-nav="bestall">Beställ</a></li>
+      <li><a href="#galleri" data-nav="galleri">Sushin</a></li>
+      <li><a href="#omdomen" data-nav="omdomen">Omdömen</a></li>
+      <li><a href="#om" data-nav="om">Om oss</a></li>
+      <li><a href="#kontakt" data-nav="kontakt">Kontakt</a></li>
+    </ul>
+    <a class="nav-cta" href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener">Beställ nu</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hem">
+  <div class="hero-grid-lines" aria-hidden="true"></div>
+  <div class="hero-orb orb-1" data-parallax="0.18" aria-hidden="true"></div>
+  <div class="hero-orb orb-2" data-parallax="0.1" aria-hidden="true"></div>
+  <div class="hero-glyph" data-parallax="0.06" aria-hidden="true">鮨</div>
+  <div class="wrap">
+    <div class="hero-eyebrow stage s1"><span class="dot"></span> Öppet idag 12–20 · Take away &amp; hemkörning</div>
+    <h1 class="stage s2">Färsk <em>sushi</em> i Örnsköldsvik</h1>
+    <p class="lede stage s3">Handrullad sushi till bra pris, mitt på Skolgatan. Ät på plats, hämta din beställning eller få den hemkörd via Foodora — betyg 4,6 av 5 av över 850 gäster.</p>
+    <div class="hero-ctas stage s4">
+      <a class="btn btn-primary" href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener">Beställ via Foodora <span class="ico">→</span></a>
+      <a class="btn btn-glass" href="tel:+46764464090">Ring 076-446 40 90</a>
+    </div>
+    <div class="hero-stats stage s5">
+      <div><strong data-count="4.6" data-decimals="1">0,0</strong><span>Foodora · 851 recensioner</span></div>
+      <div><strong data-count="4.0" data-decimals="1">0,0</strong><span>Google · 217 recensioner</span></div>
+      <div><strong>6 dgr</strong><span>Öppet per vecka</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span>Scrolla</span><span class="line"></span></div>
+</section>
+
+<!-- BESTÄLL / TJÄNSTER -->
+<section id="bestall">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Tre sätt att få din sushi</span>
+      <h2 class="reveal" style="--d:.08s;">Ät här, hämta eller få hemkört</h2>
+      <p class="reveal" style="--d:.16s;">Samma färska sushi oavsett hur du beställer — rullad samma dag, aldrig igår.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card reveal" style="--d:.05s;">
+        <div class="service-ico" aria-hidden="true">🍣</div>
+        <h3>Ät på plats</h3>
+        <p>Slå dig ner på Skolgatan 4B och ät din sushi nyrullad, direkt från disken.</p>
+        <div class="meta">Tis–fre 11–20 · lör–sön 12–20</div>
+      </article>
+      <article class="service-card reveal" style="--d:.15s;">
+        <div class="service-ico" aria-hidden="true">🥢</div>
+        <h3>Take away</h3>
+        <p>Ring in din beställning så packar vi den klar — hämtning utanför funkar också.</p>
+        <div class="meta"><a href="tel:+46764464090">Ring 076-446 40 90</a></div>
+      </article>
+      <article class="service-card reveal" style="--d:.25s;">
+        <div class="service-ico" aria-hidden="true">🛵</div>
+        <h3>Hemkörning</h3>
+        <p>Beställ via Foodora och få sushin hem till dörren — betygsatt 4,6 av 5 av våra gäster.</p>
+        <div class="meta"><a href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener">Öppna Foodora →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALLERI -->
+<section class="gallery" id="galleri">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Ur disken</span>
+      <h2 class="reveal" style="--d:.08s;">Det gästerna kommer tillbaka för</h2>
+      <p class="reveal" style="--d:.16s;">Inte flest varianter i stan — men det vi gör, gör vi ordentligt. Aktuell meny och priser hittar du på Foodora eller i disken.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item g-wide reveal reveal-scale" style="--d:.05s;">
+        <div class="bg bg-lax"></div><div class="shade"></div>
+        <div class="label"><div class="t">Laxnigiri</div><div class="p">Husets favorit</div></div>
+      </div>
+      <div class="g-item reveal reveal-scale" style="--d:.1s;">
+        <div class="bg bg-tamago"></div><div class="shade"></div>
+        <div class="label"><div class="t">Tamago</div><div class="p">Sött omelettäcke</div></div>
+      </div>
+      <div class="g-item g-tall reveal reveal-scale" style="--d:.15s;">
+        <div class="bg bg-mix"></div><div class="shade"></div>
+        <div class="label"><div class="t">Blandad bricka</div><div class="p">13 bitar + misosoppa</div></div>
+      </div>
+      <div class="g-item reveal reveal-scale" style="--d:.2s;">
+        <div class="bg bg-avokado"></div><div class="shade"></div>
+        <div class="label"><div class="t">Vegetarisk rulle</div><div class="p">Avokado &amp; gurka</div></div>
+      </div>
+      <div class="g-item reveal reveal-scale" style="--d:.25s;">
+        <div class="bg bg-raka"></div><div class="shade"></div>
+        <div class="label"><div class="t">Räknigiri</div><div class="p">Klassikern</div></div>
+      </div>
+      <div class="g-item g-wide reveal reveal-scale" style="--d:.3s;">
+        <div class="bg bg-tonfisk"></div><div class="shade"></div>
+        <div class="label"><div class="t">Maki-mix</div><div class="p">Lax · tonfisk · avokado</div></div>
+      </div>
+    </div>
+    <p class="gallery-note reveal">Bildytorna är förberedda för restaurangens egna foton — byts rakt av mot riktiga bilder i samma format utan att layouten påverkas.</p>
+  </div>
+</section>
+
+<!-- OMDÖMEN -->
+<section id="omdomen">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Kundomdömen</span>
+      <h2 class="reveal" style="--d:.08s;">Vad gästerna säger</h2>
+      <p class="reveal" style="--d:.16s;">Riktiga röster från Foodora, Google och Hitta.se.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card reveal" style="--d:.05s;">
+        <div class="q" aria-hidden="true">"</div>
+        <div class="stars" aria-label="Positivt omdöme">★★★★★</div>
+        <blockquote>Riktigt bra sushi — säkert topp 3 av dem jag provat i Norrland. Bra pris också!</blockquote>
+        <div class="who"><span>Gäst</span><span>Omdöme</span></div>
+      </article>
+      <article class="review-card reveal" style="--d:.15s;">
+        <div class="q" aria-hidden="true">"</div>
+        <div class="stars" aria-label="4 av 5 stjärnor">★★★★☆</div>
+        <blockquote>Inte så många varianter, men det som finns är mycket bra.</blockquote>
+        <div class="who"><span>Recensent</span><span>Hitta.se</span></div>
+      </article>
+      <article class="review-card reveal" style="--d:.25s;">
+        <div class="q" aria-hidden="true">"</div>
+        <div class="stars" aria-label="Positivt omdöme">★★★★★</div>
+        <blockquote>Den prisvärda och goda sushin i stan — riktigt, riktigt bra.</blockquote>
+        <div class="who"><span>Gäst</span><span>Omdöme</span></div>
+      </article>
+    </div>
+    <div class="rating-strip reveal reveal-scale">
+      <div class="block">
+        <div class="score" data-count="4.6" data-decimals="1">0,0</div>
+        <div class="lbl">FOODORA<br>851 recensioner</div>
+      </div>
+      <div class="block">
+        <div class="score" data-count="4.0" data-decimals="1">0,0</div>
+        <div class="lbl">GOOGLE<br>217 recensioner</div>
+      </div>
+      <div class="src">Recensionerna verifieras ej av Sushi Bar</div>
+    </div>
+  </div>
+</section>
+
+<!-- OM OSS -->
+<section class="about" id="om">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <span class="eyebrow reveal">Om Sushi Bar</span>
+      <h2 class="reveal" style="--d:.08s; font-size:clamp(1.9rem,3vw,2.6rem); margin-bottom:22px;">Litet ställe. Kort meny. Färsk sushi.</h2>
+      <p class="reveal" style="--d:.16s;">Sushi Bar på Skolgatan 4B gör en sak och gör den bra: <strong>handrullad sushi till ärliga priser</strong>. Menyn är medvetet kort — det som ligger i disken är rullat samma dag.</p>
+      <p class="reveal" style="--d:.24s;">Ät på plats, sväng förbi och hämta, eller låt Foodora köra hem brickan. Över 850 gäster har satt betyg — <strong>4,6 av 5</strong> talar sitt eget språk.</p>
+      <div class="about-badges reveal" style="--d:.32s;">
+        <span class="badge">Handrullat dagligen</span>
+        <span class="badge">Take away</span>
+        <span class="badge">Hemkörning via Foodora</span>
+        <span class="badge">Vegetariska alternativ</span>
+      </div>
+    </div>
+    <div class="maki-visual reveal reveal-scale" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g class="maki-spin">
+          <circle cx="100" cy="100" r="92" fill="#182420" stroke="#F97B5C" stroke-width="3"/>
+          <circle cx="100" cy="100" r="66" fill="#F5F1E8"/>
+          <circle cx="100" cy="100" r="30" fill="#F97B5C"/>
+          <circle cx="78" cy="82" r="9" fill="#9DBF6E"/>
+          <circle cx="124" cy="80" r="7" fill="#EF5D6F"/>
+          <circle cx="120" cy="122" r="8" fill="#F5CE72"/>
+          <circle cx="76" cy="120" r="6" fill="#EF5D6F"/>
+          <g fill="none" stroke="#E4DECE" stroke-width="1.4" opacity=".7">
+            <circle cx="100" cy="100" r="52"/>
+            <circle cx="100" cy="100" r="42"/>
+          </g>
+        </g>
+        <text x="100" y="106" text-anchor="middle" font-family="Fraunces, serif" font-size="15" fill="#0D1512" font-weight="600">鮨</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow reveal">Kontakt &amp; öppettider</span>
+      <h2 class="reveal" style="--d:.08s;">Hitta till oss</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="panel reveal" style="--d:.05s;">
+        <h3>Öppettider</h3>
+        <table class="hours-table">
+          <tr class="today"><td>Lördag</td><td>12:00–20:00</td></tr>
+          <tr><td>Söndag</td><td>12:00–20:00</td></tr>
+          <tr class="closed"><td>Måndag</td><td>Stängt</td></tr>
+          <tr><td>Tisdag</td><td>11:00–20:00</td></tr>
+          <tr><td>Onsdag</td><td>11:00–20:00</td></tr>
+          <tr><td>Torsdag</td><td>11:00–20:00</td></tr>
+          <tr><td>Fredag</td><td>11:00–20:00</td></tr>
+        </table>
+      </div>
+      <div class="panel reveal" style="--d:.15s;">
+        <h3>Kontakt</h3>
+        <div class="contact-links">
+          <a href="tel:+46764464090"><span>Ring &amp; beställ</span><span class="arrow">076-446 40 90 →</span></a>
+          <a href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener"><span>Hemkörning</span><span class="arrow">Foodora →</span></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Sushi+Bar+Skolgatan+4B+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener"><span>Vägbeskrivning</span><span class="arrow">Google Maps →</span></a>
+        </div>
+        <div class="map-note">
+          <strong>Skolgatan 4B</strong>
+          891 63 Örnsköldsvik — mitt i centrum.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA-BAND -->
+<div class="cta-band">
+  <div class="wrap">
+    <h2 class="reveal">Sugen på sushi? <em>Brickan är några klick bort.</em></h2>
+    <p class="reveal" style="--d:.1s;">Beställ hemkörning via Foodora eller ring så packar vi din take away.</p>
+    <div class="reveal" style="--d:.2s;">
+      <a class="btn btn-primary" href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener" style="display:inline-flex;">Beställ via Foodora <span class="ico">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brandmark" href="#hem" style="text-decoration:none;">
+          <svg class="maki" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="30" cy="30" r="27" fill="#182420" stroke="#F97B5C" stroke-width="2"/>
+            <circle cx="30" cy="30" r="18" fill="#F5F1E8"/>
+            <circle cx="30" cy="30" r="8.5" fill="#F97B5C"/>
+          </svg>
+          <div class="brand-name">Sushi Bar</div>
+        </a>
+        <p>Färsk, handrullad sushi på Skolgatan 4B i Örnsköldsvik. Ät på plats, hämta eller beställ hemkörning.</p>
+      </div>
+      <div>
+        <h4>Utforska</h4>
+        <ul>
+          <li><a href="#bestall">Beställ</a></li>
+          <li><a href="#galleri">Sushin</a></li>
+          <li><a href="#omdomen">Omdömen</a></li>
+          <li><a href="#om">Om oss</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+46764464090">076-446 40 90</a></li>
+          <li><a href="https://www.foodora.se/restaurant/z45i/sushi-bar-ornskoldsvik" target="_blank" rel="noopener">Foodora — hemkörning</a></li>
+          <li><a href="#kontakt">Skolgatan 4B, Örnsköldsvik</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Sushi Bar, Örnsköldsvik</span>
+      <span>Designkoncept — ej publicerad sida</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Tillbaka till toppen">↑</button>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- loader ----
+  const loader = document.getElementById('loader');
+  window.addEventListener('load', () => {
+    setTimeout(() => loader.classList.add('done'), reduced ? 0 : 1000);
+  });
+  setTimeout(() => loader.classList.add('done'), 2600);
+
+  // ---- mobile nav ----
+  const toggle = document.getElementById('navToggle');
+  const list = document.getElementById('navList');
+  toggle.addEventListener('click', () => {
+    const open = list.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    list.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // ---- header + parallax + to-top ----
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
+  let ticking = false;
+  function onScroll(){
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 30);
+    toTop.classList.toggle('show', y > 700);
+    if (!reduced) {
+      parallaxEls.forEach(el => {
+        el.style.transform = 'translateY(' + (y * parseFloat(el.dataset.parallax)) + 'px)';
+      });
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
+
+  // ---- reveals ----
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (reduced) el.classList.add('in'); else revealObs.observe(el);
+  });
+
+  // ---- aktiv menyindikator ----
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = ['bestall','galleri','omdomen','om','kontakt'].map(id => document.getElementById(id));
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === e.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s => s && navObs.observe(s));
+
+  // ---- count-up ----
+  function animateCount(el){
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || '0');
+    const dur = 1400, start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = (target * eased).toFixed(decimals);
+      el.textContent = decimals > 0 ? val.replace('.', ',') : Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); }
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el => {
+    if (reduced) {
+      const d = parseInt(el.dataset.decimals || '0');
+      el.textContent = d > 0 ? parseFloat(el.dataset.count).toFixed(d).replace('.', ',') : el.dataset.count;
+    } else countObs.observe(el);
+  });
+
+  // ---- glow som foljer muspekaren pa tjanstekorten ----
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+</script>
+
+</body>
+</html>
