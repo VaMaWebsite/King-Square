@@ -19,8 +19,8 @@
     document.body.classList.remove('is-loading');
     runHeroIntro();
   };
-  window.addEventListener('load', () => setTimeout(hidePreloader, reduced ? 150 : 900));
-  setTimeout(hidePreloader, 3200); // safety net if load never fires
+  window.addEventListener('load', () => setTimeout(hidePreloader, reduced ? 150 : 1700));
+  setTimeout(hidePreloader, 3600); // safety net if load never fires
 
   /* ---------------- scroll progress bar ---------------- */
   const progressBar = document.getElementById('progressBar');
