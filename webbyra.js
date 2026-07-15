@@ -241,55 +241,26 @@
     restart();
   }
 
-  /* ---------------- contact form (sends via Web3Forms) ---------------- */
-  const WEB3FORMS_ACCESS_KEY = 'ef2e16cd-dc2d-4d5b-bf77-575710c39f03';
+  /* ---------------- contact form (opens visitor's own mail app) ---------------- */
   const form = document.getElementById('contactForm');
   if (form) {
     const success = document.getElementById('contactSuccess');
-    const errorBox = document.getElementById('contactError');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const submitLabel = submitBtn.querySelector('.btn-label');
-    const idleLabel = submitLabel.textContent;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (form.botcheck && form.botcheck.checked) return; // honeypot tripped, silently drop
-
-      errorBox.classList.remove('show');
-      success.classList.remove('show');
-      submitBtn.setAttribute('disabled', 'true');
-      submitLabel.textContent = 'Skickar…';
 
       const name = document.getElementById('cName').value;
       const email = document.getElementById('cEmail').value;
       const message = document.getElementById('cMsg').value;
 
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_ACCESS_KEY,
-            subject: 'Nytt meddelande från vamawebsite',
-            from_name: 'VAMA — kontaktformulär',
-            name, email, message,
-          }),
-        });
-        const data = await res.json();
-        if (!res.ok || !data.success) throw new Error(data.message || 'Skicka misslyckades');
+      const subject = encodeURIComponent('Nytt meddelande från vamawebsite – ' + name);
+      const body = encodeURIComponent(`Namn: ${name}\nE-post: ${email}\n\nMeddelande:\n${message}`);
+      window.location.href = `mailto:vamakontakt@gmail.com?subject=${subject}&body=${body}`;
 
-        document.getElementById('successName').textContent = name;
-        success.classList.add('show');
-        form.reset();
-        success.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-      } catch (err) {
-        errorBox.classList.add('show');
-        errorBox.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-      } finally {
-        submitBtn.removeAttribute('disabled');
-        submitLabel.textContent = idleLabel;
-      }
+      document.getElementById('successName').textContent = name;
+      success.classList.add('show');
+      success.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
     });
   }
 
