@@ -51,7 +51,7 @@ tailwind.config = {
   /* Rubrikrader som glider upp. Startlägena aktiveras bara när GSAP laddats
      (html.js-anim) — utan skript förblir allt innehåll synligt. */
   .line-mask { overflow: hidden; display: block; }
-  .js-anim .line-mask > span { display: block; transform: translateY(115%); will-change: transform; }
+  .js-anim .line-mask > span { display: block; transform: translateY(115%); opacity: 0; will-change: transform, opacity; }
   .js-anim .fade-item { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
   .js-anim [data-reveal] { opacity: 0; transform: translateY(36px); will-change: transform, opacity; }
 
@@ -64,6 +64,11 @@ tailwind.config = {
     transition: transform .55s cubic-bezier(.77, 0, .175, 1);
   }
   .link-brush:hover::after, .link-brush:focus-visible::after { transform: scaleX(1) skewY(-.6deg); }
+
+  /* När GSAP är aktivt ersätts CSS-linjen av en SVG-penseldragslinje
+     som ritas ut med stroke-dashoffset (se abergmaleri.js) */
+  .js-anim .link-brush::after { content: none; }
+  .brush-svg { position: absolute; left: 0; bottom: -7px; width: 100%; height: 9px; overflow: visible; pointer-events: none; }
 
   /* Flytande knapp: färgen sköljer upp underifrån som våt färg */
   .btn-liquid { position: relative; overflow: hidden; isolation: isolate; transition: color .45s cubic-bezier(.77,0,.175,1), border-color .45s; }
@@ -360,11 +365,11 @@ tailwind.config = {
   <!-- ===== KONTAKT ===== -->
   <section id="kontakt" class="pb-28 lg:pb-36">
     <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
-      <div class="bg-ink text-paper rounded-[2.5rem] px-8 py-16 sm:px-14 lg:px-20 lg:py-24 relative overflow-hidden" data-reveal>
+      <div class="bg-ink text-paper rounded-[2.5rem] px-8 py-16 sm:px-14 lg:px-20 lg:py-24 relative overflow-hidden" data-contact-panel>
         <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-clay/30 blur-3xl" aria-hidden="true"></div>
 
         <div class="grid lg:grid-cols-12 gap-14 relative">
-          <div class="lg:col-span-7">
+          <div class="lg:col-span-7" data-contact-left>
             <p class="text-xs uppercase tracking-[.4em] text-clay mb-8">Kontakt</p>
             <h2 class="font-serif font-medium leading-[1.05] tracking-tight text-[clamp(2.5rem,5vw,4.5rem)]">
               Redo att måla om?<br><em class="italic text-paper/60">Vi tar det från början.</em>
@@ -380,15 +385,15 @@ tailwind.config = {
           </div>
 
           <div class="lg:col-span-4 lg:col-start-9 flex flex-col justify-end gap-8 text-sm">
-            <div>
+            <div data-contact-item>
               <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">Telefon</p>
               <a href="tel:" class="link-brush text-lg">[Telefonnummer]</a>
             </div>
-            <div>
+            <div data-contact-item>
               <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">E-post</p>
               <a href="mailto:" class="link-brush text-lg">[E-postadress]</a>
             </div>
-            <div>
+            <div data-contact-item>
               <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">Besök oss</p>
               <a href="https://www.google.com/maps/search/?api=1&query=L%C3%A5ngv%C3%A4gen+52,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener" class="link-brush text-lg">Långvägen 52, Örnsköldsvik</a>
             </div>
@@ -410,82 +415,6 @@ tailwind.config = {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-(function () {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
-
-  /* ---- Intro: rubriken glider upp, resten tonar in mjukt ---- */
-  if (hasGsap && !reduceMotion) {
-    // Startlägena (dolda element) aktiveras först nu — laddar GSAP inte syns allt ändå
-    document.documentElement.classList.add('js-anim');
-    gsap.registerPlugin(ScrollTrigger);
-
-    const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    intro
-      .to('.line-mask > span', { y: 0, duration: 1.4, stagger: 0.12 }, 0.15)
-      .to('.fade-item', { opacity: 1, y: 0, duration: 1.1, stagger: 0.09 }, 0.5);
-
-    /* ---- Scrollavslöjanden ---- */
-    gsap.utils.toArray('[data-reveal]').forEach((el) => {
-      gsap.to(el, {
-        opacity: 1, y: 0, duration: 1.1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-      });
-    });
-
-    /* ---- Diskret parallax på herobilden ---- */
-    gsap.to('#heroImage', {
-      yPercent: -6, ease: 'none',
-      scrollTrigger: { trigger: '#heroImage', start: 'top bottom', end: 'bottom top', scrub: 1 }
-    });
-
-    // Mät om triggerpositionerna när typsnitt och stilar har landat
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => ScrollTrigger.refresh());
-    }
-    window.addEventListener('load', () => ScrollTrigger.refresh());
-  }
-
-  /* ---- Menyn får rygg när man scrollar ---- */
-  const nav = document.getElementById('siteNav');
-  const onScroll = () => {
-    const scrolled = window.scrollY > 24;
-    nav.classList.toggle('bg-paper/85', scrolled);
-    nav.classList.toggle('backdrop-blur-md', scrolled);
-    nav.classList.toggle('shadow-[0_1px_0_rgba(26,26,26,.08)]', scrolled);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  /* ---- Före/Efter-reglage: dra med pekare eller styr med piltangenter ---- */
-  document.querySelectorAll('.ba-frame').forEach((frame) => {
-    const setSplit = (clientX) => {
-      const rect = frame.getBoundingClientRect();
-      const pct = Math.min(96, Math.max(4, ((clientX - rect.left) / rect.width) * 100));
-      frame.style.setProperty('--split', pct + '%');
-    };
-
-    let dragging = false;
-    frame.addEventListener('pointerdown', (e) => {
-      dragging = true;
-      frame.setPointerCapture(e.pointerId);
-      setSplit(e.clientX);
-    });
-    frame.addEventListener('pointermove', (e) => { if (dragging) setSplit(e.clientX); });
-    frame.addEventListener('pointerup', () => { dragging = false; });
-    frame.addEventListener('pointercancel', () => { dragging = false; });
-
-    frame.setAttribute('tabindex', '0');
-    frame.setAttribute('role', 'slider');
-    frame.setAttribute('aria-label', 'Jämför före och efter');
-    frame.addEventListener('keydown', (e) => {
-      const current = parseFloat(getComputedStyle(frame).getPropertyValue('--split')) || 50;
-      if (e.key === 'ArrowLeft') { frame.style.setProperty('--split', Math.max(4, current - 4) + '%'); e.preventDefault(); }
-      if (e.key === 'ArrowRight') { frame.style.setProperty('--split', Math.min(96, current + 4) + '%'); e.preventDefault(); }
-    });
-  });
-})();
-</script>
+<script src="abergmaleri.js"></script>
 </body>
 </html>
