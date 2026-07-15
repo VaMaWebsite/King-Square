@@ -241,17 +241,55 @@
     restart();
   }
 
-  /* ---------------- contact form ---------------- */
+  /* ---------------- contact form (sends via Web3Forms) ---------------- */
+  const WEB3FORMS_ACCESS_KEY = 'ef2e16cd-dc2d-4d5b-bf77-575710c39f03';
   const form = document.getElementById('contactForm');
   if (form) {
     const success = document.getElementById('contactSuccess');
-    form.addEventListener('submit', (e) => {
+    const errorBox = document.getElementById('contactError');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitLabel = submitBtn.querySelector('.btn-label');
+    const idleLabel = submitLabel.textContent;
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      document.getElementById('successName').textContent = document.getElementById('cName').value;
-      success.classList.add('show');
-      form.querySelector('button[type="submit"]').setAttribute('disabled', 'true');
-      success.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      if (form.botcheck && form.botcheck.checked) return; // honeypot tripped, silently drop
+
+      errorBox.classList.remove('show');
+      success.classList.remove('show');
+      submitBtn.setAttribute('disabled', 'true');
+      submitLabel.textContent = 'Skickar…';
+
+      const name = document.getElementById('cName').value;
+      const email = document.getElementById('cEmail').value;
+      const message = document.getElementById('cMsg').value;
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: 'Nytt meddelande från vamawebsite',
+            from_name: 'VAMA — kontaktformulär',
+            name, email, message,
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.message || 'Skicka misslyckades');
+
+        document.getElementById('successName').textContent = name;
+        success.classList.add('show');
+        form.reset();
+        success.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      } catch (err) {
+        errorBox.classList.add('show');
+        errorBox.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      } finally {
+        submitBtn.removeAttribute('disabled');
+        submitLabel.textContent = idleLabel;
+      }
     });
   }
 
