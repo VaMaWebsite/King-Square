@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gullängets Hårsalong — Hårsalong & barberare i Örnsköldsvik</title>
+<meta name="description" content="Gullängets Hårsalong på Björnavägen 20 i Örnsköldsvik. Klippning, färgning, slingor, balayage och skäggtrimning för dam, herr och barn. Ring 0660-840 45 för att boka tid.">
+<meta property="og:title" content="Gullängets Hårsalong — Örnsköldsvik">
+<meta property="og:description" content="Din skönhet börjar hos oss. Klippning, färgning och styling med personlig service på Björnavägen 20.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Marcellus&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     GULLÄNGETS HÅRSALONG — PREMIUM LIGHT
+     Palett: krämvit / beige / ljusgrå / guld
+     ============================================================ */
+  :root{
+    --cream:#FBF7F1;
+    --cream-2:#F5EFE4;
+    --beige:#EEE2CC;
+    --surface:#FFFFFF;
+    --surface-dim:rgba(184,147,90,.06);
+    --line:rgba(184,147,90,.22);
+    --gold:#B08347;
+    --gold-bright:#C79A5B;
+    --gold-soft:#E4CFA6;
+    --ink:#2B2620;
+    --ink-dim:rgba(43,38,32,.64);
+    --ink-faint:rgba(43,38,32,.42);
+    --radius:20px;
+    --radius-sm:13px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    line-height:1.65;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; line-height:1.12; font-weight:600; letter-spacing:-.01em;}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:4px;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'Marcellus', serif; font-size:.82rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--gold); display:inline-flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:26px; height:1px; background:var(--gold-bright);}
+  section{padding:108px 0;}
+  @media (max-width:900px){section{padding:76px 0;}}
+  .section-head{max-width:640px; margin:0 auto 56px; text-align:center;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem); margin:16px 0 14px;}
+  .section-head p{color:var(--ink-dim); font-size:1.05rem;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    font-family:'Work Sans', sans-serif; font-weight:600; font-size:.98rem;
+    padding:16px 34px; border-radius:100px; cursor:pointer; border:1px solid transparent;
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease), background .35s, color .35s, border-color .35s;
+    text-decoration:none; letter-spacing:.01em;
+  }
+  .btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold)); color:#fff; box-shadow:0 14px 30px -14px rgba(176,131,71,.65);}
+  .btn-gold:hover{transform:translateY(-3px); box-shadow:0 20px 38px -14px rgba(176,131,71,.75);}
+  .btn-ghost{background:rgba(255,255,255,.5); border-color:var(--line); color:var(--ink); backdrop-filter:blur(6px);}
+  .btn-ghost:hover{border-color:var(--gold); background:#fff; transform:translateY(-3px);}
+  .btn:active{transform:translateY(0);}
+  svg.icon{width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;}
+
+  /* =============== REVEALS =============== */
+  .reveal{opacity:0; transform:translateY(30px); transition:opacity .85s var(--ease), transform .85s var(--ease); transition-delay:var(--d,0s);}
+  .reveal.in{opacity:1; transform:none;}
+  .reveal-scale{transform:scale(.94) translateY(18px);}
+  .reveal-scale.in{transform:none;}
+
+  /* =============== NAVBAR =============== */
+  header.site{position:fixed; top:0; left:0; right:0; z-index:200; transition:background .35s, box-shadow .35s, border-color .35s; border-bottom:1px solid transparent;}
+  header.site.scrolled{background:rgba(251,247,241,.82); backdrop-filter:blur(16px) saturate(1.3); -webkit-backdrop-filter:blur(16px) saturate(1.3); border-bottom-color:var(--line); box-shadow:0 12px 40px -26px rgba(43,38,32,.35);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:22px; padding-bottom:22px; transition:padding .3s;}
+  header.site.scrolled nav.wrap{padding-top:14px; padding-bottom:14px;}
+  .brandmark{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand-mark{width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--gold-soft),var(--gold)); display:flex; align-items:center; justify-content:center; color:#fff; flex:none;}
+  .brand-mark svg{width:20px; height:20px;}
+  .brand-word{font-family:'Marcellus', serif; font-size:1.28rem; letter-spacing:.01em;}
+  .brand-word span{display:block; font-family:'IBM Plex Mono', monospace; font-size:.62rem; letter-spacing:.24em; color:var(--gold); text-transform:uppercase; margin-top:2px;}
+  nav ul{list-style:none; display:flex; gap:36px; align-items:center;}
+  .nav-cta-mobile{display:none;}
+  nav a{text-decoration:none; font-size:.94rem; font-weight:500; color:var(--ink-dim); position:relative; padding:4px 0; transition:color .3s;}
+  nav a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1.5px; background:var(--gold); transition:width .35s var(--ease);}
+  nav a:hover, nav a.active{color:var(--ink);}
+  nav a:hover::after, nav a.active::after{width:100%;}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .nav-cta .btn{padding:12px 26px; font-size:.9rem;}
+  #navToggle{display:none; background:none; border:none; color:var(--ink); cursor:pointer; padding:6px;}
+  @media (max-width:860px){
+    nav ul{position:fixed; top:0; right:0; height:100vh; width:min(320px,84vw); background:var(--surface); flex-direction:column; justify-content:center; align-items:flex-start; gap:28px; padding:40px; transform:translateX(100%); transition:transform .45s var(--ease); box-shadow:-20px 0 50px -20px rgba(0,0,0,.25);}
+    nav ul.open{transform:translateX(0);}
+    .nav-cta .btn.btn-ghost, .nav-cta .btn.btn-gold{display:none;}
+    #navToggle{display:block;}
+    .nav-cta-mobile{display:list-item;}
+  }
+
+  /* =============== HERO =============== */
+  .hero{position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; padding-top:110px;}
+  .hero-bg{position:absolute; inset:-10% -5% -5% -5%; z-index:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 12%, rgba(203,164,91,.28), transparent 60%),
+      radial-gradient(ellipse 50% 45% at 10% 85%, rgba(228,207,166,.4), transparent 60%),
+      linear-gradient(160deg,#FBF7F1 0%, #F5EFE4 45%, #EEE2CC 100%);
+  }
+  .hero-bg::before{content:''; position:absolute; inset:0; opacity:.5;
+    background-image:radial-gradient(rgba(176,131,71,.16) 1px, transparent 1.5px);
+    background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 60% 30%, #000 0%, transparent 75%);
+    mask-image:radial-gradient(ellipse 70% 60% at 60% 30%, #000 0%, transparent 75%);
+  }
+  .hero-ring{position:absolute; border-radius:50%; border:1px solid var(--line); z-index:0;}
+  .hero-ring.r1{width:520px; height:520px; top:-140px; right:-120px;}
+  .hero-ring.r2{width:340px; height:340px; bottom:-100px; left:-80px; border-color:rgba(184,147,90,.15);}
+  .hero-photo{position:absolute; right:6%; top:52%; transform:translateY(-50%); width:min(360px,34vw); aspect-ratio:3/4; border-radius:28px; z-index:1;
+    background:linear-gradient(150deg,#EFE2C6,#D9BE8C 55%,#B08347); box-shadow:0 40px 80px -30px rgba(176,131,71,.5); overflow:hidden;}
+  .hero-photo::before{content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 30% 25%, rgba(255,255,255,.5), transparent 45%); }
+  .hero-photo svg{position:absolute; bottom:26px; left:26px; width:52px; height:52px; color:#fff; opacity:.9;}
+  .hero-photo .cap{position:absolute; bottom:26px; right:26px; left:100px; color:#fff; font-family:'Marcellus', serif; font-size:.98rem; text-align:right; line-height:1.3; text-shadow:0 4px 18px rgba(0,0,0,.25);}
+  @media (max-width:1080px){.hero-photo{display:none;}}
+  .hero-content{position:relative; z-index:2; max-width:660px;}
+  .hero-content h1{font-size:clamp(2.6rem,6vw,4.6rem); margin:22px 0 22px;}
+  .hero-content h1 em{font-style:normal; color:var(--gold); position:relative;}
+  .hero-content p.lead{font-size:1.18rem; color:var(--ink-dim); max-width:520px; margin-bottom:38px;}
+  .hero-actions{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:56px;}
+  .hero-stats{display:flex; gap:40px; flex-wrap:wrap;}
+  .hero-stats div{border-left:1px solid var(--line); padding-left:16px;}
+  .hero-stats strong{display:block; font-family:'Fraunces', serif; font-size:1.7rem; color:var(--ink);}
+  .hero-stats span{font-size:.82rem; color:var(--ink-faint); letter-spacing:.03em;}
+  .scroll-cue{position:absolute; left:50%; bottom:38px; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--ink-faint); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;}
+  .scroll-cue .line{width:1px; height:38px; background:linear-gradient(var(--gold),transparent); animation:scrollLine 2.2s var(--ease) infinite;}
+  @keyframes scrollLine{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 50.01%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
+
+  /* =============== OM OSS =============== */
+  .about{background:var(--surface);}
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:72px; align-items:center;}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr; gap:44px;}}
+  .about-visual{position:relative; aspect-ratio:4/5; border-radius:var(--radius); overflow:hidden;
+    background:linear-gradient(150deg,#F5EFE4,#E4CFA6 60%,#B08347); box-shadow:0 30px 60px -30px rgba(43,38,32,.3);}
+  .about-visual::before{content:''; position:absolute; inset:0; background-image:radial-gradient(circle at 70% 20%, rgba(255,255,255,.45), transparent 50%);}
+  .about-visual svg{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:88px; height:88px; color:rgba(255,255,255,.85);}
+  .about-badge{position:absolute; left:-24px; bottom:36px; background:#fff; border-radius:var(--radius-sm); padding:20px 26px; box-shadow:0 24px 48px -22px rgba(43,38,32,.35); display:flex; align-items:center; gap:14px;}
+  @media (max-width:520px){.about-badge{left:12px;}}
+  .about-badge svg{width:30px; height:30px; color:var(--gold);}
+  .about-badge strong{display:block; font-family:'Fraunces', serif; font-size:1.3rem;}
+  .about-badge span{font-size:.78rem; color:var(--ink-faint);}
+  .about-text p{color:var(--ink-dim); margin-bottom:18px; font-size:1.04rem;}
+  .about-points{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:30px;}
+  .about-points li{list-style:none; display:flex; gap:12px; align-items:flex-start; font-size:.94rem;}
+  .about-points svg{width:19px; height:19px; color:var(--gold); flex:none; margin-top:2px;}
+
+  /* =============== TJÄNSTER =============== */
+  .services{background:var(--cream-2);}
+  .service-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  @media (max-width:1000px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:34px 26px;
+    position:relative; overflow:hidden; transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s;
+  }
+  .service-card::before{content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s;
+    background:radial-gradient(240px circle at var(--mx,50%) var(--my,0%), rgba(203,164,91,.14), transparent 60%);}
+  .service-card:hover{transform:translateY(-8px); box-shadow:0 28px 56px -30px rgba(43,38,32,.28); border-color:var(--gold-soft);}
+  .service-card:hover::before{opacity:1;}
+  .service-icon{width:54px; height:54px; border-radius:16px; background:var(--surface-dim); display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:var(--gold); transition:background .4s, transform .5s var(--ease);}
+  .service-card:hover .service-icon{background:linear-gradient(135deg,var(--gold-bright),var(--gold)); color:#fff; transform:rotate(-6deg) scale(1.05);}
+  .service-card h3{font-size:1.18rem; margin-bottom:8px;}
+  .service-card p{color:var(--ink-dim); font-size:.92rem; margin-bottom:18px;}
+  .service-price{font-family:'IBM Plex Mono', monospace; font-size:.92rem; color:var(--gold); border-top:1px dashed var(--line); padding-top:14px; display:flex; justify-content:space-between;}
+  .price-note{text-align:center; color:var(--ink-faint); font-size:.85rem; margin-top:36px;}
+
+  /* =============== GALLERI =============== */
+  .gallery{background:var(--surface);}
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:170px; gap:16px;}
+  .gallery-grid figure:nth-child(1){grid-column:span 2; grid-row:span 2;}
+  .gallery-grid figure:nth-child(4){grid-row:span 2;}
+  .gallery-grid figure:nth-child(7){grid-column:span 2;}
+  @media (max-width:860px){.gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;} .gallery-grid figure:nth-child(1){grid-column:span 2; grid-row:span 1;} .gallery-grid figure:nth-child(4){grid-row:span 1;}}
+  .gallery-grid figure{margin:0; position:relative; border-radius:var(--radius-sm); overflow:hidden; cursor:pointer; border:1px solid var(--line);}
+  .gallery-grid .ph{position:absolute; inset:0; transition:transform .7s var(--ease);}
+  .gallery-grid figure:hover .ph{transform:scale(1.09);}
+  .gallery-grid figcaption{position:absolute; inset:auto 0 0 0; padding:16px; background:linear-gradient(to top, rgba(43,38,32,.72), transparent); color:#fff; font-family:'Marcellus', serif; font-size:.94rem; opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s;}
+  .gallery-grid figure:hover figcaption{opacity:1; transform:none;}
+  .gallery-grid .zoom-hint{position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(.8); transition:opacity .35s, transform .35s;}
+  .gallery-grid figure:hover .zoom-hint{opacity:1; transform:scale(1);}
+  .gallery-grid .zoom-hint svg{width:16px; height:16px; color:var(--ink);}
+
+  /* Lightbox */
+  .lightbox{position:fixed; inset:0; z-index:500; background:rgba(20,17,12,.92); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .4s var(--ease);}
+  .lightbox.open{opacity:1; pointer-events:auto;}
+  .lightbox-stage{position:relative; width:min(760px,88vw); aspect-ratio:4/3; border-radius:var(--radius); overflow:hidden; transform:scale(.92); transition:transform .4s var(--ease);}
+  .lightbox.open .lightbox-stage{transform:scale(1);}
+  .lightbox-cap{position:absolute; left:0; right:0; bottom:0; padding:22px; color:#fff; font-family:'Marcellus', serif; background:linear-gradient(to top, rgba(0,0,0,.55), transparent);}
+  .lightbox button{position:absolute; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; border-radius:50%; width:46px; height:46px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .3s, transform .3s;}
+  .lightbox button:hover{background:rgba(255,255,255,.25); transform:scale(1.06);}
+  .lightbox .lb-close{top:24px; right:24px;}
+  .lightbox .lb-prev{left:24px; top:50%; transform:translateY(-50%);}
+  .lightbox .lb-next{right:24px; top:50%; transform:translateY(-50%);}
+
+  /* =============== VARFÖR VÄLJA OSS =============== */
+  .why{background:linear-gradient(180deg,var(--cream-2),var(--cream));}
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.why-grid{grid-template-columns:1fr;}}
+  .why-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:32px 26px; text-align:center; transition:transform .5s var(--ease), box-shadow .5s var(--ease);}
+  .why-card:hover{transform:translateY(-6px); box-shadow:0 26px 50px -28px rgba(43,38,32,.28);}
+  .why-card .ic{width:56px; height:56px; margin:0 auto 18px; border-radius:50%; background:var(--surface-dim); display:flex; align-items:center; justify-content:center; color:var(--gold);}
+  .why-card h3{font-size:1.08rem; margin-bottom:8px;}
+  .why-card p{font-size:.9rem; color:var(--ink-dim);}
+
+  /* =============== RECENSIONER =============== */
+  .reviews{background:var(--surface); overflow:hidden;}
+  .review-stage{position:relative; max-width:760px; margin:0 auto;}
+  .review-track{display:flex; transition:transform .7s var(--ease);}
+  .review-slide{flex:0 0 100%; padding:6px;}
+  .review-card{background:var(--cream); border:1px solid var(--line); border-radius:var(--radius); padding:44px 40px; text-align:center;}
+  .review-card .q{font-family:'Fraunces', serif; font-size:3rem; color:var(--gold); line-height:0; display:block; margin-bottom:8px;}
+  .review-card .stars{color:var(--gold-bright); letter-spacing:3px; font-size:1.05rem; margin-bottom:14px;}
+  .review-card blockquote{font-size:1.12rem; font-style:italic; color:var(--ink); margin-bottom:20px;}
+  .review-card .who{font-family:'Marcellus', serif; font-size:.92rem; color:var(--ink-faint);}
+  .review-controls{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:32px;}
+  .review-controls button{background:var(--surface); border:1px solid var(--line); border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink); transition:border-color .3s, transform .3s;}
+  .review-controls button:hover{border-color:var(--gold); transform:scale(1.06);}
+  .review-dots{display:flex; gap:9px;}
+  .review-dots button{width:9px; height:9px; padding:0; border-radius:50%; background:var(--beige); border:none;}
+  .review-dots button.active{background:var(--gold); width:24px; border-radius:6px;}
+  .rating-strip{display:flex; align-items:center; justify-content:center; gap:14px; margin-top:44px; flex-wrap:wrap; text-align:center;}
+  .rating-strip .score{font-family:'Fraunces', serif; font-size:2.2rem; color:var(--gold);}
+  .rating-strip .lbl{font-size:.78rem; color:var(--ink-faint); letter-spacing:.06em; text-transform:uppercase; text-align:left;}
+  .rating-strip .src{width:100%; font-size:.78rem; color:var(--ink-faint); margin-top:6px;}
+
+  /* =============== BOKA TID =============== */
+  .booking{background:linear-gradient(165deg,#2B2620,#3A3226); color:#F5EFE4; position:relative; overflow:hidden;}
+  .booking::before{content:''; position:absolute; inset:0; background-image:radial-gradient(ellipse 60% 50% at 85% 10%, rgba(203,164,91,.22), transparent 60%);}
+  .booking .section-head p{color:rgba(245,239,228,.68);}
+  .booking .section-head .eyebrow{color:var(--gold-bright);}
+  .booking-form{position:relative; max-width:820px; margin:0 auto; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:var(--radius); padding:44px; backdrop-filter:blur(10px);}
+  @media (max-width:600px){.booking-form{padding:26px;}}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  @media (max-width:640px){.form-grid{grid-template-columns:1fr;}}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.82rem; letter-spacing:.04em; color:rgba(245,239,228,.72);}
+  .field input, .field select, .field textarea{
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18); border-radius:11px; padding:13px 16px;
+    color:#fff; font-family:'Work Sans', sans-serif; font-size:.96rem; transition:border-color .3s, background .3s;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:rgba(245,239,228,.38);}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--gold-bright); background:rgba(255,255,255,.1);}
+  .field select option{color:#2B2620;}
+  .form-foot{margin-top:30px; display:flex; align-items:center; gap:22px; flex-wrap:wrap; justify-content:space-between;}
+  .form-note{font-size:.82rem; color:rgba(245,239,228,.55); max-width:360px;}
+  .form-success{display:none; align-items:center; gap:12px; background:rgba(203,164,91,.16); border:1px solid rgba(203,164,91,.4); border-radius:12px; padding:16px 20px; margin-top:22px; font-size:.92rem;}
+  .form-success.show{display:flex;}
+  .form-success svg{width:20px; height:20px; color:var(--gold-bright); flex:none;}
+
+  /* =============== KONTAKT =============== */
+  .contact{background:var(--cream-2);}
+  .contact-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:50px; align-items:stretch;}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-list{display:flex; flex-direction:column; gap:20px;}
+  .contact-item{display:flex; gap:18px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:22px; transition:transform .4s var(--ease), box-shadow .4s var(--ease);}
+  .contact-item:hover{transform:translateY(-4px); box-shadow:0 20px 40px -26px rgba(43,38,32,.3);}
+  .contact-item .ic{width:44px; height:44px; border-radius:12px; background:var(--surface-dim); display:flex; align-items:center; justify-content:center; color:var(--gold); flex:none;}
+  .contact-item h4{font-size:1rem; margin-bottom:4px; font-family:'Work Sans',sans-serif; font-weight:600;}
+  .contact-item p, .contact-item a{color:var(--ink-dim); font-size:.92rem; text-decoration:none;}
+  .contact-item a:hover{color:var(--gold);}
+  .hours-table{width:100%; border-collapse:collapse; margin-top:6px;}
+  .hours-table td{padding:2px 0; font-size:.9rem; color:var(--ink-dim);}
+  .hours-table td:last-child{text-align:right; font-family:'IBM Plex Mono', monospace; color:var(--ink);}
+  .map-frame{border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); min-height:340px; box-shadow:0 30px 60px -34px rgba(43,38,32,.32);}
+  .map-frame iframe{width:100%; height:100%; min-height:340px; border:0; display:block;}
+
+  /* =============== FOOTER =============== */
+  footer{background:#2B2620; color:rgba(245,239,228,.72); padding:64px 0 26px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:44px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.1);}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr; gap:32px;}}
+  footer .brand-word{color:#F5EFE4;}
+  footer p.desc{margin-top:14px; font-size:.92rem; max-width:320px; line-height:1.7;}
+  .footer-social{display:flex; gap:12px; margin-top:22px;}
+  .footer-social a{width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; transition:background .3s, border-color .3s, transform .3s;}
+  .footer-social a:hover{background:var(--gold); border-color:var(--gold); transform:translateY(-3px);}
+  .footer-social svg{width:16px; height:16px;}
+  footer h5{font-family:'Marcellus', serif; color:#F5EFE4; font-size:.98rem; margin-bottom:18px; letter-spacing:.02em;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:12px;}
+  footer a{text-decoration:none; font-size:.92rem; color:rgba(245,239,228,.68); transition:color .3s;}
+  footer a:hover{color:var(--gold-bright);}
+  .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding-top:24px; font-size:.8rem; color:rgba(245,239,228,.42);}
+
+  .to-top{position:fixed; right:26px; bottom:26px; z-index:150; width:50px; height:50px; border-radius:50%; background:var(--ink); color:#F5EFE4; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transform:translateY(14px) scale(.8); pointer-events:none; transition:opacity .4s var(--ease), transform .4s var(--ease), background .3s;}
+  .to-top.show{opacity:1; transform:none; pointer-events:auto;}
+  .to-top:hover{background:var(--gold);}
+  .to-top svg{width:20px; height:20px;}
+
+  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+    .reveal, .reveal-scale{opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site" id="siteHeader">
+  <nav class="wrap">
+    <a href="#hero" class="brandmark">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6" r="2.6"/><circle cx="7" cy="18" r="2.6"/><path d="M20 5 9 15"/><path d="M13.5 12.5 20 19"/><path d="M9 9l1.7 1.7"/></svg>
+      </span>
+      <span class="brand-word">Gullängets<span>Hårsalong · Örnsköldsvik</span></span>
+    </a>
+    <ul id="navList">
+      <li><a href="#om" data-nav="om">Om oss</a></li>
+      <li><a href="#tjanster" data-nav="tjanster">Tjänster</a></li>
+      <li><a href="#galleri" data-nav="galleri">Galleri</a></li>
+      <li><a href="#omdomen" data-nav="omdomen">Omdömen</a></li>
+      <li><a href="#kontakt" data-nav="kontakt">Kontakt</a></li>
+      <li class="nav-cta-mobile"><a href="#boka" class="btn btn-gold">Boka tid</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:0660-84045" class="btn btn-ghost">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 1-2Z"/></svg>
+        0660-840 45
+      </a>
+      <a href="#boka" class="btn btn-gold">Boka tid</a>
+      <button id="navToggle" aria-label="Öppna meny" aria-expanded="false">
+        <svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" data-parallax="-0.12"></div>
+    <div class="hero-ring r1" data-parallax="0.08"></div>
+    <div class="hero-ring r2" data-parallax="0.05"></div>
+    <div class="hero-photo" data-parallax="-0.06">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="6" r="2.6"/><circle cx="7" cy="18" r="2.6"/><path d="M20 5 9 15"/><path d="M13.5 12.5 20 19"/></svg>
+      <div class="cap">Klippning &amp; styling<br>med personlig känsla</div>
+    </div>
+    <div class="wrap">
+      <div class="hero-content">
+        <span class="eyebrow reveal">Hårsalong &amp; barberare i Örnsköldsvik</span>
+        <h1 class="reveal" style="--d:.08s;">Din skönhet<br><em>börjar hos oss</em></h1>
+        <p class="lead reveal" style="--d:.16s;">På Björnavägen 20 möts kvalitet, erfarenhet och personlig service. Vi tar oss tid att lyssna på precis vad du vill ha — och ser till att du lämnar salongen nöjd.</p>
+        <div class="hero-actions reveal" style="--d:.24s;">
+          <a href="#boka" class="btn btn-gold">
+            <svg class="icon" viewBox="0 0 24 24" stroke="#fff"><rect x="3" y="5" width="18" height="16" rx="3"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Boka tid
+          </a>
+          <a href="#tjanster" class="btn btn-ghost">Våra tjänster</a>
+        </div>
+        <div class="hero-stats reveal" style="--d:.32s;">
+          <div><strong data-count="4.6" data-decimals="1">0,0</strong><span>Betyg online</span></div>
+          <div><strong data-count="85" data-decimals="0">0</strong><span>Recensioner</span></div>
+          <div><strong>10–18</strong><span>Öppet vardagar</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scrolla</span><span class="line"></span></div>
+  </section>
+
+  <!-- OM OSS -->
+  <section class="about" id="om">
+    <div class="wrap about-grid">
+      <div class="about-visual reveal reveal-scale">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 1-2Z" opacity="0"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="9" r="2.4"/><path d="M7.5 18a5 5 0 0 1 9 0"/></svg>
+        <div class="about-badge">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2 15 8.5 22 9.5 17 14.3 18.2 21 12 17.7 5.8 21 7 14.3 2 9.5 9 8.5Z"/></svg>
+          <div><strong>4,6 / 5</strong><span>85 recensioner online</span></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow reveal">Om salongen</span>
+        <h2 class="reveal" style="--d:.06s;">Kvalitet och personlig service i varje detalj</h2>
+        <p class="reveal" style="--d:.12s;">Gullängets Hårsalong ligger centralt på Björnavägen 20 i Örnsköldsvik och erbjuder klippning, färgning och styling för hela familjen. Vi arbetar med erfarna frisörer och barberare som lägger stor vikt vid att förstå precis vad varje kund vill uppnå.</p>
+        <p class="reveal" style="--d:.18s;">Den avslappnade och välkomnande atmosfären gör att du kan luta dig tillbaka medan vi tar hand om resten — med kvalitetsprodukter och ett öga för detaljer.</p>
+        <ul class="about-points reveal" style="--d:.24s;">
+          <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Erfarna frisörer &amp; barberare</li>
+          <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Kvalitetsprodukter</li>
+          <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Personlig rådgivning</li>
+          <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Centralt läge i stan</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TJÄNSTER -->
+  <section class="services" id="tjanster">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Tjänster</span>
+        <h2 class="reveal" style="--d:.06s;">Något för hela familjen</h2>
+        <p class="reveal" style="--d:.12s;">Från klassisk klippning till färgning och balayage — alltid med personlig rådgivning.</p>
+      </div>
+      <div class="service-grid">
+
+        <article class="service-card reveal" style="--d:.02s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="7" cy="6" r="2.6"/><circle cx="7" cy="18" r="2.6"/><path d="M20 5 9 15"/><path d="M13.5 12.5 20 19"/></svg></div>
+          <h3>Damklippning</h3>
+          <p>Klippning anpassad efter din hårtyp och stil, med råd om vad som passar dig.</p>
+          <div class="service-price"><span>Från</span><span>550 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.08s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M4 21c1.2-4.5 4.2-6.5 8-6.5s6.8 2 8 6.5"/></svg></div>
+          <h3>Herrklippning</h3>
+          <p>Skarp och prydlig klippning, från klassiskt till modernt fade.</p>
+          <div class="service-price"><span>Från</span><span>380 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.14s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M6 21c0-4 2.7-6.5 6-6.5s6 2.5 6 6.5"/></svg></div>
+          <h3>Barnklippning</h3>
+          <p>Tryggt och tålmodigt bemötande för de yngsta kunderna, t.o.m. 12 år.</p>
+          <div class="service-price"><span>Från</span><span>280 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.2s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2c3 3 5 6.5 5 10a5 5 0 0 1-10 0c0-3.5 2-7 5-10Z"/></svg></div>
+          <h3>Färgning</h3>
+          <p>Heltäckande färg i den nyans du önskar, med skonsamma produkter.</p>
+          <div class="service-price"><span>Från</span><span>850 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.02s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18" opacity=".0"/><path d="M6 3c0 6-2 6-2 12s2 3 2 6M18 3c0 6 2 6 2 12s-2 3-2 6"/></svg></div>
+          <h3>Slingor</h3>
+          <p>Ljusa slingor som ger djup och dimension till din frisyr.</p>
+          <div class="service-price"><span>Från</span><span>950 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.08s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19c4-1 4-6 8-7"/><path d="M12 12c4 1 4 6 8 7"/><path d="M6 5c3 0 4 2 6 2s3-2 6-2"/></svg></div>
+          <h3>Balayage</h3>
+          <p>Frihandsmålad slingteknik för ett naturligt, solkysst resultat.</p>
+          <div class="service-price"><span>Från</span><span>1 250 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.14s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 12H3M21 12h-1.2M6 6l1.4 1.4M16.6 16.6 18 18M18 6l-1.4 1.4M7.4 16.6 6 18"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <h3>Styling</h3>
+          <p>Föning, uppsättning och styling för fest eller vardag.</p>
+          <div class="service-price"><span>Från</span><span>350 kr</span></div>
+        </article>
+
+        <article class="service-card reveal" style="--d:.2s;">
+          <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12h9l4-3v6l-4-3"/><path d="M4 12v3a3 3 0 0 0 3 3h2"/></svg></div>
+          <h3>Skäggtrimning</h3>
+          <p>Formklippning och trimning för ett välvårdat skägg.</p>
+          <div class="service-price"><span>Från</span><span>150 kr</span></div>
+        </article>
+
+      </div>
+      <p class="price-note reveal">Prisexempel — hör av dig på 0660-840 45 för aktuellt pris på just din tjänst.</p>
+    </div>
+  </section>
+
+  <!-- GALLERI -->
+  <section class="gallery" id="galleri">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Galleri</span>
+        <h2 class="reveal" style="--d:.06s;">Ett urval av vårt hantverk</h2>
+        <p class="reveal" style="--d:.12s;">Klicka på en bild för att se den i större format.</p>
+      </div>
+      <div class="gallery-grid reveal reveal-scale" id="galleryGrid">
+        <figure data-cap="Balayage med varma toner" style="--g1:#EFE2C6; --g2:#B08347;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Balayage</figcaption>
+        </figure>
+        <figure data-cap="Klassisk damklippning" style="--g1:#F5EFE4; --g2:#C79A5B;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Damklippning</figcaption>
+        </figure>
+        <figure data-cap="Skarp herrklippning" style="--g1:#E4CFA6; --g2:#8C6A3A;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Herrklippning</figcaption>
+        </figure>
+        <figure data-cap="Salongsmiljön hos oss" style="--g1:#FBF7F1; --g2:#D9BE8C;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Salongen</figcaption>
+        </figure>
+        <figure data-cap="Färgning i varma nyanser" style="--g1:#C79A5B; --g2:#5C4326;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Färgning</figcaption>
+        </figure>
+        <figure data-cap="Styling för fest och vardag" style="--g1:#EEE2CC; --g2:#B08347;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Styling</figcaption>
+        </figure>
+        <figure data-cap="Skäggtrimning och barberare" style="--g1:#D9BE8C; --g2:#3A2E1C;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Barberare</figcaption>
+        </figure>
+        <figure data-cap="Nöjda kunder lämnar leende salongen" style="--g1:#F5EFE4; --g2:#8C6A3A;">
+          <div class="ph" style="background:linear-gradient(150deg,var(--g1),var(--g2));"></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>
+          <figcaption>Nöjda kunder</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARFÖR VÄLJA OSS -->
+  <section class="why" id="varfor">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Varför välja oss</span>
+        <h2 class="reveal" style="--d:.06s;">En salong du kan lita på</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal" style="--d:.02s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2 15 8.5 22 9.5 17 14.3 18.2 21 12 17.7 5.8 21 7 14.3 2 9.5 9 8.5Z"/></svg></div>
+          <h3>Erfaren personal</h3>
+          <p>Frisörer och barberare med gedigen erfarenhet av dam-, herr- och barnklippning.</p>
+        </div>
+        <div class="why-card reveal" style="--d:.08s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2c3 3 5 6.5 5 10a5 5 0 0 1-10 0c0-3.5 2-7 5-10Z"/></svg></div>
+          <h3>Kvalitetsprodukter</h3>
+          <p>Vi använder produkter som skonar håret och ger ett hållbart resultat.</p>
+        </div>
+        <div class="why-card reveal" style="--d:.14s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M8 12l2.5 2.5L16 9"/></svg></div>
+          <h3>Personlig rådgivning</h3>
+          <p>Vi tar oss tid att lyssna på vad du vill ha innan vi sätter sax i hår.</p>
+        </div>
+        <div class="why-card reveal" style="--d:.02s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></div>
+          <h3>Centralt läge</h3>
+          <p>Björnavägen 20 i Örnsköldsvik — lätt att hitta, med parkering i närheten.</p>
+        </div>
+        <div class="why-card reveal" style="--d:.08s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.4"/><path d="M2.5 20c1-3.6 3.3-5.4 6.5-5.4s5.5 1.8 6.5 5.4"/><circle cx="17" cy="8" r="2.6"/><path d="M15.5 14.3c2.6.4 4 1.9 4.8 4.7"/></svg></div>
+          <h3>Omtyckt av kunder</h3>
+          <p>4,6 av 5 i betyg utifrån 85 recensioner online.</p>
+        </div>
+        <div class="why-card reveal" style="--d:.14s;">
+          <div class="ic"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+          <h3>Prisvärd service</h3>
+          <p>Tydliga priser och kvalitet i varje behandling, utan överraskningar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KUNDRECENSIONER -->
+  <section class="reviews" id="omdomen">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Kundröster</span>
+        <h2 class="reveal" style="--d:.06s;">Vad besökare säger</h2>
+        <p class="reveal" style="--d:.12s;">Exempel på det slags omdömen kunder brukar lämna om salongen.</p>
+      </div>
+
+      <div class="review-stage reveal reveal-scale">
+        <div class="review-track" id="reviewTrack">
+          <div class="review-slide">
+            <div class="review-card">
+              <span class="q" aria-hidden="true">"</span>
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Personlig service och riktigt fint resultat — jag kände mig lyssnad på från första minuten.</blockquote>
+              <div class="who">Gäst · Damklippning</div>
+            </div>
+          </div>
+          <div class="review-slide">
+            <div class="review-card">
+              <span class="q" aria-hidden="true">"</span>
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Skön atmosfär och prydlig klippning varje gång. Blir alltid nöjd när jag går härifrån.</blockquote>
+              <div class="who">Gäst · Herrklippning</div>
+            </div>
+          </div>
+          <div class="review-slide">
+            <div class="review-card">
+              <span class="q" aria-hidden="true">"</span>
+              <div class="stars" aria-label="4 av 5 stjärnor">★★★★☆</div>
+              <blockquote>Fin balayage med bra rådgivning kring vilken nyans som skulle passa mig bäst.</blockquote>
+              <div class="who">Gäst · Balayage</div>
+            </div>
+          </div>
+          <div class="review-slide">
+            <div class="review-card">
+              <span class="q" aria-hidden="true">"</span>
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Tryggt och lugnt bemötande, perfekt för klippning med barn.</blockquote>
+              <div class="who">Gäst · Barnklippning</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-controls">
+          <button id="revPrev" aria-label="Föregående omdöme"><svg class="icon" viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg></button>
+          <div class="review-dots" id="revDots"></div>
+          <button id="revNext" aria-label="Nästa omdöme"><svg class="icon" viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
+
+      <div class="rating-strip reveal reveal-scale">
+        <div class="score" data-count="4.6" data-decimals="1">0,0</div>
+        <div class="lbl">av 5<br>Snittbetyg online</div>
+        <div class="src">Baserat på cirka 85 recensioner från olika omdömestjänster. Enskilda citat ovan är exempel och verifieras ej av salongen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOKA TID -->
+  <section class="booking" id="boka">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Boka tid</span>
+        <h2 class="reveal" style="--d:.06s;">Boka din tid hos oss</h2>
+        <p class="reveal" style="--d:.12s;">Fyll i formuläret så återkommer vi och bekräftar — eller ring oss direkt på 0660-840 45.</p>
+      </div>
+      <form class="booking-form reveal reveal-scale" id="bookingForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="bName">Namn *</label>
+            <input type="text" id="bName" name="name" placeholder="Ditt namn" required>
+          </div>
+          <div class="field">
+            <label for="bPhone">Telefon *</label>
+            <input type="tel" id="bPhone" name="phone" placeholder="07X-XXX XX XX" required>
+          </div>
+          <div class="field">
+            <label for="bEmail">E-post *</label>
+            <input type="email" id="bEmail" name="email" placeholder="namn@exempel.se" required>
+          </div>
+          <div class="field">
+            <label for="bService">Tjänst *</label>
+            <select id="bService" name="service" required>
+              <option value="" disabled selected>Välj tjänst</option>
+              <option>Damklippning</option>
+              <option>Herrklippning</option>
+              <option>Barnklippning</option>
+              <option>Färgning</option>
+              <option>Slingor</option>
+              <option>Balayage</option>
+              <option>Styling</option>
+              <option>Skäggtrimning</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bDate">Datum *</label>
+            <input type="date" id="bDate" name="date" required>
+          </div>
+          <div class="field">
+            <label for="bTime">Tid *</label>
+            <input type="time" id="bTime" name="time" required>
+          </div>
+          <div class="field full">
+            <label for="bMsg">Meddelande</label>
+            <textarea id="bMsg" name="message" rows="4" placeholder="Övriga önskemål eller frågor"></textarea>
+          </div>
+        </div>
+        <div class="form-foot">
+          <p class="form-note">Vi kontaktar dig via telefon eller e-post för att bekräfta tiden. Behöver du en tid snart — ring gärna direkt.</p>
+          <button type="submit" class="btn btn-gold">
+            <svg class="icon" viewBox="0 0 24 24" stroke="#fff"><rect x="3" y="5" width="18" height="16" rx="3"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Boka nu
+          </button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+          <span>Tack, <strong id="successName"></strong>! Din förfrågan är mottagen — vi hör av oss snart för att bekräfta din tid.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="contact" id="kontakt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Kontakt</span>
+        <h2 class="reveal" style="--d:.06s;">Hitta till oss</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-list reveal" style="--d:.06s;">
+          <div class="contact-item">
+            <span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 1-2Z"/></svg></span>
+            <div><h4>Telefon</h4><a href="tel:0660-84045">0660-840 45</a></div>
+          </div>
+          <div class="contact-item">
+            <span class="ic"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
+            <div><h4>Adress</h4><a href="https://www.google.com/maps/search/?api=1&query=Bj%C3%B6rnav%C3%A4gen+20,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener">Björnavägen 20, Örnsköldsvik</a></div>
+          </div>
+          <div class="contact-item">
+            <span class="ic"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></span>
+            <div>
+              <h4>Öppettider</h4>
+              <table class="hours-table">
+                <tr><td>Måndag–Fredag</td><td>10:00–18:00</td></tr>
+                <tr><td>Lördag</td><td>10:00–14:00</td></tr>
+                <tr><td>Söndag</td><td>Stängt</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="map-frame reveal reveal-scale" style="--d:.12s;">
+          <iframe src="https://www.google.com/maps?q=Bj%C3%B6rnav%C3%A4gen+20,+%C3%96rnsk%C3%B6ldsvik&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Karta till Gullängets Hårsalong, Björnavägen 20, Örnsköldsvik"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#hero" class="brandmark">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6" r="2.6"/><circle cx="7" cy="18" r="2.6"/><path d="M20 5 9 15"/><path d="M13.5 12.5 20 19"/></svg>
+          </span>
+          <span class="brand-word">Gullängets<span>Hårsalong · Örnsköldsvik</span></span>
+        </a>
+        <p class="desc">Hårsalong &amp; barberare på Björnavägen 20 i Örnsköldsvik. Klippning, färgning och styling med personlig service.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg class="icon" style="width:16px;height:16px;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg class="icon" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M14 21v-8h3l.5-4H14V7a1.5 1.5 0 0 1 1.5-1.5H18V2h-2.5A4.5 4.5 0 0 0 11 6.5V9H8v4h3v8Z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Snabblänkar</h5>
+        <ul>
+          <li><a href="#om">Om oss</a></li>
+          <li><a href="#tjanster">Tjänster</a></li>
+          <li><a href="#galleri">Galleri</a></li>
+          <li><a href="#omdomen">Omdömen</a></li>
+          <li><a href="#boka">Boka tid</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="tel:0660-84045">0660-840 45</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Bj%C3%B6rnav%C3%A4gen+20,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener">Björnavägen 20, Örnsköldsvik</a></li>
+          <li>Mån–Fre 10–18 · Lör 10–14</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gullängets Hårsalong, Örnsköldsvik</span>
+      <span>Designkoncept — ej salongens officiella webbplats</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Tillbaka till toppen">
+  <svg class="icon" viewBox="0 0 24 24" stroke="#F5EFE4"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildvisning">
+  <div class="lightbox-stage" id="lbStage">
+    <div class="ph" id="lbImg" style="position:absolute; inset:0;"></div>
+    <div class="lightbox-cap" id="lbCap"></div>
+  </div>
+  <button class="lb-prev" id="lbPrev" aria-label="Föregående bild"><svg class="icon" viewBox="0 0 24 24" stroke="#fff"><polyline points="15 6 9 12 15 18"/></svg></button>
+  <button class="lb-next" id="lbNext" aria-label="Nästa bild"><svg class="icon" viewBox="0 0 24 24" stroke="#fff"><polyline points="9 6 15 12 9 18"/></svg></button>
+  <button class="lb-close" id="lbClose" aria-label="Stäng"><svg class="icon" viewBox="0 0 24 24" stroke="#fff"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
+</div>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- mobile nav ----
+  const toggle = document.getElementById('navToggle');
+  const list = document.getElementById('navList');
+  toggle.addEventListener('click', () => {
+    const open = list.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    list.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // ---- header + parallax + to-top ----
+  const header = document.getElementById('siteHeader');
+  const toTop = document.getElementById('toTop');
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
+  let ticking = false;
+  function onScroll(){
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 30);
+    toTop.classList.toggle('show', y > 700);
+    if (!reduced) {
+      parallaxEls.forEach(el => {
+        el.style.transform = 'translateY(' + (y * parseFloat(el.dataset.parallax)) + 'px)';
+      });
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, {passive:true});
+  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
+
+  // ---- smooth scroll offset for sticky header ----
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const offset = window.innerWidth < 860 ? 74 : 92;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top, behavior: reduced ? 'auto' : 'smooth'});
+    });
+  });
+
+  // ---- reveals ----
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (reduced) el.classList.add('in'); else revealObs.observe(el);
+  });
+
+  // ---- active nav indicator ----
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = ['om','tjanster','galleri','omdomen','kontakt'].map(id => document.getElementById(id));
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === e.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s => s && navObs.observe(s));
+
+  // ---- count-up ----
+  function animateCount(el){
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || '0');
+    const dur = 1400, start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = (target * eased).toFixed(decimals);
+      el.textContent = decimals > 0 ? val.replace('.', ',') : Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); }
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el => {
+    if (reduced) {
+      const d = parseInt(el.dataset.decimals || '0');
+      el.textContent = d > 0 ? parseFloat(el.dataset.count).toFixed(d).replace('.', ',') : el.dataset.count;
+    } else countObs.observe(el);
+  });
+
+  // ---- glow follows pointer on service cards ----
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  // ---- gallery lightbox ----
+  const galleryFigures = Array.from(document.querySelectorAll('#galleryGrid figure'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  let lbIndex = 0;
+
+  function openLightbox(i){
+    lbIndex = (i + galleryFigures.length) % galleryFigures.length;
+    const fig = galleryFigures[lbIndex];
+    lbImg.style.background = getComputedStyle(fig.querySelector('.ph')).backgroundImage;
+    lbCap.textContent = fig.dataset.cap || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  galleryFigures.forEach((fig, i) => {
+    fig.addEventListener('click', () => openLightbox(i));
+    fig.setAttribute('tabindex', '0');
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('aria-label', 'Visa bild: ' + (fig.dataset.cap || ''));
+    fig.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => openLightbox(lbIndex - 1));
+  document.getElementById('lbNext').addEventListener('click', () => openLightbox(lbIndex + 1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox(lbIndex - 1);
+    if (e.key === 'ArrowRight') openLightbox(lbIndex + 1);
+  });
+
+  // ---- review carousel ----
+  const track = document.getElementById('reviewTrack');
+  const slides = Array.from(track.children);
+  const dotsWrap = document.getElementById('revDots');
+  let revIndex = 0, revTimer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', 'Visa omdöme ' + (i + 1));
+    dot.addEventListener('click', () => goToReview(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function renderReview(){
+    track.style.transform = 'translateX(-' + (revIndex * 100) + '%)';
+    dots.forEach((d, i) => d.classList.toggle('active', i === revIndex));
+  }
+  function goToReview(i){
+    revIndex = (i + slides.length) % slides.length;
+    renderReview();
+    restartAutoplay();
+  }
+  function restartAutoplay(){
+    clearInterval(revTimer);
+    if (reduced) return;
+    revTimer = setInterval(() => goToReview(revIndex + 1), 6000);
+  }
+  document.getElementById('revPrev').addEventListener('click', () => goToReview(revIndex - 1));
+  document.getElementById('revNext').addEventListener('click', () => goToReview(revIndex + 1));
+  const reviewStage = document.querySelector('.review-stage');
+  reviewStage.addEventListener('mouseenter', () => clearInterval(revTimer));
+  reviewStage.addEventListener('mouseleave', restartAutoplay);
+  renderReview();
+  restartAutoplay();
+
+  // ---- booking form ----
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('formSuccess');
+  const dateInput = document.getElementById('bDate');
+  dateInput.min = new Date().toISOString().split('T')[0];
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    document.getElementById('successName').textContent = document.getElementById('bName').value;
+    success.classList.add('show');
+    form.querySelector('button[type="submit"]').setAttribute('disabled', 'true');
+    success.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
+  });
+</script>
+
+</body>
+</html>
