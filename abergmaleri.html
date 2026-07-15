@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Åberg &amp; Söner Måleri — Vi förvandlar rum till konstverk</title>
-<meta name="description" content="Åberg & Söner Måleri AB — premiummåleri i Örnsköldsvik sedan 1987. Inomhusmålning, utomhusmålning, tapetsering och totalentreprenad.">
+<title>Åberg Måleri — Vi förvandlar rum till konstverk</title>
+<meta name="description" content="Åberg Måleri — premiummåleri i Örnsköldsvik sedan 1987. Inomhusmålning, utomhusmålning, tapetsering och totalentreprenad.">
 <meta name="theme-color" content="#FAF9F6">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF9F6'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23A44A24'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23D6081B'/%3E%3Ctext x='16' y='23' font-family='Arial, sans-serif' font-size='18' font-weight='800' fill='%23fff' text-anchor='middle'%3EÅ%3C/text%3E%3C/svg%3E">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Åberg & Söner Måleri — Vi förvandlar rum till konstverk">
+<meta property="og:title" content="Åberg Måleri — Vi förvandlar rum till konstverk">
 <meta property="og:description" content="Ett hantverk förfinat sedan 1987. Måleri, tapetsering och totalentreprenad i Örnsköldsvik.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -24,8 +24,9 @@ tailwind.config = {
       colors: {
         paper:   '#FAF9F6',
         ink:     '#1a1a1a',
-        clay:    '#A44A24',
-        'clay-deep': '#7E3417',
+        clay:    '#C0121D',        /* varumärkesrött, lätt dämpat för text på papper */
+        'clay-deep': '#7E0E15',
+        brand:   '#D6081B',        /* logotypens röda */
         linen:   '#F1EEE7',
         mist:    '#6B6660'
       },
@@ -40,7 +41,21 @@ tailwind.config = {
 
 <style>
   html { scroll-behavior: smooth; }
-  ::selection { background: #A44A24; color: #FAF9F6; }
+  ::selection { background: #C0121D; color: #FAF9F6; }
+
+  /* Logotyp: vit ÅBERG + skriven "måleri" på röd platta */
+  .logo-block {
+    display: inline-flex; flex-direction: column; align-items: flex-start;
+    background: #D6081B; color: #fff; line-height: 1;
+    padding: .5rem .85rem .5rem; border-radius: .3rem;
+  }
+  .logo-main { font-weight: 800; font-size: 1.35rem; letter-spacing: .05em; }
+  .logo-script {
+    font-family: 'Caveat', cursive; font-weight: 600; font-size: 1.3rem; line-height: .65;
+    align-self: flex-end; transform: rotate(-4deg); margin-top: -1px;
+  }
+  .logo-sm .logo-main { font-size: 1.05rem; }
+  .logo-sm .logo-script { font-size: 1.05rem; }
 
   /* Subtilt papperskorn över hela sidan */
   .grain::before {
@@ -73,12 +88,12 @@ tailwind.config = {
   /* Flytande knapp: färgen sköljer upp underifrån som våt färg */
   .btn-liquid { position: relative; overflow: hidden; isolation: isolate; transition: color .45s cubic-bezier(.77,0,.175,1), border-color .45s; }
   .btn-liquid::before {
-    content: ""; position: absolute; inset: -2% -10%; z-index: -1; background: #A44A24;
+    content: ""; position: absolute; inset: -2% -10%; z-index: -1; background: #C0121D;
     border-radius: 48% 52% 0 0 / 100% 100% 0 0;
     transform: translateY(103%); transition: transform .6s cubic-bezier(.77,0,.175,1), border-radius .6s cubic-bezier(.77,0,.175,1);
   }
   .btn-liquid:hover::before, .btn-liquid:focus-visible::before { transform: translateY(0); border-radius: 0; }
-  .btn-liquid:hover, .btn-liquid:focus-visible { color: #FAF9F6; border-color: #A44A24; }
+  .btn-liquid:hover, .btn-liquid:focus-visible { color: #FAF9F6; border-color: #C0121D; }
 
   .btn-liquid-dark::before { background: #1a1a1a; }
   .btn-liquid-dark:hover, .btn-liquid-dark:focus-visible { border-color: #1a1a1a; }
@@ -117,9 +132,11 @@ tailwind.config = {
 <!-- ===== MENY — endast logotyp + kontaktknapp ===== -->
 <header id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
   <div class="max-w-[1440px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-16 py-6">
-    <a href="#" class="fade-item leading-none">
-      <span class="font-serif text-2xl tracking-tight">Åberg <em class="text-clay not-italic font-serif italic">&amp;</em> Söner</span>
-      <span class="block text-[10px] uppercase tracking-[.35em] text-mist mt-1.5">Måleri · Örnsköldsvik · 1987</span>
+    <a href="#" class="fade-item leading-none" aria-label="Åberg Måleri — till startsidan">
+      <span class="logo-block">
+        <span class="logo-main">ÅBERG</span>
+        <span class="logo-script">måleri</span>
+      </span>
     </a>
     <a href="#kontakt" class="fade-item btn-liquid inline-flex items-center gap-3 border border-ink/25 rounded-full px-7 py-3 text-sm tracking-wide">
       Kontakta oss
@@ -143,8 +160,8 @@ tailwind.config = {
           </h1>
           <div class="mt-12 max-w-md lg:ml-[8%]">
             <p class="fade-item text-mist text-lg leading-relaxed">
-              Tre generationers penseldrag i Örnsköldsvik. Vi målar hem, trapphus och lokaler med
-              en noggrannhet som märks långt efter att stegen är hopfälld.
+              Åberg Måleri har satt färg på Örnsköldsvik sedan 1987. Vi målar hem, trapphus och
+              lokaler med en noggrannhet som märks långt efter att stegen är hopfälld.
             </p>
             <div class="fade-item mt-10 flex flex-wrap items-center gap-8">
               <a href="#kontakt" class="btn-liquid inline-flex items-center gap-3 border border-ink rounded-full px-8 py-4 text-sm tracking-wide">
@@ -159,7 +176,7 @@ tailwind.config = {
         <div class="lg:col-span-5 xl:col-span-5 relative">
           <div id="heroImage" class="fade-item relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-40px_rgba(26,26,26,.35)]">
             <!-- Platshållare: ersätt med foto av ett färdigmålat rum -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#E8D5C4] via-[#D9B49A] to-[#A44A24]"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-[#EFD6CC] via-[#DCA79B] to-[#B72A20]"></div>
             <div class="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_30%_20%,rgba(250,249,246,.8),transparent_55%)]"></div>
             <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
               <div class="bg-paper/90 backdrop-blur rounded-2xl px-5 py-4">
@@ -219,7 +236,7 @@ tailwind.config = {
 
         <!-- Stort block: Inomhusmålning -->
         <a href="#kontakt" class="bento-card group md:col-span-4 md:row-span-2 bg-linen rounded-[2rem] p-9 lg:p-12 flex flex-col justify-between relative overflow-hidden" data-reveal>
-          <div class="card-swatch absolute -right-16 -top-16 w-72 h-72 rounded-full bg-gradient-to-br from-[#E8D5C4] to-[#A44A24]/70 blur-[1px]" aria-hidden="true"></div>
+          <div class="card-swatch absolute -right-16 -top-16 w-72 h-72 rounded-full bg-gradient-to-br from-[#EFD6CC] to-[#C0121D]/60 blur-[1px]" aria-hidden="true"></div>
           <div class="relative flex items-start justify-between">
             <span class="text-xs tracking-[.3em] text-mist">01</span>
             <svg class="card-arrow w-6 h-6 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -312,7 +329,7 @@ tailwind.config = {
             <div class="absolute inset-0 bg-gradient-to-br from-[#B9B2A6] via-[#8F887C] to-[#6B655B]">
               <span class="absolute top-5 left-5 text-[10px] uppercase tracking-[.3em] bg-ink/70 text-paper px-4 py-2 rounded-full">Före</span>
             </div>
-            <div class="ba-after absolute inset-0 bg-gradient-to-br from-[#F3E6D8] via-[#E3C4A8] to-[#B96A3F]">
+            <div class="ba-after absolute inset-0 bg-gradient-to-br from-[#F3E3D8] via-[#E3B7A8] to-[#BC4A35]">
               <span class="absolute top-5 right-5 text-[10px] uppercase tracking-[.3em] bg-clay text-paper px-4 py-2 rounded-full">Efter</span>
             </div>
             <div class="ba-handle absolute top-0 bottom-0 w-px bg-paper -translate-x-1/2 pointer-events-none">
@@ -358,7 +375,7 @@ tailwind.config = {
       <blockquote class="font-serif italic font-medium leading-snug text-[clamp(1.75rem,3.5vw,3rem)]">
         Färg är det sista handslaget i ett projekt — det som avgör hur allt annat uppfattas.
       </blockquote>
-      <p class="mt-8 text-xs uppercase tracking-[.4em] text-mist">Åberg &amp; Söner Måleri — sedan 1987</p>
+      <p class="mt-8 text-xs uppercase tracking-[.4em] text-mist">Åberg Måleri — sedan 1987</p>
     </div>
   </section>
 
@@ -408,8 +425,11 @@ tailwind.config = {
 <!-- ===== SIDFOT ===== -->
 <footer class="border-t border-ink/10">
   <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="font-serif text-lg">Åberg <em class="text-clay not-italic font-serif italic">&amp;</em> Söner Måleri AB</p>
-    <p class="text-xs text-mist tracking-wide">© 2026 · Örnsköldsvik · Org.nr [XXXXXX-XXXX]</p>
+    <span class="logo-block logo-sm" aria-label="Åberg Måleri">
+      <span class="logo-main">ÅBERG</span>
+      <span class="logo-script">måleri</span>
+    </span>
+    <p class="text-xs text-mist tracking-wide">© 2026 · Åberg Måleri · Örnsköldsvik · Org.nr [XXXXXX-XXXX]</p>
   </div>
 </footer>
 
