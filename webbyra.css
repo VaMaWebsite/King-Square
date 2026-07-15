@@ -119,10 +119,20 @@ section{position:relative; padding:150px 0;}
   align-items:center; justify-content:center; gap:18px; transition:opacity .7s var(--ease-soft), visibility .7s;
 }
 .preloader.done{opacity:0; visibility:hidden; pointer-events:none;}
-.preloader .mark{width:46px; height:46px; border-radius:14px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; animation:markPulse 1.6s ease-in-out infinite;}
-@keyframes markPulse{0%,100%{transform:scale(1);} 50%{transform:scale(1.08);}}
+.preloader-logo{display:flex; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:clamp(2.4rem,6vw,3.4rem); letter-spacing:-.01em;}
+.preloader-logo span{
+  display:inline-block; opacity:0; transform:translateY(28px) scale(.82); filter:blur(6px);
+  animation:logoLetterIn .75s var(--ease-soft) forwards;
+}
+.preloader-logo span:nth-child(odd){color:#6E85F5;}
+.preloader-logo span:nth-child(even){color:#12141C;}
+.preloader-logo span:nth-child(1){animation-delay:.05s;}
+.preloader-logo span:nth-child(2){animation-delay:.16s;}
+.preloader-logo span:nth-child(3){animation-delay:.27s;}
+.preloader-logo span:nth-child(4){animation-delay:.38s;}
+@keyframes logoLetterIn{to{opacity:1; transform:none; filter:blur(0);}}
 .preloader .bar{width:160px; height:2px; background:var(--line); border-radius:2px; overflow:hidden;}
-.preloader .bar span{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--accent-deep),var(--accent-2)); animation:loadBar 1.1s var(--ease-soft) forwards .15s;}
+.preloader .bar span{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--accent-deep),var(--accent-2)); animation:loadBar 1s var(--ease-soft) forwards .65s;}
 @keyframes loadBar{to{width:100%;}}
 
 /* ---------- reveal (GSAP hooks fall back gracefully) ---------- */
