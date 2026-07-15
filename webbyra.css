@@ -338,13 +338,6 @@ section{position:relative; padding:150px 0;}
 }
 .form-success.show{display:flex;}
 .form-success svg{width:18px; height:18px; color:var(--accent-2); flex:none;}
-.form-error{
-  display:none; align-items:center; gap:12px; background:rgba(255,138,128,.14); border:1px solid rgba(255,138,128,.35);
-  border-radius:12px; padding:14px 18px; font-size:.9rem; color:#ffd4cf;
-}
-.form-error.show{display:flex;}
-.form-error svg{width:18px; height:18px; color:#ff8a80; flex:none;}
-.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; padding:0; margin:-1px;}
 
 /* ---------- footer ---------- */
 footer{padding:70px 0 30px;}
