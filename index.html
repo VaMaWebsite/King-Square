@@ -3,931 +3,425 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>King Square — Asiatiskt kök & take away i Örnsköldsvik</title>
-<meta name="description" content="King Square på Skolgatan 12 i Örnsköldsvik serverar asiatiskt kök — wok, currygrytor och kombinationsmenyer. Ät på plats eller ring 0660-152 60 för take away.">
-<meta property="og:title" content="King Square — Asiatiskt kök i Örnsköldsvik">
-<meta property="og:description" content="Wok, currygrytor och take away på Skolgatan 12. Betyg 4,2 av 5 på Google.">
+<title>VAMA — Digital byrå i världsklass | Webbutveckling &amp; design</title>
+<meta name="description" content="VAMA designar och bygger digitala upplevelser i premiumklass — skräddarsydd webbutveckling, UI/UX-design, branding och e-handel utan mallar.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237CC8FF'/%3E%3Cstop offset='1' stop-color='%232F8FD1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' fill='white' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
 <meta property="og:type" content="website">
+<meta property="og:title" content="VAMA — Digital byrå i världsklass">
+<meta property="og:description" content="Skräddarsydd webbutveckling, UI/UX-design och branding. Inga mallar — bara digitala upplevelser som sticker ut.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VAMA — Digital byrå i världsklass">
+<meta name="twitter:description" content="Skräddarsydd webbutveckling, UI/UX-design och branding utan mallar.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Marcellus&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  /* ============================================================
-     KING SQUARE — PREMIUM DARK
-     Palett: lacksröd / guld / bläck / papper (samma identitet)
-     ============================================================ */
-  :root{
-    --bg:#14100A;
-    --bg-2:#1C1710;
-    --surface:rgba(251,247,238,.045);
-    --surface-strong:rgba(251,247,238,.08);
-    --line:rgba(228,206,148,.14);
-    --lacquer:#A8201A;
-    --lacquer-bright:#C9302A;
-    --gold:#C9A54D;
-    --gold-soft:#E4CE94;
-    --text:#F4EBDA;
-    --text-dim:rgba(244,235,218,.62);
-    --radius:18px;
-    --radius-sm:12px;
-    --ease:cubic-bezier(.22,1,.36,1);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Work Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    line-height:1.6;
-  }
-  h1,h2,h3{font-family:'Fraunces', serif; line-height:1.1;}
-  a{color:inherit;}
-  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:4px;}
-  .wrap{max-width:1140px; margin:0 auto; padding:0 28px;}
-  .mono{font-family:'IBM Plex Mono', monospace;}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-  /* =============== LOADER =============== */
-  .loader{
-    position:fixed; inset:0; z-index:200;
-    background:var(--bg);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
-    transition:opacity .6s ease, visibility .6s;
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  if (window.tailwind) {
+    tailwind.config = {
+      corePlugins: { preflight: false }, // hand-authored CSS below owns resets/base styles
+      theme: {
+        extend: {
+          colors: {
+            accent: '#7CC8FF', 'accent-2': '#8FD3FF', 'accent-soft': '#CFEFFF', 'accent-deep': '#2F8FD1',
+            ink: '#0C0F14', bgsoft: '#FAFAFA'
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Plus Jakarta Sans', 'sans-serif'] }
+        }
+      }
+    };
   }
-  .loader.done{opacity:0; visibility:hidden;}
-  .loader svg{width:64px; height:64px;}
-  .loader path{
-    stroke-dasharray:160; stroke-dashoffset:160;
-    animation:draw 1s var(--ease) .1s forwards;
-  }
-  .loader rect{opacity:0; animation:fadeIn .4s ease .9s forwards;}
-  .loader .word{
-    font-family:'Fraunces', serif; font-size:1.1rem; letter-spacing:.28em;
-    text-transform:uppercase; color:var(--gold-soft);
-    opacity:0; animation:fadeIn .6s ease .6s forwards;
-  }
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  @keyframes fadeIn{to{opacity:1;}}
+</script>
+<link rel="stylesheet" href="webbyra.css">
 
-  /* =============== REVEALS =============== */
-  .reveal{
-    opacity:0; transform:translateY(30px);
-    transition:opacity .85s var(--ease), transform .85s var(--ease);
-    transition-delay:var(--d,0s);
-  }
-  .reveal.in{opacity:1; transform:none;}
-  .reveal-scale{transform:scale(.94) translateY(18px);}
-  .reveal-scale.in{transform:none;}
-
-  /* =============== NAVBAR =============== */
-  header.site{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    transition:background .35s, box-shadow .35s, border-color .35s;
-    border-bottom:1px solid transparent;
-  }
-  header.site.scrolled{
-    background:rgba(20,16,10,.72);
-    backdrop-filter:blur(16px) saturate(1.3);
-    -webkit-backdrop-filter:blur(16px) saturate(1.3);
-    border-bottom-color:var(--line);
-    box-shadow:0 12px 40px -20px rgba(0,0,0,.8);
-  }
-  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px; transition:padding .3s;}
-  header.site.scrolled nav.wrap{padding-top:12px; padding-bottom:12px;}
-  .brandmark{display:flex; align-items:center; gap:12px; text-decoration:none;}
-  .crown{width:34px; height:34px; flex:none; transition:transform .4s var(--ease);}
-  .brandmark:hover .crown{transform:rotate(-8deg) scale(1.08);}
-  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:1.3rem; color:var(--gold-soft);}
-  .brand-sub{font-family:'IBM Plex Mono', monospace; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-dim);}
-  nav ul{list-style:none; display:flex; gap:6px;}
-  nav ul a{
-    text-decoration:none; font-size:.9rem; font-weight:500; color:var(--text-dim);
-    padding:8px 14px; border-radius:999px;
-    transition:color .25s, background .25s;
-  }
-  nav ul a:hover{color:var(--text);}
-  nav ul a.active{
-    color:var(--gold-soft);
-    background:var(--surface-strong);
-    box-shadow:inset 0 0 0 1px var(--line);
-  }
-  .nav-cta{
-    background:var(--lacquer); color:#fff; text-decoration:none;
-    padding:11px 22px; border-radius:999px; font-weight:600; font-size:.87rem;
-    position:relative; overflow:hidden; white-space:nowrap;
-    transition:transform .25s var(--ease), box-shadow .25s, background .25s;
-    box-shadow:0 8px 24px -10px rgba(168,32,26,.7);
-  }
-  .nav-cta::before{
-    content:""; position:absolute; top:0; left:-80%; width:55%; height:100%;
-    background:linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
-    transform:skewX(-20deg); transition:left .55s ease;
-  }
-  .nav-cta:hover{transform:translateY(-2px); background:var(--lacquer-bright);}
-  .nav-cta:hover::before{left:135%;}
-  .nav-toggle{display:none;}
-
-  /* =============== HERO =============== */
-  .hero{
-    min-height:100svh;
-    display:flex; align-items:center;
-    position:relative; overflow:hidden;
-    padding:140px 0 100px;
-    background:
-      radial-gradient(1100px 600px at 80% -10%, rgba(168,32,26,.35), transparent 60%),
-      radial-gradient(800px 500px at 10% 110%, rgba(201,165,77,.14), transparent 60%),
-      var(--bg);
-  }
-  .hero-grid-lines{
-    position:absolute; inset:0; pointer-events:none; opacity:.5;
-    background-image:
-      repeating-linear-gradient(0deg, rgba(228,206,148,.04) 0 1px, transparent 1px 72px),
-      repeating-linear-gradient(90deg, rgba(228,206,148,.04) 0 1px, transparent 1px 72px);
-  }
-  .hero-orb{
-    position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none;
-    will-change:transform;
-  }
-  .orb-1{width:460px; height:460px; background:rgba(168,32,26,.32); top:-140px; right:-100px;}
-  .orb-2{width:380px; height:380px; background:rgba(201,165,77,.16); bottom:-160px; left:-120px;}
-  .hero-glyph{
-    position:absolute; right:4%; top:50%; transform:translateY(-50%);
-    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(14rem,28vw,26rem);
-    color:transparent;
-    -webkit-text-stroke:1.5px rgba(228,206,148,.13);
-    line-height:1; pointer-events:none; user-select:none;
-    will-change:transform;
-  }
-  .hero .wrap{position:relative; z-index:2; max-width:1140px;}
-  .stage{opacity:0; transform:translateY(28px); animation:rise .95s var(--ease) forwards;}
-  .stage.s1{animation-delay:1.1s;} .stage.s2{animation-delay:1.25s;}
-  .stage.s3{animation-delay:1.4s;} .stage.s4{animation-delay:1.55s;}
-  .stage.s5{animation-delay:1.75s;}
-  @keyframes rise{to{opacity:1; transform:none;}}
-  .hero-eyebrow{
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'IBM Plex Mono', monospace; font-size:.75rem; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--gold-soft);
-    padding:9px 18px; border-radius:999px;
-    background:var(--surface); border:1px solid var(--line);
-    backdrop-filter:blur(8px);
-    margin-bottom:28px;
-  }
-  .hero-eyebrow .dot{
-    width:7px; height:7px; border-radius:50%; background:#7BC47F;
-    animation:pulse 2.2s ease-out infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(123,196,127,.5);}
-    70%{box-shadow:0 0 0 9px rgba(123,196,127,0);}
-    100%{box-shadow:0 0 0 0 rgba(123,196,127,0);}
-  }
-  .hero h1{
-    font-family:'Marcellus', serif;
-    font-size:clamp(2.7rem, 6vw, 4.8rem);
-    font-weight:400; letter-spacing:.04em; text-transform:uppercase;
-    max-width:14ch; margin-bottom:26px; line-height:1.12;
-  }
-  .hero h1 em{
-    font-style:normal;
-    background:linear-gradient(105deg, var(--gold-soft), var(--gold) 60%, #a9843a);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero p.lede{font-size:1.15rem; color:var(--text-dim); max-width:46ch; margin-bottom:40px;}
-  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:56px;}
-  .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    padding:16px 30px; border-radius:999px; font-weight:600; font-size:.96rem;
-    text-decoration:none; position:relative; overflow:hidden;
-    transition:transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s;
-  }
-  .btn::before{
-    content:""; position:absolute; top:0; left:-80%; width:55%; height:100%;
-    background:linear-gradient(100deg, transparent, rgba(255,255,255,.32), transparent);
-    transform:skewX(-20deg); transition:left .55s ease;
-  }
-  .btn:hover::before{left:135%;}
-  .btn:hover{transform:translateY(-3px);}
-  .btn:active{transform:translateY(-1px);}
-  .btn .ico{transition:transform .3s var(--ease);}
-  .btn:hover .ico{transform:translateX(4px);}
-  .btn-primary{
-    background:linear-gradient(120deg, var(--lacquer-bright), var(--lacquer));
-    color:#fff; box-shadow:0 16px 40px -14px rgba(168,32,26,.75);
-  }
-  .btn-primary:hover{box-shadow:0 20px 50px -14px rgba(201,48,42,.85);}
-  .btn-glass{
-    background:var(--surface); border:1px solid var(--line); color:var(--text);
-    backdrop-filter:blur(8px);
-  }
-  .btn-glass:hover{background:var(--surface-strong); border-color:rgba(228,206,148,.3);}
-  .hero-stats{
-    display:flex; gap:0; flex-wrap:wrap;
-    border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--surface); backdrop-filter:blur(10px);
-    max-width:640px; overflow:hidden;
-  }
-  .hero-stats>div{
-    flex:1; min-width:170px; padding:22px 26px;
-    border-right:1px solid var(--line);
-  }
-  .hero-stats>div:last-child{border-right:none;}
-  .hero-stats strong{
-    display:block; font-family:'Fraunces', serif; font-weight:600;
-    font-size:1.5rem; color:var(--gold-soft); font-variant-numeric:tabular-nums;
-  }
-  .hero-stats span{font-family:'IBM Plex Mono', monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim);}
-  .scroll-hint{
-    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:8px;
-    color:var(--text-dim); font-family:'IBM Plex Mono', monospace; font-size:.66rem;
-    letter-spacing:.2em; text-transform:uppercase; z-index:2;
-    opacity:0; animation:fadeIn 1s ease 2.4s forwards;
-  }
-  .scroll-hint .line{
-    width:1px; height:44px; background:linear-gradient(var(--gold-soft), transparent);
-    animation:drip 2s ease-in-out infinite;
-    transform-origin:top;
-  }
-  @keyframes drip{0%,100%{transform:scaleY(.4); opacity:.4;} 50%{transform:scaleY(1); opacity:1;}}
-
-  /* =============== SECTION SHELL =============== */
-  section{padding:110px 0; position:relative;}
-  .eyebrow{
-    display:inline-block;
-    font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--gold);
-    padding:7px 16px; border-radius:999px;
-    border:1px solid var(--line); background:var(--surface);
-    margin-bottom:20px;
-  }
-  .section-head{max-width:660px; margin-bottom:60px;}
-  .section-head h2{font-size:clamp(2rem,3.4vw,2.9rem); font-weight:600; margin-bottom:18px; letter-spacing:-.01em;}
-  .section-head p{font-size:1.06rem; color:var(--text-dim); max-width:54ch;}
-  .divider{
-    height:1px; width:100%;
-    background:linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
-  }
-
-  /* =============== SERVICES =============== */
-  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .service-card{
-    background:linear-gradient(160deg, var(--surface-strong), var(--surface));
-    border:1px solid var(--line); border-radius:var(--radius);
-    padding:36px 30px;
-    backdrop-filter:blur(10px);
-    position:relative; overflow:hidden;
-    transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
-  }
-  .service-card::after{
-    content:""; position:absolute; inset:0; border-radius:var(--radius);
-    background:radial-gradient(320px 200px at var(--mx,50%) var(--my,0%), rgba(201,165,77,.14), transparent 70%);
-    opacity:0; transition:opacity .4s; pointer-events:none;
-  }
-  .service-card:hover{transform:translateY(-8px); border-color:rgba(228,206,148,.32); box-shadow:0 30px 60px -30px rgba(0,0,0,.8);}
-  .service-card:hover::after{opacity:1;}
-  .service-ico{
-    width:56px; height:56px; border-radius:14px;
-    background:linear-gradient(140deg, rgba(168,32,26,.35), rgba(168,32,26,.1));
-    border:1px solid rgba(201,48,42,.35);
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.5rem; margin-bottom:24px;
-    transition:transform .4s var(--ease);
-  }
-  .service-card:hover .service-ico{transform:scale(1.12) rotate(-6deg);}
-  .service-card h3{font-size:1.35rem; font-weight:600; margin-bottom:12px; color:var(--gold-soft);}
-  .service-card p{font-size:.96rem; color:var(--text-dim); margin-bottom:18px;}
-  .service-card .meta{font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--gold); letter-spacing:.06em;}
-
-  /* =============== GALLERY / SIGNATURRÄTTER =============== */
-  .gallery{background:var(--bg-2);}
-  .gallery-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:18px;
-  }
-  .g-item{
-    border-radius:var(--radius); overflow:hidden; position:relative;
-    border:1px solid var(--line); cursor:default;
-    display:flex; align-items:flex-end; padding:22px;
-    transition:transform .45s var(--ease), box-shadow .45s;
-  }
-  .g-item:hover{transform:translateY(-6px) scale(1.015); box-shadow:0 28px 56px -26px rgba(0,0,0,.85); z-index:2;}
-  .g-item .bg{
-    position:absolute; inset:0; transition:transform .8s var(--ease);
-  }
-  .g-item:hover .bg{transform:scale(1.08);}
-  .g-item .shade{
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, transparent 30%, rgba(20,16,10,.85));
-  }
-  .g-item .label{position:relative; z-index:2;}
-  .g-item .label .t{font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem;}
-  .g-item .label .p{font-family:'IBM Plex Mono', monospace; font-size:.75rem; color:var(--gold-soft); margin-top:4px;}
-  .g-wide{grid-column:span 2;}
-  .g-tall{grid-row:span 2;}
-  /* dish gradients (byts mot riktiga foton) */
-  .bg-1{background:radial-gradient(circle at 30% 30%, #E0722F, #8C2B12 70%);}
-  .bg-2{background:radial-gradient(circle at 70% 25%, #D9A441, #7A4A12 75%);}
-  .bg-3{background:radial-gradient(circle at 40% 60%, #B5452A, #5C1610 75%);}
-  .bg-4{background:radial-gradient(circle at 60% 40%, #C98A3B, #6E3D14 70%);}
-  .bg-5{background:radial-gradient(circle at 30% 70%, #A83A2E, #471209 75%);}
-  .bg-6{background:radial-gradient(circle at 65% 60%, #D9B054, #7C5A1A 75%);}
-  .g-item .bg::after{
-    content:""; position:absolute; inset:0;
-    background-image:radial-gradient(rgba(255,255,255,.09) 1px, transparent 1.5px);
-    background-size:14px 14px; opacity:.35;
-  }
-  .gallery-note{margin-top:26px; font-size:.86rem; color:var(--text-dim); max-width:64ch;}
-
-  /* =============== TESTIMONIALS =============== */
-  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .review-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-    padding:32px 28px; backdrop-filter:blur(10px);
-    display:flex; flex-direction:column; gap:16px;
-    transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
-  }
-  .review-card:hover{transform:translateY(-8px); border-color:rgba(228,206,148,.3); box-shadow:0 28px 56px -28px rgba(0,0,0,.8);}
-  .review-card .q{
-    font-family:'Fraunces', serif; font-size:2.6rem; line-height:0; color:var(--gold);
-    height:16px;
-  }
-  .review-card .stars{color:var(--gold); letter-spacing:2px; font-size:.92rem;}
-  .review-card .stars.low{color:var(--lacquer-bright);}
-  .review-card blockquote{font-size:.99rem; font-style:italic; color:var(--text); opacity:.9;}
-  .review-card .who{
-    margin-top:auto; padding-top:14px; border-top:1px solid var(--line);
-    display:flex; justify-content:space-between;
-    font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--text-dim);
-  }
-  .rating-strip{
-    margin-top:44px;
-    display:flex; align-items:center; gap:26px; flex-wrap:wrap;
-    background:linear-gradient(120deg, rgba(168,32,26,.22), rgba(201,165,77,.1));
-    border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px 32px; backdrop-filter:blur(10px);
-  }
-  .rating-strip .score{font-family:'Fraunces', serif; font-size:3rem; font-weight:600; color:var(--gold-soft); line-height:1; font-variant-numeric:tabular-nums;}
-  .rating-strip .of{color:var(--text-dim); font-size:.9rem;}
-  .rating-strip .src{margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:.76rem; color:var(--text-dim);}
-
-  /* =============== ABOUT =============== */
-  .about{background:var(--bg-2);}
-  .about-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center;}
-  .about-copy p{color:var(--text-dim); font-size:1.04rem; margin-bottom:20px;}
-  .about-copy p strong{color:var(--gold-soft); font-weight:600;}
-  .about-visual{
-    aspect-ratio:1/1.05; border-radius:var(--radius); position:relative;
-    background:
-      radial-gradient(circle at 32% 28%, rgba(255,255,255,.14), transparent 55%),
-      linear-gradient(160deg, var(--gold) 0%, #8f6f2e 100%);
-    box-shadow:0 40px 90px -30px rgba(0,0,0,.9);
-    display:flex; align-items:center; justify-content:center;
-    animation:floaty 8s ease-in-out infinite;
-  }
-  @keyframes floaty{0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);}}
-  .about-visual .ring{
-    width:76%; height:76%; border-radius:50%; border:2px dashed rgba(20,16,10,.4);
-    display:flex; align-items:center; justify-content:center;
-    animation:spin 46s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
-  .about-visual .ring-inner{text-align:center; color:#1C1710; animation:spin 46s linear infinite reverse;}
-  .about-visual .ring-inner .num{font-family:'Fraunces', serif; font-weight:600; font-size:4rem; line-height:1;}
-  .about-visual .ring-inner .cap{font-family:'IBM Plex Mono', monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; margin-top:8px; opacity:.75;}
-  .about-badges{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;}
-  .badge{
-    font-family:'IBM Plex Mono', monospace; font-size:.74rem;
-    padding:10px 16px; border-radius:999px;
-    background:var(--surface); border:1px solid var(--line);
-    transition:background .3s, border-color .3s, transform .3s var(--ease);
-  }
-  .badge:hover{background:rgba(168,32,26,.25); border-color:rgba(201,48,42,.4); transform:translateY(-2px);}
-
-  /* =============== CONTACT =============== */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
-  .panel{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-    padding:36px 32px; backdrop-filter:blur(10px);
-  }
-  .panel h3{font-size:1.3rem; color:var(--gold-soft); margin-bottom:24px; font-weight:600;}
-  .hours-table{width:100%; border-collapse:collapse;}
-  .hours-table tr{border-bottom:1px solid var(--line); transition:background .2s;}
-  .hours-table tr:last-child{border-bottom:none;}
-  .hours-table tr:hover{background:var(--surface);}
-  .hours-table td{padding:13px 8px; font-size:.95rem;}
-  .hours-table td:first-child{font-weight:500;}
-  .hours-table td:last-child{text-align:right; font-family:'IBM Plex Mono', monospace; font-size:.86rem; color:var(--text-dim);}
-  .hours-table tr.today td{color:var(--gold-soft);}
-  .hours-table tr.today td:first-child::after{
-    content:"idag"; font-family:'IBM Plex Mono', monospace; font-size:.62rem;
-    margin-left:10px; padding:3px 9px; border-radius:999px;
-    background:rgba(201,165,77,.18); border:1px solid rgba(201,165,77,.35);
-    vertical-align:middle;
-  }
-  .hours-table tr.closed td{opacity:.45;}
-  .contact-links{display:flex; flex-direction:column;}
-  .contact-links a{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:18px 8px; border-bottom:1px solid var(--line);
-    text-decoration:none; font-weight:500; font-size:1rem;
-    transition:background .25s, padding-left .25s var(--ease);
-    border-radius:8px;
-  }
-  .contact-links a:hover{background:var(--surface); padding-left:16px;}
-  .contact-links a:last-child{border-bottom:none;}
-  .contact-links .arrow{
-    font-family:'IBM Plex Mono', monospace; color:var(--gold);
-    transition:transform .3s var(--ease);
-  }
-  .contact-links a:hover .arrow{transform:translateX(6px);}
-  .map-note{
-    margin-top:24px; padding:20px 22px; border-radius:var(--radius-sm);
-    background:linear-gradient(120deg, rgba(168,32,26,.2), transparent);
-    border:1px solid rgba(201,48,42,.25);
-    font-size:.92rem; color:var(--text-dim);
-  }
-  .map-note strong{color:var(--text); display:block; font-family:'Fraunces', serif; font-size:1.15rem; margin-bottom:4px;}
-
-  /* =============== CTA BAND =============== */
-  .cta-band{
-    padding:90px 0;
-    background:
-      radial-gradient(700px 340px at 50% 0%, rgba(168,32,26,.4), transparent 70%),
-      var(--bg-2);
-    text-align:center;
-  }
-  .cta-band h2{font-size:clamp(1.9rem,3.4vw,2.8rem); font-weight:600; margin-bottom:16px;}
-  .cta-band h2 em{font-style:italic; color:var(--gold-soft); font-weight:500;}
-  .cta-band p{color:var(--text-dim); margin-bottom:36px;}
-  .cta-band .btn{margin:0 auto;}
-
-  /* =============== FOOTER =============== */
-  footer{background:var(--bg); border-top:1px solid var(--line); padding:64px 0 30px;}
-  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:44px; margin-bottom:48px;}
-  .footer-brand p{margin-top:14px; font-size:.92rem; color:var(--text-dim); max-width:32ch;}
-  footer h4{font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:18px;}
-  footer ul{list-style:none;}
-  footer li{margin-bottom:11px; font-size:.92rem;}
-  footer li a{text-decoration:none; color:var(--text-dim); transition:color .2s, padding-left .25s var(--ease);}
-  footer li a:hover{color:var(--gold-soft); padding-left:6px;}
-  .footer-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
-    padding-top:26px; border-top:1px solid var(--line);
-    font-family:'IBM Plex Mono', monospace; font-size:.73rem; color:var(--text-dim);
-  }
-
-  /* =============== TO TOP =============== */
-  .to-top{
-    position:fixed; right:26px; bottom:26px; z-index:110;
-    width:50px; height:50px; border-radius:50%;
-    background:var(--surface-strong); color:var(--gold-soft);
-    border:1px solid var(--line); cursor:pointer; font-size:1.15rem;
-    backdrop-filter:blur(10px);
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; pointer-events:none; transform:translateY(14px);
-    transition:opacity .35s, transform .35s var(--ease), background .25s, border-color .25s;
-  }
-  .to-top.show{opacity:1; pointer-events:auto; transform:none;}
-  .to-top:hover{background:rgba(168,32,26,.4); border-color:rgba(201,48,42,.5);}
-
-  /* =============== RESPONSIVE =============== */
-  @media (max-width:960px){
-    .services-grid{grid-template-columns:1fr 1fr;}
-    .gallery-grid{grid-template-columns:1fr 1fr; grid-auto-rows:190px;}
-    .review-grid{grid-template-columns:1fr;}
-    .about-grid{grid-template-columns:1fr; gap:48px;}
-    .about-visual{max-width:340px; margin:0 auto;}
-    .contact-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr; gap:32px;}
-  }
-  @media (max-width:760px){
-    nav ul{
-      position:fixed; top:66px; left:16px; right:16px;
-      background:rgba(20,16,10,.94); backdrop-filter:blur(20px);
-      border:1px solid var(--line); border-radius:var(--radius);
-      flex-direction:column; padding:18px; gap:6px;
-      transform:translateY(-16px); opacity:0; pointer-events:none;
-      transition:transform .3s var(--ease), opacity .3s;
-      z-index:90;
-    }
-    nav ul.open{transform:none; opacity:1; pointer-events:auto;}
-    nav ul a{display:block;}
-    .nav-toggle{
-      display:block; background:var(--surface); border:1px solid var(--line);
-      color:var(--text); border-radius:999px; padding:9px 16px;
-      font-family:'IBM Plex Mono', monospace; font-size:.78rem; cursor:pointer;
-    }
-    .services-grid{grid-template-columns:1fr;}
-    .gallery-grid{grid-template-columns:1fr; grid-auto-rows:200px;}
-    .g-wide{grid-column:span 1;}
-    .g-tall{grid-row:span 1;}
-    .hero-stats{flex-direction:column;}
-    .hero-stats>div{border-right:none; border-bottom:1px solid var(--line);}
-    .hero-stats>div:last-child{border-bottom:none;}
-    section{padding:76px 0;}
-    .hero{padding:120px 0 80px;}
-    .hero-glyph{display:none;}
-  }
-
-  /* =============== REDUCED MOTION =============== */
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *, *::before, *::after{
-      animation-duration:.01ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:.01ms !important;
-    }
-    .reveal, .stage{opacity:1; transform:none;}
-    .loader{display:none;}
-  }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "VAMA",
+  "description": "Digital byrå som bygger skräddarsydd webbutveckling, UI/UX-design och branding.",
+  "email": "vamakontakt@gmail.com",
+  "areaServed": "Örnsköldsvik, Sverige"
+}
+</script>
 </head>
-<body>
+<body class="is-loading">
 
-<!-- LOADER -->
-<div class="loader" id="loader" aria-hidden="true">
-  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8 34L6 16L15 23L24 10L33 23L42 16L40 34H8Z" stroke="#C9A54D" stroke-width="2.4" stroke-linejoin="round" fill="rgba(201,165,77,0.12)"/>
-    <rect x="8" y="34" width="32" height="5" fill="#A8201A"/>
-  </svg>
-  <div class="word">King Square</div>
+<a href="#main" class="skip-link">Hoppa till innehåll</a>
+<div class="noise-overlay" aria-hidden="true"></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader-logo">
+    <span>V</span><span>A</span><span>M</span><span>A</span>
+  </div>
+  <div class="bar"><span></span></div>
 </div>
 
-<!-- NAV -->
-<header class="site" id="siteHeader">
-  <nav class="wrap">
-    <a class="brandmark" href="#hem" aria-label="King Square, till toppen">
-      <svg class="crown" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 34L6 16L15 23L24 10L33 23L42 16L40 34H8Z" stroke="#C9A54D" stroke-width="2.4" stroke-linejoin="round" fill="rgba(201,165,77,0.12)"/>
-        <rect x="8" y="34" width="32" height="5" fill="#A8201A"/>
-      </svg>
-      <div>
-        <div class="brand-name">King Square</div>
-        <div class="brand-sub">Örnsköldsvik · Skolgatan 12</div>
-      </div>
+<header class="navbar" id="siteNav">
+  <div class="wrap nav-inner">
+    <a href="#hero" class="brand">
+      <span class="mark" aria-hidden="true">V</span>
+      VAMA
     </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList">Meny</button>
-    <ul id="navList">
-      <li><a href="#tjanster" data-nav="tjanster">Tjänster</a></li>
-      <li><a href="#galleri" data-nav="galleri">Rätter</a></li>
-      <li><a href="#omdomen" data-nav="omdomen">Omdömen</a></li>
-      <li><a href="#om" data-nav="om">Om oss</a></li>
-      <li><a href="#kontakt" data-nav="kontakt">Kontakt</a></li>
-    </ul>
-    <a class="nav-cta" href="tel:+4666015260">Ring &amp; beställ</a>
-  </nav>
+    <nav class="nav-links" aria-label="Huvudmeny">
+      <a href="#om" data-nav="om">Om oss</a>
+      <a href="#tjanster" data-nav="tjanster">Tjänster</a>
+      <a href="#portfolio" data-nav="portfolio">Portfolio</a>
+      <a href="#process" data-nav="process">Process</a>
+      <a href="#omdomen" data-nav="omdomen">Omdömen</a>
+      <a href="#kontakt" data-nav="kontakt">Kontakt</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#kontakt" class="btn btn-primary magnetic">Starta projekt</a>
+      <button id="navToggle" aria-label="Öppna meny" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="hem">
-  <div class="hero-grid-lines" aria-hidden="true"></div>
-  <div class="hero-orb orb-1" data-parallax="0.18" aria-hidden="true"></div>
-  <div class="hero-orb orb-2" data-parallax="0.1" aria-hidden="true"></div>
-  <div class="hero-glyph" data-parallax="0.06" aria-hidden="true">王</div>
-  <div class="wrap">
-    <div class="hero-eyebrow stage s1"><span class="dot"></span> Öppet idag 12–20 · Take away &amp; servering</div>
-    <h1 class="stage s2">Äkta <em>asiatiskt kök</em> i Örnsköldsvik</h1>
-    <p class="lede stage s3">Wok, currygrytor och friterade favoriter, lagade på Skolgatan sedan många år. Ät på plats i lugn miljö eller ring in din beställning och hämta när det passar dig.</p>
-    <div class="hero-ctas stage s4">
-      <a class="btn btn-primary" href="tel:+4666015260">Ring 0660-152 60 <span class="ico">→</span></a>
-      <a class="btn btn-glass" href="#galleri">Utforska rätterna</a>
-    </div>
-    <div class="hero-stats stage s5">
-      <div><strong data-count="4.2" data-decimals="1">0,0</strong><span>Betyg på Google</span></div>
-      <div><strong data-count="381">0</strong><span>Recensioner</span></div>
-      <div><strong>6 dgr</strong><span>Öppet per vecka</span></div>
-    </div>
-  </div>
-  <div class="scroll-hint" aria-hidden="true"><span>Scrolla</span><span class="line"></span></div>
-</section>
-
-<!-- TJÄNSTER -->
-<section id="tjanster">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow reveal">Det vi gör bäst</span>
-      <h2 class="reveal" style="--d:.08s;">Tre sätt att äta hos oss</h2>
-      <p class="reveal" style="--d:.16s;">Samma kök, samma omsorg — oavsett om du sitter ner, tar med dig eller beställer för hela familjen.</p>
-    </div>
-    <div class="services-grid">
-      <article class="service-card reveal" style="--d:.05s;">
-        <div class="service-ico" aria-hidden="true">🍜</div>
-        <h3>Ät på plats</h3>
-        <p>Slå dig ner på Skolgatan 12 och låt köket göra jobbet. Lunch och middag, sex dagar i veckan.</p>
-        <div class="meta">Mån–tors 11–19:30 · Fre–lör till 20</div>
-      </article>
-      <article class="service-card reveal" style="--d:.15s;">
-        <div class="service-ico" aria-hidden="true">🥡</div>
-        <h3>Take away</h3>
-        <p>Ring in din beställning så står den klar när du kommer. Perfekt för vardagskvällar och fredagsmys.</p>
-        <div class="meta">Ring 0660-152 60</div>
-      </article>
-      <article class="service-card reveal" style="--d:.25s;">
-        <div class="service-ico" aria-hidden="true">👑</div>
-        <h3>Kombinationsmenyer</h3>
-        <p>Tre eller fyra små rätter på samma tallrik — husets signatur och det generösa sättet att smaka mer.</p>
-        <div class="meta">Från 163:- · sötsursås ingår</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- GALLERI -->
-<section class="gallery" id="galleri">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow reveal">Ur menyn</span>
-      <h2 class="reveal" style="--d:.08s;">Husets signaturrätter</h2>
-      <p class="reveal" style="--d:.16s;">Ett urval av det gästerna kommer tillbaka för. Fullständig meny finns i restaurangen.</p>
-    </div>
-    <div class="gallery-grid">
-      <div class="g-item g-wide reveal reveal-scale" style="--d:.05s;">
-        <div class="bg bg-1"></div><div class="shade"></div>
-        <div class="label"><div class="t">Kyckling i starksås 🌶</div><div class="p">158:-</div></div>
-      </div>
-      <div class="g-item reveal reveal-scale" style="--d:.1s;">
-        <div class="bg bg-2"></div><div class="shade"></div>
-        <div class="label"><div class="t">Kycklingspett</div><div class="p">148:-</div></div>
-      </div>
-      <div class="g-item g-tall reveal reveal-scale" style="--d:.15s;">
-        <div class="bg bg-3"></div><div class="shade"></div>
-        <div class="label"><div class="t">Stekta scampi, sötsur vitlökssås</div><div class="p">243:-</div></div>
-      </div>
-      <div class="g-item reveal reveal-scale" style="--d:.2s;">
-        <div class="bg bg-4"></div><div class="shade"></div>
-        <div class="label"><div class="t">Spicy honey kyckling 🌶</div><div class="p">188:-</div></div>
-      </div>
-      <div class="g-item reveal reveal-scale" style="--d:.25s;">
-        <div class="bg bg-5"></div><div class="shade"></div>
-        <div class="label"><div class="t">Stekt anka i starksås 🌶</div><div class="p">248:-</div></div>
-      </div>
-      <div class="g-item g-wide reveal reveal-scale" style="--d:.3s;">
-        <div class="bg bg-6"></div><div class="shade"></div>
-        <div class="label"><div class="t">Tre små rätter — husets kombination</div><div class="p">163:-</div></div>
-      </div>
-    </div>
-    <p class="gallery-note reveal">Bildytorna är förberedda för restaurangens egna maträttsfoton — byts enkelt mot riktiga bilder i samma format utan att layouten påverkas.</p>
-  </div>
-</section>
-
-<!-- OMDÖMEN -->
-<section id="omdomen">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow reveal">Kundomdömen</span>
-      <h2 class="reveal" style="--d:.08s;">Vad gästerna säger</h2>
-      <p class="reveal" style="--d:.16s;">Ett ärligt urval från Google — både lovord och kritik.</p>
-    </div>
-    <div class="review-grid">
-      <article class="review-card reveal" style="--d:.05s;">
-        <div class="q" aria-hidden="true">"</div>
-        <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
-        <blockquote>Kände mig som en kung för en dag — maten var äkta kinesisk.</blockquote>
-        <div class="who"><span>Edvard Blomm</span><span>Google · 1 mån</span></div>
-      </article>
-      <article class="review-card reveal" style="--d:.15s;">
-        <div class="q" aria-hidden="true">"</div>
-        <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
-        <blockquote>Väldigt fin service och snäll personal — man kände sig omhändertagen och maten var god.</blockquote>
-        <div class="who"><span>Elina Jonsson</span><span>Google · 1 år</span></div>
-      </article>
-      <article class="review-card reveal" style="--d:.25s;">
-        <div class="q" aria-hidden="true">"</div>
-        <div class="stars low" aria-label="1 av 5 stjärnor">★☆☆☆☆</div>
-        <blockquote>En gäst tyckte att smaken inte höll måttet vid sitt besök.</blockquote>
-        <div class="who"><span>Erik Hedman</span><span>Google · 1 år</span></div>
-      </article>
-    </div>
-    <div class="rating-strip reveal reveal-scale">
-      <div class="score" data-count="4.2" data-decimals="1">0,0</div>
-      <div>
-        <div style="color:var(--gold); letter-spacing:3px;">★★★★☆</div>
-        <div class="of">av 5 möjliga</div>
-      </div>
-      <div class="src">381 recensioner på Google · verifieras ej av King Square</div>
-    </div>
-  </div>
-</section>
-
-<!-- OM OSS -->
-<section class="about" id="om">
-  <div class="wrap about-grid">
-    <div class="about-copy">
-      <span class="eyebrow reveal">Om King Square</span>
-      <h2 class="reveal" style="--d:.08s; font-size:clamp(1.9rem,3vw,2.6rem); margin-bottom:22px;">Grannrestaurangen med starksås och stark karaktär</h2>
-      <p class="reveal" style="--d:.16s;">King Square ligger mitt på Skolgatan och lagar <strong>asiatisk husmanskost</strong> — wok, currygrytor, fritering och söt-sur-klassiker — till lunch, middag och avhämtning.</p>
-      <p class="reveal" style="--d:.24s;">Menyn är byggd för att dela: tre eller fyra små rätter serverade tillsammans, sida vid sida med klassiker som kycklingspett och stekta scampi. Enkelt, generöst och gjort för <strong>Örnsköldsviks vardag</strong>.</p>
-      <div class="about-badges reveal" style="--d:.32s;">
-        <span class="badge">Wok &amp; fritering</span>
-        <span class="badge">Take away</span>
-        <span class="badge">Currygrytor</span>
-        <span class="badge">Familjeportioner</span>
-      </div>
-    </div>
-    <div class="about-visual reveal reveal-scale" aria-hidden="true">
-      <div class="ring">
-        <div class="ring-inner">
-          <div class="num">王</div>
-          <div class="cap">King Square</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- KONTAKT -->
-<section id="kontakt">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow reveal">Kontakt &amp; öppettider</span>
-      <h2 class="reveal" style="--d:.08s;">Hitta till oss</h2>
-    </div>
-    <div class="contact-grid">
-      <div class="panel reveal" style="--d:.05s;">
-        <h3>Öppettider</h3>
-        <table class="hours-table">
-          <tr class="today"><td>Lördag</td><td>12:00–20:00</td></tr>
-          <tr class="closed"><td>Söndag</td><td>Stängt</td></tr>
-          <tr><td>Måndag</td><td>11:00–19:30</td></tr>
-          <tr><td>Tisdag</td><td>11:00–19:30</td></tr>
-          <tr><td>Onsdag</td><td>11:00–19:30</td></tr>
-          <tr><td>Torsdag</td><td>11:00–19:30</td></tr>
-          <tr><td>Fredag</td><td>11:00–20:00</td></tr>
-        </table>
-      </div>
-      <div class="panel reveal" style="--d:.15s;">
-        <h3>Kontakt</h3>
-        <div class="contact-links">
-          <a href="tel:+4666015260"><span>Ring restaurangen</span><span class="arrow">0660-152 60 →</span></a>
-          <a href="tel:+46768816913"><span>Mobil</span><span class="arrow">076-881 69 13 →</span></a>
-          <a href="mailto:kingsquare@hotmail.se"><span>Maila oss</span><span class="arrow">kingsquare@hotmail.se →</span></a>
-          <a href="https://www.google.com/maps/search/?api=1&query=King+Square+Skolgatan+12+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener"><span>Vägbeskrivning</span><span class="arrow">Google Maps →</span></a>
-        </div>
-        <div class="map-note">
-          <strong>Skolgatan 12</strong>
-          891 33 Örnsköldsvik — mitt i centrum, nära gågatan.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA-BAND -->
-<div class="cta-band">
-  <div class="wrap">
-    <h2 class="reveal">Hungrig? <em>Middagen är ett samtal bort.</em></h2>
-    <p class="reveal" style="--d:.1s;">Ring in din beställning så står den klar när du kommer.</p>
-    <div class="reveal" style="--d:.2s;">
-      <a class="btn btn-primary" href="tel:+4666015260" style="display:inline-flex;">Ring 0660-152 60 <span class="ico">→</span></a>
-    </div>
-  </div>
+<div class="nav-mobile" id="navMobile">
+  <a href="#om">Om oss</a>
+  <a href="#tjanster">Tjänster</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#process">Process</a>
+  <a href="#omdomen">Omdömen</a>
+  <a href="#kontakt">Kontakt</a>
 </div>
 
-<!-- FOOTER -->
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="blob blob-blue" style="width:520px; height:520px; top:-160px; right:-140px;"></div>
+    <div class="blob blob-soft" style="width:420px; height:420px; bottom:-120px; left:-100px;"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Digital byrå · Örnsköldsvik</span>
+        <h1>
+          <span class="line"><span class="word">Vi</span> <span class="word">bygger</span></span>
+          <span class="line"><span class="word">digitala</span></span>
+          <span class="line"><span class="word"><em>upplevelser</em></span></span>
+          <span class="line"><span class="word">människor</span> <span class="word">minns.</span></span>
+        </h1>
+        <p class="lead">VAMA designar och utvecklar skräddarsydda webbplatser utan mallar — byggda för att kännas premium, ladda snabbt och konvertera besökare till kunder.</p>
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn btn-accent magnetic">
+            Starta ett projekt
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#portfolio" class="btn btn-ghost magnetic">Se vårt arbete</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>4</strong><span>Levererade projekt</span></div>
+          <div><strong>100%</strong><span>Skräddarsydd kod</span></div>
+          <div><strong>0</strong><span>Färdiga mallar</span></div>
+        </div>
+      </div>
+      <div class="hero-stage" id="heroStage">
+        <div class="stage-fallback" aria-hidden="true"></div>
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Scrolla</span><span class="dot-track"></span></div>
+  </section>
+
+  <!-- OM OSS -->
+  <section id="om">
+    <div class="wrap about-grid">
+      <div class="about-visual reveal">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="core" aria-hidden="true"></div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow reveal">Om VAMA</span>
+        <h2 class="reveal" data-delay=".05">Byrån som väljer kvalitet framför genvägar</h2>
+        <p class="reveal" data-delay=".1">Vi är en liten digital byrå med stort hantverk. Varje projekt byggs från grunden — ingen page builder, inga generiska teman. Bara ren kod, genomtänkt design och ett fokus på hur det faktiskt känns att använda sidan.</p>
+        <p class="reveal" data-delay=".15">Resultatet är webbplatser som laddar snabbt, ser exceptionella ut och representerar varumärket precis så som det förtjänar.</p>
+        <ul class="about-points reveal" data-delay=".2">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Handskriven, skräddarsydd kod</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Design med tydlig identitet</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Snabb, optimerad prestanda</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Nära dialog genom hela processen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TJÄNSTER -->
+  <section id="tjanster">
+    <div class="wrap">
+      <div class="section-head center mx-auto">
+        <span class="eyebrow reveal">Tjänster</span>
+        <h2 class="reveal" data-delay=".05">Allt din digitala närvaro behöver</h2>
+        <p class="reveal" data-delay=".1">Från första skiss till lanserad, sökmotoroptimerad webbplats.</p>
+      </div>
+      <div class="services-grid">
+        <article class="service-card reveal" data-delay="0">
+          <span class="num">01</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg></div>
+          <h3>Webbutveckling</h3>
+          <p>Snabba, skalbara webbplatser byggda med modern kod — utan onödig komplexitet.</p>
+        </article>
+        <article class="service-card reveal" data-delay=".05">
+          <span class="num">02</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3>UI/UX Design</h3>
+          <p>Gränssnitt som känns självklara att använda och vackra att titta på.</p>
+        </article>
+        <article class="service-card reveal" data-delay=".1">
+          <span class="num">03</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z"/></svg></div>
+          <h3>Branding</h3>
+          <p>Visuell identitet — logotyp, färgpalett och tonalitet som håller ihop.</p>
+        </article>
+        <article class="service-card reveal" data-delay="0">
+          <span class="num">04</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg></div>
+          <h3>SEO</h3>
+          <p>Teknisk och innehållsmässig optimering som gör att ni faktiskt syns.</p>
+        </article>
+        <article class="service-card reveal" data-delay=".05">
+          <span class="num">05</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 8H7L5 6Z"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg></div>
+          <h3>E-handel</h3>
+          <p>Sömlösa köpupplevelser byggda för konvertering, från kassa till kvitto.</p>
+        </article>
+        <article class="service-card reveal" data-delay=".1">
+          <span class="num">06</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+          <h3>AI-lösningar</h3>
+          <p>Smarta integrationer som automatiserar och effektiviserar er verksamhet.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Portfolio</span>
+        <h2 class="reveal" data-delay=".05">Ett urval av vårt arbete</h2>
+        <p class="reveal" data-delay=".1">Riktiga projekt, byggda för lokala verksamheter i Örnsköldsvik.</p>
+      </div>
+      <div class="portfolio-grid">
+        <a class="project-card reveal" data-delay="0" href="kingsquare.html" target="_blank" rel="noopener" aria-label="Öppna projektet King Square">
+          <div class="bg" style="background:linear-gradient(150deg,#A8201A,#C9A54D);" aria-hidden="true"></div>
+          <div class="overlay">
+            <span class="cat">Restaurang</span>
+            <h3>King Square</h3>
+            <p>Asiatiskt kök &amp; take away — meny, beställning och atmosfär i en och samma upplevelse.</p>
+            <span class="visit">Visa projekt<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+        </a>
+        <a class="project-card reveal" data-delay=".05" href="sushibar.html" target="_blank" rel="noopener" aria-label="Öppna projektet Sushi Bar">
+          <div class="bg" style="background:linear-gradient(150deg,#0D1512,#F97B5C);" aria-hidden="true"></div>
+          <div class="overlay">
+            <span class="cat">Restaurang</span>
+            <h3>Sushi Bar</h3>
+            <p>Färsk sushi i Örnsköldsvik — ren design med fokus på beställning och recensioner.</p>
+            <span class="visit">Visa projekt<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+        </a>
+        <a class="project-card reveal" data-delay="0" href="hong.html" target="_blank" rel="noopener" aria-label="Öppna projektet Hong Restaurang">
+          <div class="bg" style="background:linear-gradient(150deg,#7A1F1F,#E4B84B);" aria-hidden="true"></div>
+          <div class="overlay">
+            <span class="cat">Restaurang</span>
+            <h3>Hong Restaurang</h3>
+            <p>Kinesisk lunchbuffé — tydlig meny och priser med säljande, varma animationer.</p>
+            <span class="visit">Visa projekt<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+        </a>
+        <a class="project-card reveal" data-delay=".05" href="gullangets-harsalong.html" target="_blank" rel="noopener" aria-label="Öppna projektet Gullängets Hårsalong">
+          <div class="bg" style="background:linear-gradient(150deg,#B08347,#FBF7F1);" aria-hidden="true"></div>
+          <div class="overlay">
+            <span class="cat">Skönhet &amp; hälsa</span>
+            <h3>Gullängets Hårsalong</h3>
+            <p>Hårsalong &amp; barberare — ljus, varm design med bokningsflöde och galleri.</p>
+            <span class="visit">Visa projekt<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head center mx-auto">
+        <span class="eyebrow reveal">Process</span>
+        <h2 class="reveal" data-delay=".05">Så jobbar vi</h2>
+        <p class="reveal" data-delay=".1">Fyra tydliga steg, från idé till lansering.</p>
+      </div>
+      <div class="process-list reveal" data-delay=".1">
+        <div class="process-line" aria-hidden="true"><div class="process-line-fill" id="processFill"></div></div>
+        <div class="process-step">
+          <div class="node">01</div>
+          <div class="body"><h3>Discovery</h3><p>Vi lär känna verksamheten, målgruppen och målen innan en enda pixel ritas.</p></div>
+        </div>
+        <div class="process-step">
+          <div class="node">02</div>
+          <div class="body"><h3>Design</h3><p>Visuell identitet och gränssnitt tar form — förankrat med er hela vägen.</p></div>
+        </div>
+        <div class="process-step">
+          <div class="node">03</div>
+          <div class="body"><h3>Development</h3><p>Designen byggs till en snabb, responsiv och tillgänglig webbplats.</p></div>
+        </div>
+        <div class="process-step">
+          <div class="node">04</div>
+          <div class="body"><h3>Launch</h3><p>Sidan testas, optimeras och lanseras — med support efteråt.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTIK -->
+  <section>
+    <div class="wrap">
+      <div class="stats-strip">
+        <div class="stat reveal" data-delay="0"><strong data-count="4" data-decimals="0">0</strong><span>Levererade projekt</span></div>
+        <div class="stat reveal" data-delay=".05"><strong data-count="100" data-decimals="0" data-suffix="%">0%</strong><span>Skräddarsydd kod</span></div>
+        <div class="stat reveal" data-delay=".1"><strong data-count="48" data-decimals="0" data-suffix="h">0h</strong><span>Genomsnittlig svarstid</span></div>
+        <div class="stat reveal" data-delay=".15"><strong data-count="0" data-decimals="0">0</strong><span>Färdiga mallar använda</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OMDÖMEN -->
+  <section id="omdomen">
+    <div class="wrap">
+      <div class="section-head center mx-auto">
+        <span class="eyebrow reveal">Omdömen</span>
+        <h2 class="reveal" data-delay=".05">Vad kunder brukar säga</h2>
+      </div>
+      <div class="t-stage reveal" data-delay=".1">
+        <div class="t-track" id="tTrack">
+          <div class="t-slide">
+            <div class="t-card">
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Vi fick en sida som faktiskt känns som oss — snabb, snygg och enkel att hitta i.</blockquote>
+              <div class="who">Restaurangägare, Örnsköldsvik</div>
+            </div>
+          </div>
+          <div class="t-slide">
+            <div class="t-card">
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Processen var tydlig från start till mål, och slutresultatet höll en helt annan klass.</blockquote>
+              <div class="who">Salongägare, Örnsköldsvik</div>
+            </div>
+          </div>
+          <div class="t-slide">
+            <div class="t-card">
+              <div class="stars" aria-label="5 av 5 stjärnor">★★★★★</div>
+              <blockquote>Bra kommunikation genom hela projektet och en sida som faktiskt levererar bokningar.</blockquote>
+              <div class="who">Verksamhetsägare, Örnsköldsvik</div>
+            </div>
+          </div>
+        </div>
+        <div class="t-controls">
+          <button id="tPrev" aria-label="Föregående omdöme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 6 9 12 15 18"/></svg></button>
+          <div class="t-dots" id="tDots"></div>
+          <button id="tNext" aria-label="Nästa omdöme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
+      <p class="t-note reveal" data-delay=".15">Exempelcitat som illustrerar den typ av respons vi strävar efter från varje projekt.</p>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="contact-cta reveal">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <span class="eyebrow" style="color:var(--accent-2);">Kontakt</span>
+            <h2>Redo att starta ert projekt?</h2>
+            <p>Berätta kort om vad ni behöver, så återkommer vi med nästa steg.</p>
+            <div class="contact-detail">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <a href="mailto:vamakontakt@gmail.com">vamakontakt@gmail.com</a>
+            </div>
+            <div class="contact-detail">
+              <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
+              <span>Örnsköldsvik, Sverige</span>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="cName">Namn *</label>
+              <input type="text" id="cName" name="name" placeholder="Ditt namn" required>
+            </div>
+            <div class="field">
+              <label for="cEmail">E-post *</label>
+              <input type="email" id="cEmail" name="email" placeholder="namn@exempel.se" required>
+            </div>
+            <div class="field">
+              <label for="cMsg">Meddelande *</label>
+              <textarea id="cMsg" name="message" rows="4" placeholder="Berätta om ert projekt" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-accent magnetic" style="align-self:flex-start;">
+              Skicka meddelande
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <div class="form-success" id="contactSuccess">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Tack, <strong id="successName"></strong>! Meddelandet är mottaget — vi hör av oss snart.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
 <footer>
   <div class="wrap">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="brandmark" href="#hem" style="text-decoration:none;">
-          <svg class="crown" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M8 34L6 16L15 23L24 10L33 23L42 16L40 34H8Z" stroke="#C9A54D" stroke-width="2.4" stroke-linejoin="round" fill="rgba(201,165,77,0.12)"/>
-            <rect x="8" y="34" width="32" height="5" fill="#A8201A"/>
-          </svg>
-          <div class="brand-name">King Square</div>
-        </a>
-        <p>Asiatisk mat på Skolgatan 12 i Örnsköldsvik. Öppet sex dagar i veckan för lunch, middag och take away.</p>
-      </div>
       <div>
-        <h4>Utforska</h4>
-        <ul>
-          <li><a href="#tjanster">Tjänster</a></li>
-          <li><a href="#galleri">Rätter</a></li>
-          <li><a href="#omdomen">Omdömen</a></li>
-          <li><a href="#om">Om oss</a></li>
-        </ul>
+        <a href="#hero" class="brand"><span class="mark" aria-hidden="true">V</span>VAMA</a>
+        <p style="max-width:280px; color:var(--ink-dim); font-size:.92rem; margin-top:14px;">Digital byrå som bygger skräddarsydda webbplatser utan mallar.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8"/><path d="M12 16v-3a2 2 0 0 1 4 0v3"/></svg></a>
+        </div>
       </div>
-      <div>
-        <h4>Kontakt</h4>
-        <ul>
-          <li><a href="tel:+4666015260">0660-152 60</a></li>
-          <li><a href="mailto:kingsquare@hotmail.se">kingsquare@hotmail.se</a></li>
-          <li><a href="#kontakt">Skolgatan 12, Örnsköldsvik</a></li>
-        </ul>
+      <div class="footer-links">
+        <div>
+          <h5>Sidkarta</h5>
+          <ul>
+            <li><a href="#om">Om oss</a></li>
+            <li><a href="#tjanster">Tjänster</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Kontakt</h5>
+          <ul>
+            <li><a href="mailto:vamakontakt@gmail.com">vamakontakt@gmail.com</a></li>
+            <li><span>Örnsköldsvik, Sverige</span></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© King Square, Örnsköldsvik</span>
-      <span>Designkoncept — ej publicerad sida</span>
+      <span>© 2026 VAMA</span>
+      <span>Byggd med kärlek till detaljer</span>
     </div>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Tillbaka till toppen">↑</button>
-
-<script>
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---- loader ----
-  const loader = document.getElementById('loader');
-  window.addEventListener('load', () => {
-    setTimeout(() => loader.classList.add('done'), reduced ? 0 : 1000);
-  });
-  // fallback om load dröjer
-  setTimeout(() => loader.classList.add('done'), 2600);
-
-  // ---- mobile nav ----
-  const toggle = document.getElementById('navToggle');
-  const list = document.getElementById('navList');
-  toggle.addEventListener('click', () => {
-    const open = list.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    list.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-  }));
-
-  // ---- header state + parallax + to-top (en scroll-lyssnare, rAF-throttlad) ----
-  const header = document.getElementById('siteHeader');
-  const toTop = document.getElementById('toTop');
-  const parallaxEls = document.querySelectorAll('[data-parallax]');
-  let ticking = false;
-  function onScroll(){
-    const y = window.scrollY;
-    header.classList.toggle('scrolled', y > 30);
-    toTop.classList.toggle('show', y > 700);
-    if (!reduced) {
-      parallaxEls.forEach(el => {
-        el.style.transform = 'translateY(' + (y * parseFloat(el.dataset.parallax)) + 'px)';
-      });
-    }
-    ticking = false;
-  }
-  window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-  }, {passive:true});
-  toTop.addEventListener('click', () => window.scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'}));
-
-  // ---- scroll reveals ----
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
-    });
-  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (reduced) el.classList.add('in'); else revealObs.observe(el);
-  });
-
-  // ---- aktiv menyindikator ----
-  const navLinks = document.querySelectorAll('[data-nav]');
-  const sections = ['tjanster','galleri','omdomen','om','kontakt'].map(id => document.getElementById(id));
-  const navObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === e.target.id));
-      }
-    });
-  }, {rootMargin:'-40% 0px -55% 0px'});
-  sections.forEach(s => s && navObs.observe(s));
-
-  // ---- count-up ----
-  function animateCount(el){
-    const target = parseFloat(el.dataset.count);
-    const decimals = parseInt(el.dataset.decimals || '0');
-    const dur = 1400, start = performance.now();
-    function tick(now){
-      const p = Math.min((now - start) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const val = (target * eased).toFixed(decimals);
-      el.textContent = decimals > 0 ? val.replace('.', ',') : Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  const countObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); }
-    });
-  }, {threshold:.6});
-  document.querySelectorAll('[data-count]').forEach(el => {
-    if (reduced) {
-      const d = parseInt(el.dataset.decimals || '0');
-      el.textContent = d > 0 ? parseFloat(el.dataset.count).toFixed(d).replace('.', ',') : el.dataset.count;
-    } else countObs.observe(el);
-  });
-
-  // ---- glow som följer muspekaren på tjänstekorten ----
-  document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('pointermove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-    });
-  });
-</script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="webbyra.js"></script>
 </body>
 </html>
