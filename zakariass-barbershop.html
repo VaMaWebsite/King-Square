@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zakariass Barbershop — Frisör i Örnsköldsvik | Klippning, färg &amp; styling</title>
+<meta name="description" content="Zakariass Barbershop på Storgatan 39b i Örnsköldsvik. Klippning, skäggvård, färgning och styling. Betyg 5,0/5 (97+ röster). Ring 073-933 31 40.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDFAF4;
+  --bg-2:#F5EFE4;
+  --ink:#1A0A02;
+  --red:#B01E14;
+  --red-dark:#8A1610;
+  --red-light:#E8382A;
+  --gold:#C4920A;
+  --gold-light:#E8B830;
+  --cream:#FFF8EC;
+  --text:#2A1506;
+  --text-dim:#7A5A3A;
+  --line:rgba(180,100,20,.15);
+  --radius:4px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6;}
+h1,h2,h3{font-family:'Noto Serif SC',serif;line-height:1.15;}
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:200;background:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .7s,visibility .7s;}
+.loader.done{opacity:0;visibility:hidden;}
+.loader .char{font-family:'Noto Serif SC',serif;font-size:5rem;color:var(--gold-light);opacity:0;animation:charIn 1s var(--ease) .2s forwards;}
+@keyframes charIn{0%{opacity:0;transform:scale(.6);}100%{opacity:1;transform:scale(1);}}
+.loader .sub{font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,248,236,.7);opacity:0;animation:fadeIn .6s ease .9s forwards;}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* REVEALS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s);}
+.reveal.in{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s);}
+.reveal-left.in{opacity:1;transform:none;}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s);}
+.reveal-right.in{opacity:1;transform:none;}
+.stage{opacity:0;transform:translateY(26px);animation:stageIn .9s var(--ease) forwards;}
+.stage.s1{animation-delay:.15s;}
+.stage.s2{animation-delay:.32s;}
+.stage.s3{animation-delay:.5s;}
+.stage.s4{animation-delay:.68s;}
+.stage.s5{animation-delay:.86s;}
+@keyframes stageIn{to{opacity:1;transform:none;}}
+
+/* SCROLL PROGRESS */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold) 0%,var(--red-light) 100%);z-index:150;transition:width .1s linear;}
+
+/* PAPPERSNYANS — subtil textur för djup */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:radial-gradient(rgba(0,0,0,.03) 1px,transparent 1px);
+  background-size:3px 3px;mix-blend-mode:multiply;
+}
+
+/* ÖPPET-STATUS */
+.status-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:7px 13px;border:1px solid var(--line);margin-right:14px;color:var(--text-dim);white-space:nowrap;
+}
+.status-badge .dot{width:7px;height:7px;border-radius:50%;background:#2e9e4d;flex:none;animation:pulseGreen 2s infinite;}
+.status-badge.closed .dot{background:var(--red);animation:pulseRed 2s infinite;}
+@keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(46,158,77,.55);}70%{box-shadow:0 0 0 8px rgba(46,158,77,0);}100%{box-shadow:0 0 0 0 rgba(46,158,77,0);}}
+@keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(176,30,20,.55);}70%{box-shadow:0 0 0 8px rgba(176,30,20,0);}100%{box-shadow:0 0 0 0 rgba(176,30,20,0);}}
+@media(max-width:860px){.status-badge{display:none;}}
+
+/* KNAPPGLANS */
+.btn-gold::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);
+  transform:skewX(-20deg);transition:left .7s ease;
+}
+.btn-gold:hover::after{left:130%;}
+
+/* MEST BOKAD-MÄRKE */
+.price-row{position:relative;}
+.price-row.featured{border-left-color:var(--gold);background:linear-gradient(90deg,rgba(196,146,10,.06),transparent 60%);}
+.popular-tag{
+  position:absolute;top:-12px;left:36px;
+  background:var(--gold);color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 11px;box-shadow:0 6px 16px -4px rgba(196,146,10,.55);
+  animation:tagFloat 2.6s ease-in-out infinite;
+}
+@keyframes tagFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+
+/* HERO — FLYTANDE PARTIKLAR */
+.steam{position:absolute;right:70px;bottom:56px;pointer-events:none;}
+.steam span{position:absolute;bottom:0;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.16);animation:steamRise 4.4s ease-in infinite;}
+.steam span:nth-child(2){left:16px;animation-delay:1.4s;}
+.steam span:nth-child(3){left:-16px;animation-delay:2.8s;}
+@keyframes steamRise{0%{transform:translateY(0) scale(1);opacity:0;}18%{opacity:.6;}100%{transform:translateY(-100px) scale(.15);opacity:0;}}
+
+/* KORT-TILT */
+.quote-grid{perspective:1200px;}
+
+/* STICKY MOBIL-CTA */
+.mobile-cta{display:none;}
+@media(max-width:700px){
+  .mobile-cta{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    position:fixed;left:0;right:0;bottom:0;z-index:120;
+    background:var(--red);color:#fff;text-decoration:none;
+    padding:16px;font-weight:600;font-size:.92rem;
+    box-shadow:0 -8px 24px -8px rgba(0,0,0,.4);
+    animation:ctaSlideUp .6s var(--ease) .4s backwards;
+  }
+  .mobile-cta:active{background:var(--red-dark);}
+  .to-top{bottom:78px;}
+  footer{padding-bottom:80px;}
+}
+@keyframes ctaSlideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+
+/* NAV — ljust papperstema */
+header.site{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cream);border-bottom:2px solid var(--red);transition:box-shadow .3s;}
+header.site.scrolled{box-shadow:0 4px 24px -8px rgba(176,30,20,.25);}
+nav.wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;}
+.brandmark{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.brand-seal{
+  width:44px;height:44px;background:var(--red);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--gold-light);
+  transition:transform .5s var(--ease);
+  box-shadow:0 4px 14px -4px rgba(176,30,20,.5);
+}
+.brandmark:hover .brand-seal{transform:rotate(20deg) scale(1.1);}
+.brand-name{font-family:'Noto Serif SC',serif;font-weight:700;font-size:1.1rem;color:var(--red);}
+.brand-sub{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);}
+nav ul{list-style:none;display:flex;gap:4px;}
+nav ul a{
+  text-decoration:none;font-size:.9rem;font-weight:500;color:var(--text-dim);
+  padding:8px 16px;border-radius:2px;
+  transition:color .2s,background .2s;
+}
+nav ul a:hover{color:var(--red);background:rgba(176,30,20,.07);}
+nav ul a.active{color:var(--red);font-weight:600;border-bottom:2px solid var(--red);border-radius:0;}
+.nav-cta{
+  background:var(--red);color:#fff;text-decoration:none;
+  padding:11px 24px;font-weight:600;font-size:.88rem;
+  position:relative;overflow:hidden;
+  transition:background .2s,transform .2s var(--ease);
+}
+.nav-cta:hover{background:var(--red-dark);transform:translateY(-2px);}
+.nav-toggle{display:none;}
+
+/* HERO — stor split */
+.hero{
+  min-height:100svh;display:grid;grid-template-columns:1fr 1fr;
+  padding-top:74px;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 64px 80px 32px;
+  background:var(--red);
+  position:relative;overflow:hidden;
+}
+.hero-left::before{
+  content:"✂";
+  position:absolute;right:-40px;bottom:-60px;
+  font-family:'Noto Serif SC',serif;font-size:22rem;
+  color:rgba(255,255,255,.06);line-height:1;pointer-events:none;
+}
+.hero-right{position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,var(--red) 0 24px,var(--cream) 24px 30px,var(--gold) 30px 36px,var(--cream) 36px 42px);background-size:300% 300%;animation:poleMove 6s linear infinite;}
+@keyframes poleMove{0%{background-position:0 0;}100%{background-position:240px 240px;}}
+.hero-right .bigicon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15rem;color:rgba(255,255,255,.22);pointer-events:none;text-shadow:0 12px 40px rgba(0,0,0,.15);}
+.hero-right .overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--red) 0%,transparent 40%);}
+@media(prefers-reduced-motion:reduce){.hero-right{animation:none;}}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:24px;
+}
+.hero-tag .line{width:28px;height:1px;background:var(--gold-light);}
+.hero h1{
+  font-size:clamp(2.4rem,4.8vw,4rem);
+  color:#fff;font-weight:700;
+  margin-bottom:24px;line-height:1.1;
+}
+.hero h1 span{color:var(--gold-light);}
+.hero p.lede{color:rgba(255,255,255,.78);font-size:1.08rem;max-width:40ch;margin-bottom:40px;font-weight:300;}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;font-weight:600;font-size:.96rem;
+  text-decoration:none;position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s;
+}
+.btn .ico{transition:transform .3s var(--ease);}
+.btn:hover .ico{transform:translateX(5px);}
+.btn:hover{transform:translateY(-3px);}
+.btn-gold{background:var(--gold-light);color:var(--ink);box-shadow:0 8px 24px -8px rgba(196,146,10,.6);}
+.btn-gold:hover{background:#f0c43a;box-shadow:0 14px 30px -8px rgba(196,146,10,.7);}
+.btn-outline{border:1.5px solid rgba(255,255,255,.4);color:#fff;}
+.btn-outline:hover{background:rgba(255,255,255,.12);}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
+.hero-numbers{
+  display:flex;gap:0;
+  border-top:1px solid rgba(255,255,255,.2);padding-top:32px;
+}
+.hero-numbers>div{flex:1;padding-right:24px;border-right:1px solid rgba(255,255,255,.15);margin-right:24px;}
+.hero-numbers>div:last-child{border-right:none;margin-right:0;}
+.hero-numbers strong{display:block;font-family:'Noto Serif SC',serif;font-size:1.8rem;color:var(--gold-light);line-height:1;font-variant-numeric:tabular-nums;}
+.hero-numbers span{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);}
+
+/* SECTION */
+section{padding:100px 0;}
+.section-label{
+  display:flex;align-items:center;gap:14px;margin-bottom:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--red);
+}
+.section-label::before{content:"";width:32px;height:2px;background:var(--red);}
+.section-head h2{font-size:clamp(2rem,3.4vw,2.8rem);margin-bottom:16px;color:var(--ink);}
+.section-head p{font-size:1.04rem;color:var(--text-dim);max-width:52ch;}
+.section-head{margin-bottom:56px;}
+
+/* STRIPETE DIVIDER */
+.stripe-div{
+  height:8px;
+  background:repeating-linear-gradient(90deg,var(--red) 0 18px,var(--gold) 18px 22px,var(--red) 22px 40px);
+}
+
+/* TJÄNSTGALLERI — ikonmosaik */
+.gallery-section{background:var(--ink);padding:0;}
+.gallery-wrap{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px;gap:3px;}
+.g-cell{position:relative;overflow:hidden;}
+.g-icon{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.8rem;background:linear-gradient(160deg,var(--red),var(--red-dark));transition:transform .9s var(--ease),filter .5s;filter:brightness(.85);}
+.g-cell:hover .g-icon{transform:scale(1.06);filter:brightness(1.05);}
+.g-cell .cap{
+  position:absolute;bottom:0;left:0;right:0;padding:20px 22px;
+  background:linear-gradient(transparent,rgba(26,10,2,.8));
+  color:#fff;font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:500;
+  transform:translateY(100%);transition:transform .4s var(--ease);
+}
+.g-cell:hover .cap{transform:translateY(0);}
+
+
+/* PRISKORT — horisontella kort */
+.price-list{display:flex;flex-direction:column;gap:2px;}
+.price-row{
+  display:flex;align-items:center;gap:32px;
+  padding:32px 36px;background:var(--cream);
+  border-left:4px solid var(--red);
+  transition:background .25s,border-color .25s,transform .25s var(--ease);
+}
+.price-row:hover{background:var(--bg-2);transform:translateX(8px);border-color:var(--gold);}
+.price-ico{font-size:2.2rem;flex:none;}
+.price-content{flex:1;}
+.price-content h3{font-family:'Noto Serif SC',serif;font-size:1.35rem;color:var(--ink);margin-bottom:6px;}
+.price-content p{font-size:.94rem;color:var(--text-dim);}
+.price-content .meta{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);margin-top:8px;letter-spacing:.04em;}
+.price-badge{
+  font-family:'Noto Serif SC',serif;font-size:2rem;font-weight:700;
+  color:var(--red);text-align:right;flex:none;min-width:90px;
+}
+.price-badge.quote{font-size:1.05rem;line-height:1.3;}
+.price-badge small{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-dim);font-weight:400;}
+
+/* BEHANDLINGAR — kompakt tabell */
+.menu-section{background:var(--bg-2);}
+.menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+.menu-cat{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--red);padding:16px 0 8px;
+  border-bottom:2px solid var(--red);margin-bottom:0;
+}
+.mi{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:13px 12px;margin:0 -12px;
+  border-bottom:1px solid var(--line);
+  transition:background .2s,padding-left .25s var(--ease);
+}
+.mi:hover{background:rgba(176,30,20,.06);padding-left:22px;}
+.mi .n{font-size:.96rem;font-weight:500;}
+.mi .n small{display:block;font-size:.79rem;color:var(--text-dim);font-weight:400;margin-top:2px;}
+.mi .dots{flex:1;border-bottom:1px dotted rgba(180,100,20,.25);margin:0 6px 6px;}
+.mi .p{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--red);white-space:nowrap;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
+
+/* VARFÖR OSS — kort-layout */
+.reviews-section{background:var(--cream);}
+.quote-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;}
+.quote-card{
+  padding:36px 30px;
+  border:1px solid var(--line);
+  position:relative;
+  transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;
+  background:#fff;
+}
+.quote-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px -24px rgba(176,30,20,.25);border-color:rgba(176,30,20,.25);}
+.quote-card .stars{color:var(--gold);font-size:1.6rem;margin-bottom:14px;line-height:1;}
+.quote-card h3{font-family:'Noto Serif SC',serif;font-size:1.08rem;color:var(--ink);margin-bottom:10px;}
+.quote-card blockquote{font-size:.94rem;color:var(--text-dim);line-height:1.65;font-style:normal;}
+.rating-bar{
+  margin-top:44px;display:flex;align-items:stretch;gap:0;
+  border:1px solid var(--line);overflow:hidden;
+}
+.rating-bar .rb-block{
+  flex:1;padding:24px 28px;background:#fff;border-right:1px solid var(--line);
+}
+.rating-bar .rb-block:last-child{border-right:none;}
+.rating-bar .rb-score{font-family:'Noto Serif SC',serif;font-size:2.4rem;color:var(--red);font-weight:700;line-height:1;font-variant-numeric:tabular-nums;}
+.rating-bar .rb-label{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-top:6px;}
+
+/* KONTAKT */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.contact-box{border:1px solid var(--line);background:#fff;}
+.contact-box-head{background:var(--red);padding:20px 28px;}
+.contact-box-head h3{font-family:'Noto Serif SC',serif;color:#fff;font-size:1.2rem;font-weight:500;}
+.contact-box-body{padding:28px;}
+.ht{width:100%;border-collapse:collapse;}
+.ht tr{border-bottom:1px solid var(--line);}
+.ht tr:last-child{border-bottom:none;}
+.ht td{padding:13px 4px;font-size:.94rem;}
+.ht td:first-child{font-weight:600;color:var(--ink);}
+.ht td:last-child{text-align:right;font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--text-dim);}
+.ht tr.closed td{opacity:.45;}
+.c-links a{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;border-bottom:1px solid var(--line);
+  text-decoration:none;font-weight:500;font-size:.96rem;color:var(--ink);
+  transition:color .2s,padding-left .2s var(--ease);
+}
+.c-links a:last-child{border-bottom:none;}
+.c-links a:hover{color:var(--red);padding-left:10px;}
+.c-links .arr{color:var(--red);transition:transform .2s var(--ease);}
+.c-links a:hover .arr{transform:translateX(5px);}
+.address-block{
+  margin-top:20px;padding:18px 20px;
+  border-left:3px solid var(--gold);background:var(--bg-2);
+  font-size:.92rem;color:var(--text-dim);
+}
+.address-block strong{display:block;font-family:'Noto Serif SC',serif;color:var(--ink);font-size:1.1rem;margin-bottom:3px;}
+
+/* CTA */
+.cta-section{
+  background:var(--red);padding:80px 0;
+  position:relative;overflow:hidden;text-align:center;
+}
+.cta-section::before{
+  content:"✂";
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Noto Serif SC',serif;font-size:clamp(5rem,14vw,12rem);
+  color:rgba(255,255,255,.05);white-space:nowrap;pointer-events:none;
+}
+.cta-section h2{font-family:'Noto Serif SC',serif;color:#fff;font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:14px;position:relative;}
+.cta-section p{color:rgba(255,255,255,.75);margin-bottom:34px;position:relative;font-size:1.05rem;}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(253,250,244,.75);padding:56px 0 28px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;margin-bottom:44px;}
+.foot-brand-name{font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--gold-light);margin-bottom:12px;}
+.foot-brand p{font-size:.9rem;max-width:28ch;opacity:.75;}
+footer h4{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:10px;}
+footer a{text-decoration:none;font-size:.9rem;opacity:.75;transition:opacity .2s,color .2s,padding-left .2s var(--ease);}
+footer a:hover{opacity:1;color:var(--gold-light);padding-left:6px;}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.45;}
+
+.to-top{position:fixed;right:24px;bottom:24px;z-index:110;width:48px;height:48px;background:var(--red);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s,transform .3s var(--ease),background .2s;box-shadow:0 8px 24px -8px rgba(176,30,20,.6);}
+.to-top.show{opacity:1;pointer-events:auto;transform:none;}
+.to-top:hover{background:var(--red-dark);}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{height:340px;}
+  .hero-left{padding:60px 32px;}
+  .hero-left::before{display:none;}
+  .menu-cols{grid-template-columns:1fr;}
+  .quote-grid{grid-template-columns:1fr;}
+  .contact-layout,.foot-grid{grid-template-columns:1fr;}
+  .gallery-wrap{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+}
+@media(max-width:700px){
+  nav ul{position:fixed;top:72px;left:0;right:0;background:var(--cream);border-bottom:2px solid var(--red);flex-direction:column;padding:16px 24px;gap:4px;transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .3s;z-index:90;}
+  nav ul.open{transform:none;opacity:1;pointer-events:auto;}
+  nav ul a{display:block;padding:12px 0;border-bottom:1px solid var(--line);}
+  nav ul a:last-child{border-bottom:none;}
+  .nav-toggle{display:block;background:none;border:1.5px solid var(--red);color:var(--red);padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;cursor:pointer;}
+  .gallery-wrap{grid-template-columns:1fr;}
+  section{padding:70px 0;}
+  .hero-numbers{flex-direction:column;gap:16px;}
+  .hero-numbers>div{border-right:none;padding-right:0;margin-right:0;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:16px;}
+  .price-row{flex-wrap:wrap;gap:16px;}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .reveal,.reveal-left,.reveal-right,.stage{opacity:1;transform:none;}
+  .loader{display:none;}
+  .steam span{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="char">Z</div>
+  <div class="sub">Zakariass Barbershop</div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<header class="site" id="siteHeader">
+  <nav class="wrap">
+    <a class="brandmark" href="#hem">
+      <div class="brand-seal">Z</div>
+      <div>
+        <div class="brand-name">Zakariass Barbershop</div>
+        <div class="brand-sub">073-933 31 40 · Storgatan 39b</div>
+      </div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false">≡ Meny</button>
+    <ul id="navList">
+      <li><a href="#tjanster" data-nav="tjanster">Tjänster &amp; priser</a></li>
+      <li><a href="#behandlingar" data-nav="behandlingar">Behandlingar</a></li>
+      <li><a href="#omdomen" data-nav="omdomen">Omdömen</a></li>
+      <li><a href="#kontakt" data-nav="kontakt">Kontakt</a></li>
+    </ul>
+    <span class="status-badge" id="statusBadge"><span class="dot"></span><span id="statusText">—</span></span>
+    <a class="nav-cta" href="tel:+46739333140">Ring 073-933 31 40</a>
+  </nav>
+</header>
+
+<section class="hero" id="hem">
+  <div class="hero-left">
+    <div class="hero-tag stage s1"><span class="line"></span>Storgatan 39b · Örnsköldsvik</div>
+    <h1 class="stage s2">Klippning med <span>personlig</span> känsla</h1>
+    <p class="lede stage s3">Professionell klippning, färgning och styling anpassad efter dina behov — i en avslappnad och välkomnande salong mitt i Örnsköldsvik.</p>
+    <div class="hero-ctas stage s4">
+      <a class="btn btn-gold" href="#tjanster">Se tjänster &amp; priser <span class="ico">→</span></a>
+      <a class="btn btn-outline" href="tel:+46739333140">Ring &amp; boka tid</a>
+    </div>
+    <div class="hero-numbers stage s5">
+      <div><strong data-count="5.0" data-decimals="1">0,0</strong><span>Snittbetyg</span></div>
+      <div><strong data-count="97" data-decimals="0">0</strong><span>Recensioner</span></div>
+      <div><strong>6 dagar</strong><span>Öppet i veckan</span></div>
+    </div>
+    <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+  <div class="hero-right">
+    <div class="bigicon" aria-hidden="true">✂</div>
+    <div class="overlay"></div>
+  </div>
+</section>
+
+<div class="stripe-div"></div>
+
+<!-- TJÄNSTER I FOKUS -->
+<section class="gallery-section" aria-label="Tjänster hos salongen">
+  <div class="gallery-wrap">
+    <div class="g-cell reveal-left"><div class="g-icon">✂️</div><div class="cap">Klippning</div></div>
+    <div class="g-cell reveal" style="--d:.05s;"><div class="g-icon">🪒</div><div class="cap">Skäggvård</div></div>
+    <div class="g-cell reveal" style="--d:.1s;"><div class="g-icon">🎨</div><div class="cap">Färg &amp; balayage</div></div>
+    <div class="g-cell reveal" style="--d:.15s;"><div class="g-icon">💇</div><div class="cap">Styling</div></div>
+  </div>
+</section>
+
+<div class="stripe-div"></div>
+
+<!-- TJÄNSTER & PRISER -->
+<section id="tjanster">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label reveal">Tjänster &amp; priser</div>
+      <h2 class="reveal" style="--d:.08s;">Boka den behandling du behöver</h2>
+      <p class="reveal" style="--d:.14s;">Klassiska och moderna frisyrer, utförda av erfarna barberare och stylister. Ring för aktuell prislista och lediga tider.</p>
+    </div>
+    <div class="price-list">
+      <div class="price-row featured reveal" style="--d:.05s;">
+        <span class="popular-tag">Mest bokad</span>
+        <span class="price-ico">✂️</span>
+        <div class="price-content">
+          <h3>Klippning</h3>
+          <p>Klassisk eller modern klippning för herr, dam och barn — anpassad efter ansiktsform, hårtyp och stil.</p>
+          <div class="meta">Boka via telefon · 073-933 31 40</div>
+        </div>
+        <div class="price-badge quote">Ring för pris<small>aktuell prislista</small></div>
+      </div>
+      <div class="price-row reveal" style="--d:.12s;">
+        <span class="price-ico">🪒</span>
+        <div class="price-content">
+          <h3>Skäggvård &amp; trimning</h3>
+          <p>Skäggtrimning och formning för ett vårdat och prydligt resultat.</p>
+          <div class="meta">Boka via telefon · 073-933 31 40</div>
+        </div>
+        <div class="price-badge quote">Ring för pris<small>aktuell prislista</small></div>
+      </div>
+      <div class="price-row reveal" style="--d:.19s;">
+        <span class="price-ico">🎨</span>
+        <div class="price-content">
+          <h3>Färgning, slingor &amp; balayage</h3>
+          <p>Från subtila slingor till helfärgning eller balayage — utfört av erfarna stylister.</p>
+          <div class="meta">Boka via telefon · 073-933 31 40</div>
+        </div>
+        <div class="price-badge quote">Ring för pris<small>aktuell prislista</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEHANDLINGAR -->
+<section class="menu-section" id="behandlingar">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label reveal">Behandlingar i detalj</div>
+      <h2 class="reveal" style="--d:.08s;">Klippning, färg &amp; styling</h2>
+      <p class="reveal" style="--d:.14s;">Salongen specialiserar sig på både klassiska och moderna frisyrer, så att varje kund hittar en stil som passar den personliga smaken.</p>
+    </div>
+    <div class="menu-cols">
+      <div>
+        <div class="menu-cat">Klippning &amp; skägg</div>
+        <div class="mi reveal" style="--d:.03s;"><div class="n">Herrklippning<small>Klassisk eller modern klippning efter din stil</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.05s;"><div class="n">Damklippning<small>Klippning anpassad efter hårtyp och önskemål</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.07s;"><div class="n">Barnklippning<small>Trygg och snabb klippning för de yngsta</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.09s;"><div class="n">Skäggtrimning<small>Formning och trimning av skägg</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.11s;"><div class="n">Linjering &amp; kantklippning<small>Skarpa linjer i hårfäste och skägg</small></div><div class="dots"></div><div class="p">Ring</div></div>
+      </div>
+      <div>
+        <div class="menu-cat">Färg &amp; styling</div>
+        <div class="mi reveal" style="--d:.04s;"><div class="n">Helfärgning<small>Jämn färg i hela håret</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.06s;"><div class="n">Slingor<small>Ljusare partier för mer dimension</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.08s;"><div class="n">Balayage<small>Mjuk, handmålad övergång</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.10s;"><div class="n">Styling för speciella tillfällen<small>Fest, bröllop eller andra event</small></div><div class="dots"></div><div class="p">Ring</div></div>
+        <div class="mi reveal" style="--d:.12s;"><div class="n">Hårtvätt &amp; styling<small>Avslutande styling efter klippning</small></div><div class="dots"></div><div class="p">Ring</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OMDÖMEN -->
+<section class="reviews-section" id="omdomen">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label reveal">Omdömen</div>
+      <h2 class="reveal" style="--d:.08s;">Varför kunderna väljer oss</h2>
+    </div>
+    <div class="quote-grid">
+      <article class="quote-card reveal" style="--d:.05s;">
+        <div class="stars" aria-hidden="true">✓</div>
+        <h3>Professionell service och erfarenhet</h3>
+        <blockquote>Frisörer med yrkeskunskap och fokus på klippning, färg och styling anpassad efter kundens behov.</blockquote>
+      </article>
+      <article class="quote-card reveal" style="--d:.12s;">
+        <div class="stars" aria-hidden="true">✓</div>
+        <h3>Brett utbud av hårbehandlingar</h3>
+        <blockquote>Från klassisk klippning till färgbehandlingar, slingor och modern styling för olika tillfällen.</blockquote>
+      </article>
+      <article class="quote-card reveal" style="--d:.19s;">
+        <div class="stars" aria-hidden="true">✓</div>
+        <h3>Trygg och välkomnande miljö</h3>
+        <blockquote>En frisörsalong med fokus på kvalitet, hygien och en behaglig upplevelse.</blockquote>
+      </article>
+      <article class="quote-card reveal" style="--d:.26s;">
+        <div class="stars" aria-hidden="true">✓</div>
+        <h3>Tydlig information</h3>
+        <blockquote>Klar information om tillgängliga behandlingar, tjänster och priser utan dolda detaljer.</blockquote>
+      </article>
+      <article class="quote-card reveal" style="--d:.33s;">
+        <div class="stars" aria-hidden="true">✓</div>
+        <h3>Enkel bokning</h3>
+        <blockquote>Aktuell information om öppettider samt smidig bokning, alltid via telefon.</blockquote>
+      </article>
+    </div>
+    <div class="rating-bar reveal reveal-right" style="--d:.1s;">
+      <div class="rb-block">
+        <div class="rb-score" data-count="5.0" data-decimals="1">0,0</div>
+        <div class="rb-label">Snittbetyg · 97+ recensioner</div>
+      </div>
+      <div class="rb-block">
+        <div class="rb-score">6</div>
+        <div class="rb-label">Dagar öppet i veckan</div>
+      </div>
+      <div class="rb-block" style="background:var(--bg-2);font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--text-dim);display:flex;align-items:center;">
+        Boka via telefon · 073-933 31 40
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label reveal">Kontakt</div>
+      <h2 class="reveal" style="--d:.08s;">Hitta till oss</h2>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-box reveal-left">
+        <div class="contact-box-head"><h3>Öppettider</h3></div>
+        <div class="contact-box-body">
+          <table class="ht">
+            <tr><td>Måndag</td><td>09:00–18:00</td></tr>
+            <tr><td>Tisdag</td><td>09:00–18:00</td></tr>
+            <tr><td>Onsdag</td><td>09:00–18:00</td></tr>
+            <tr><td>Torsdag</td><td>09:00–18:00</td></tr>
+            <tr><td>Fredag</td><td>09:00–18:00</td></tr>
+            <tr><td>Lördag</td><td>10:00–16:00</td></tr>
+            <tr class="closed"><td>Söndag</td><td>Stängt</td></tr>
+          </table>
+          <p style="margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--text-dim);line-height:1.6;">Boka alltid via telefon för säker tid</p>
+        </div>
+      </div>
+      <div class="contact-box reveal-right">
+        <div class="contact-box-head"><h3>Kontakta oss</h3></div>
+        <div class="contact-box-body">
+          <div class="c-links">
+            <a href="tel:+46739333140"><span>Ring &amp; boka tid</span><span class="arr">073-933 31 40 →</span></a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Zakariass+Barbershop+Storgatan+39b+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener"><span>Vägbeskrivning</span><span class="arr">Google Maps →</span></a>
+            <a href="https://www.instagram.com/zakariass_barbershop/" target="_blank" rel="noopener"><span>Instagram</span><span class="arr">@zakariass_barbershop →</span></a>
+          </div>
+          <div class="address-block">
+            <strong>Storgatan 39b</strong>
+            891 45 Örnsköldsvik
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="wrap" style="position:relative;z-index:2;">
+    <h2 class="reveal">Boka din tid idag!</h2>
+    <p class="reveal" style="--d:.1s;">Ring för att boka klippning, färgning eller styling.</p>
+    <div class="reveal" style="--d:.2s;"><a class="btn btn-gold" href="tel:+46739333140" style="display:inline-flex;">Ring 073-933 31 40 <span class="ico">→</span></a></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-name">Zakariass Barbershop</div>
+        <p>Professionell klippning, färgning och styling på Storgatan 39b i Örnsköldsvik.</p>
+      </div>
+      <div>
+        <h4>Meny</h4>
+        <ul>
+          <li><a href="#tjanster">Tjänster &amp; priser</a></li>
+          <li><a href="#behandlingar">Behandlingar</a></li>
+          <li><a href="#omdomen">Omdömen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+46739333140">073-933 31 40</a></li>
+          <li><a href="#kontakt">Storgatan 39b, Örnsköldsvik</a></li>
+          <li><a href="https://www.instagram.com/zakariass_barbershop/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Zakariass Barbershop, Örnsköldsvik</span>
+      <span>Designkoncept — ej publicerad sida</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Till toppen">↑</button>
+
+<a href="tel:+46739333140" class="mobile-cta">📞 Ring &amp; boka — 073-933 31 40</a>
+
+<script>
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const loader = document.getElementById('loader');
+window.addEventListener('load', () => setTimeout(() => loader.classList.add('done'), reduced ? 0 : 1000));
+setTimeout(() => loader.classList.add('done'), 2600);
+
+const toggle = document.getElementById('navToggle');
+const list = document.getElementById('navList');
+toggle.addEventListener('click', () => { const o=list.classList.toggle('open'); toggle.setAttribute('aria-expanded',o); });
+list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { list.classList.remove('open'); toggle.setAttribute('aria-expanded',false); }));
+
+const header=document.getElementById('siteHeader'), toTop=document.getElementById('toTop');
+const scrollProgress=document.getElementById('scrollProgress');
+let ticking=false;
+function onScroll(){
+  const y=window.scrollY;
+  header.classList.toggle('scrolled',y>30);
+  toTop.classList.toggle('show',y>600);
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  scrollProgress.style.width=(max>0?(y/max)*100:0)+'%';
+  ticking=false;
+}
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(onScroll);ticking=true;}},{passive:true});
+onScroll();
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
+
+// ÖPPET NU / STÄNGT — live-status från riktiga öppettider
+function updateOpenStatus(){
+  const badge=document.getElementById('statusBadge'), text=document.getElementById('statusText');
+  if(!badge) return;
+  const now=new Date(), day=now.getDay(), h=now.getHours()+now.getMinutes()/60;
+  let open=false, opensAt='';
+  if(day>=1&&day<=5){ open=h>=9&&h<18; opensAt='09:00'; }
+  else if(day===6){ open=h>=10&&h<16; opensAt='10:00'; }
+  badge.classList.toggle('closed',!open);
+  text.textContent = open ? 'Öppet nu' : (opensAt ? `Stängt · öppnar ${opensAt}` : 'Stängt idag');
+}
+updateOpenStatus();
+setInterval(updateOpenStatus,60000);
+
+// LÄTT 3D-TILT PÅ KORT
+if(!reduced && matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.quote-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+      card.style.transform=`translateY(-6px) rotateX(${y*-6}deg) rotateY(${x*8}deg)`;
+    });
+    card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+  });
+}
+
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target);} });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{ if(reduced) el.classList.add('in'); else revObs.observe(el); });
+
+const navLinks=document.querySelectorAll('[data-nav]');
+const sects=['tjanster','behandlingar','omdomen','kontakt'].map(id=>document.getElementById(id));
+const navObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) navLinks.forEach(l=>l.classList.toggle('active',l.dataset.nav===e.target.id)); });
+},{rootMargin:'-40% 0px -55% 0px'});
+sects.forEach(s=>s&&navObs.observe(s));
+
+function animCount(el){
+  const target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.decimals||'0');
+  const dur=1400,start=performance.now();
+  function tick(now){
+    const p=Math.min((now-start)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=dec>0?(target*e).toFixed(dec).replace('.',','):Math.round(target*e);
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){animCount(e.target);cObs.unobserve(e.target);} });
+},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>{
+  if(reduced){const d=parseInt(el.dataset.decimals||'0');el.textContent=d>0?parseFloat(el.dataset.count).toFixed(d).replace('.',','):el.dataset.count;}
+  else cObs.observe(el);
+});
+</script>
+</body>
+</html>
