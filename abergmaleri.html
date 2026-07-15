@@ -3,331 +3,489 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Åberg &amp; Söner Måleri — Målare i Örnsköldsvik sedan 1987</title>
-<meta name="description" content="Åberg & Söner Måleri AB — målare i Örnsköldsvik sedan 1987. Inomhusmålning, utomhusmålning, tapetsering och totalentreprenad tillsammans med samarbetspartners.">
-<meta name="theme-color" content="#17130F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317130F'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23B8471E'/%3E%3C/svg%3E">
+<title>Åberg &amp; Söner Måleri — Vi förvandlar rum till konstverk</title>
+<meta name="description" content="Åberg & Söner Måleri AB — premiummåleri i Örnsköldsvik sedan 1987. Inomhusmålning, utomhusmålning, tapetsering och totalentreprenad.">
+<meta name="theme-color" content="#FAF9F6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FAF9F6'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23A44A24'/%3E%3C/svg%3E">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Åberg & Söner Måleri — Målare i Örnsköldsvik sedan 1987">
-<meta property="og:description" content="Ett hantverk vi förfinat i snart fyra decennier. Måleri, tapetsering och totalentreprenad i Örnsköldsvik.">
+<meta property="og:title" content="Åberg & Söner Måleri — Vi förvandlar rum till konstverk">
+<meta property="og:description" content="Ett hantverk förfinat sedan 1987. Måleri, tapetsering och totalentreprenad i Örnsköldsvik.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="abergmaleri.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "name": "Åberg & Söner Måleri AB",
-  "description": "Målerifirma i Örnsköldsvik sedan 1987. Inomhusmålning, utomhusmålning, tapetsering och totalentreprenad.",
-  "foundingDate": "1987",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Långvägen 52",
-    "addressLocality": "Örnsköldsvik",
-    "addressCountry": "SE"
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper:   '#FAF9F6',
+        ink:     '#1a1a1a',
+        clay:    '#A44A24',
+        'clay-deep': '#7E3417',
+        linen:   '#F1EEE7',
+        mist:    '#6B6660'
+      },
+      fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans:  ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+      }
+    }
   }
 }
 </script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  ::selection { background: #A44A24; color: #FAF9F6; }
+
+  /* Subtilt papperskorn över hela sidan */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Rubrikrader som glider upp. Startlägena aktiveras bara när GSAP laddats
+     (html.js-anim) — utan skript förblir allt innehåll synligt. */
+  .line-mask { overflow: hidden; display: block; }
+  .js-anim .line-mask > span { display: block; transform: translateY(115%); will-change: transform; }
+  .js-anim .fade-item { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
+  .js-anim [data-reveal] { opacity: 0; transform: translateY(36px); will-change: transform, opacity; }
+
+  /* Penseldrags-understrykning: en oregelbunden linje som dras ut vid hover */
+  .link-brush { position: relative; display: inline-block; }
+  .link-brush::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 3px;
+    background: currentColor; border-radius: 60% 40% 55% 45% / 70% 30% 65% 35%;
+    transform: scaleX(0) skewY(-.6deg); transform-origin: left center;
+    transition: transform .55s cubic-bezier(.77, 0, .175, 1);
+  }
+  .link-brush:hover::after, .link-brush:focus-visible::after { transform: scaleX(1) skewY(-.6deg); }
+
+  /* Flytande knapp: färgen sköljer upp underifrån som våt färg */
+  .btn-liquid { position: relative; overflow: hidden; isolation: isolate; transition: color .45s cubic-bezier(.77,0,.175,1), border-color .45s; }
+  .btn-liquid::before {
+    content: ""; position: absolute; inset: -2% -10%; z-index: -1; background: #A44A24;
+    border-radius: 48% 52% 0 0 / 100% 100% 0 0;
+    transform: translateY(103%); transition: transform .6s cubic-bezier(.77,0,.175,1), border-radius .6s cubic-bezier(.77,0,.175,1);
+  }
+  .btn-liquid:hover::before, .btn-liquid:focus-visible::before { transform: translateY(0); border-radius: 0; }
+  .btn-liquid:hover, .btn-liquid:focus-visible { color: #FAF9F6; border-color: #A44A24; }
+
+  .btn-liquid-dark::before { background: #1a1a1a; }
+  .btn-liquid-dark:hover, .btn-liquid-dark:focus-visible { border-color: #1a1a1a; }
+
+  /* Bento-block: mjukt lyft + pil som glider */
+  .bento-card { transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s cubic-bezier(.22,1,.36,1); }
+  .bento-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgba(26,26,26,.18); }
+  .bento-card .card-arrow { transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .bento-card:hover .card-arrow { transform: translate(6px, -6px); }
+  .bento-card .card-swatch { transition: transform .6s cubic-bezier(.22,1,.36,1); }
+  .bento-card:hover .card-swatch { transform: scale(1.06) rotate(2deg); }
+
+  /* Före/Efter-jämföraren */
+  .ba-frame { touch-action: none; user-select: none; -webkit-user-select: none; }
+  .ba-after { clip-path: inset(0 0 0 var(--split, 50%)); }
+  .ba-handle { left: var(--split, 50%); }
+  .ba-frame:active { cursor: ew-resize; }
+
+  /* Rullande textremsa */
+  .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-anim .line-mask > span { transform: none; }
+    .js-anim .fade-item, .js-anim [data-reveal] { opacity: 1; transform: none; }
+    .marquee-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
-<body>
 
-<a href="#main" class="skip-link">Hoppa till innehåll</a>
+<body class="grain bg-paper text-ink font-sans font-light antialiased overflow-x-hidden">
 
-<header class="navbar" id="siteNav">
-  <div class="wrap nav-inner">
-    <a href="#hero" class="brand">Åberg &amp; Söner<small>Måleri · Sedan 1987</small></a>
-    <nav class="nav-links" aria-label="Huvudmeny">
-      <a href="#tjanster" data-nav="tjanster">Tjänster</a>
-      <a href="#om" data-nav="om">Om oss</a>
-      <a href="#projekt" data-nav="projekt">Projekt</a>
-      <a href="#kontakt" data-nav="kontakt">Kontakt</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="#kontakt" class="btn btn-fill">
-        Begär offert
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <button id="navToggle" aria-label="Öppna meny" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-      </button>
-    </div>
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[70] focus:bg-ink focus:text-paper focus:px-5 focus:py-3 focus:rounded-full">Hoppa till innehåll</a>
+
+<!-- ===== MENY — endast logotyp + kontaktknapp ===== -->
+<header id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <div class="max-w-[1440px] mx-auto flex items-center justify-between px-6 sm:px-10 lg:px-16 py-6">
+    <a href="#" class="fade-item leading-none">
+      <span class="font-serif text-2xl tracking-tight">Åberg <em class="text-clay not-italic font-serif italic">&amp;</em> Söner</span>
+      <span class="block text-[10px] uppercase tracking-[.35em] text-mist mt-1.5">Måleri · Örnsköldsvik · 1987</span>
+    </a>
+    <a href="#kontakt" class="fade-item btn-liquid inline-flex items-center gap-3 border border-ink/25 rounded-full px-7 py-3 text-sm tracking-wide">
+      Kontakta oss
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </div>
 </header>
 
-<div class="nav-mobile" id="navMobile">
-  <a href="#tjanster">Tjänster</a>
-  <a href="#om">Om oss</a>
-  <a href="#projekt">Projekt</a>
-  <a href="#kontakt">Kontakt</a>
-</div>
-
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-swatch" aria-hidden="true"></div>
-    <div class="wrap hero-wrap">
-      <div class="hero-grid">
-        <div>
-          <span class="hero-eyebrow reveal">Måleri sedan 1987 · Örnsköldsvik</span>
-          <h1 class="reveal" style="--d:.06s;">Ett hantverk vi förfinat i snart <em>fyra decennier.</em></h1>
+  <!-- ===== HERO — asymmetrisk: enorm rubrik vänster, bildblock höger ===== -->
+  <section class="relative min-h-screen flex items-center pt-32 pb-20">
+    <div class="max-w-[1440px] mx-auto w-full px-6 sm:px-10 lg:px-16">
+      <div class="grid lg:grid-cols-12 gap-14 lg:gap-10 items-center">
+
+        <div class="lg:col-span-7 xl:col-span-7">
+          <p class="fade-item text-xs uppercase tracking-[.4em] text-clay mb-10">Måleri på riktigt — sedan 1987</p>
+          <h1 class="font-serif font-medium leading-[1.02] tracking-[-0.02em] text-[clamp(3rem,8.5vw,7.25rem)]">
+            <span class="line-mask"><span>Vi förvandlar</span></span>
+            <span class="line-mask"><span>rum till <em class="italic text-clay">konstverk.</em></span></span>
+          </h1>
+          <div class="mt-12 max-w-md lg:ml-[8%]">
+            <p class="fade-item text-mist text-lg leading-relaxed">
+              Tre generationers penseldrag i Örnsköldsvik. Vi målar hem, trapphus och lokaler med
+              en noggrannhet som märks långt efter att stegen är hopfälld.
+            </p>
+            <div class="fade-item mt-10 flex flex-wrap items-center gap-8">
+              <a href="#kontakt" class="btn-liquid inline-flex items-center gap-3 border border-ink rounded-full px-8 py-4 text-sm tracking-wide">
+                Begär kostnadsfri offert
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="#hantverk" class="link-brush text-sm tracking-wide text-ink/80">Se vårt hantverk</a>
+            </div>
+          </div>
         </div>
-        <div class="hero-side reveal" style="--d:.14s;">
-          <p>Åberg &amp; Söner Måleri målar hem, trapphus och lokaler i Örnsköldsvik med samma noggrannhet sedan 1987 — och tar via samarbetspartners ansvar för hela totalentreprenader.</p>
-          <div class="hero-actions">
-            <a href="#kontakt" class="btn btn-fill">
-              Begär offert
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+
+        <div class="lg:col-span-5 xl:col-span-5 relative">
+          <div id="heroImage" class="fade-item relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-40px_rgba(26,26,26,.35)]">
+            <!-- Platshållare: ersätt med foto av ett färdigmålat rum -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#E8D5C4] via-[#D9B49A] to-[#A44A24]"></div>
+            <div class="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_30%_20%,rgba(250,249,246,.8),transparent_55%)]"></div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+              <div class="bg-paper/90 backdrop-blur rounded-2xl px-5 py-4">
+                <p class="text-[10px] uppercase tracking-[.3em] text-mist">Utvalt projekt</p>
+                <p class="font-serif text-lg mt-1">Sekelskiftesvåning, Örnsköldsvik</p>
+              </div>
+            </div>
+          </div>
+          <div class="fade-item absolute -bottom-8 -left-6 lg:-left-14 bg-ink text-paper rounded-3xl px-8 py-6 shadow-xl">
+            <p class="font-serif text-4xl">39<span class="text-clay">+</span></p>
+            <p class="text-[10px] uppercase tracking-[.3em] text-paper/60 mt-1">År av hantverk</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RULLANDE REMSA ===== -->
+  <div class="border-y border-ink/10 py-5 overflow-hidden" aria-hidden="true">
+    <div class="marquee-track text-[11px] uppercase tracking-[.45em] text-mist">
+      <span class="flex shrink-0">
+        <span class="px-8">Inomhusmålning</span><span class="text-clay">·</span>
+        <span class="px-8">Utomhusmålning</span><span class="text-clay">·</span>
+        <span class="px-8">Tapetsering</span><span class="text-clay">·</span>
+        <span class="px-8">Golv &amp; industri</span><span class="text-clay">·</span>
+        <span class="px-8">Totalentreprenad</span><span class="text-clay">·</span>
+      </span>
+      <span class="flex shrink-0">
+        <span class="px-8">Inomhusmålning</span><span class="text-clay">·</span>
+        <span class="px-8">Utomhusmålning</span><span class="text-clay">·</span>
+        <span class="px-8">Tapetsering</span><span class="text-clay">·</span>
+        <span class="px-8">Golv &amp; industri</span><span class="text-clay">·</span>
+        <span class="px-8">Totalentreprenad</span><span class="text-clay">·</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ===== VÅRT HANTVERK — bento grid ===== -->
+  <section id="hantverk" class="py-28 lg:py-40">
+    <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+
+      <div class="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24 items-end" data-reveal>
+        <div class="lg:col-span-7">
+          <p class="text-xs uppercase tracking-[.4em] text-clay mb-6">Vårt hantverk</p>
+          <h2 class="font-serif font-medium leading-[1.05] tracking-tight text-[clamp(2.25rem,4.5vw,4rem)]">
+            Från ett enda rum<br>till hela fastigheter.
+          </h2>
+        </div>
+        <p class="lg:col-span-4 lg:col-start-9 text-mist leading-relaxed">
+          Fem discipliner, samma princip: inget jobb är för litet eller för stort,
+          och resultatet ska hålla i decennier.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-6 auto-rows-[minmax(180px,auto)] gap-5">
+
+        <!-- Stort block: Inomhusmålning -->
+        <a href="#kontakt" class="bento-card group md:col-span-4 md:row-span-2 bg-linen rounded-[2rem] p-9 lg:p-12 flex flex-col justify-between relative overflow-hidden" data-reveal>
+          <div class="card-swatch absolute -right-16 -top-16 w-72 h-72 rounded-full bg-gradient-to-br from-[#E8D5C4] to-[#A44A24]/70 blur-[1px]" aria-hidden="true"></div>
+          <div class="relative flex items-start justify-between">
+            <span class="text-xs tracking-[.3em] text-mist">01</span>
+            <svg class="card-arrow w-6 h-6 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </div>
+          <div class="relative max-w-md">
+            <h3 class="font-serif text-3xl lg:text-4xl mb-4">Inomhusmålning</h3>
+            <p class="text-mist leading-relaxed">Väggar, tak och snickerier med knivskarpa linjer och ett städat, dammfritt utförande. Det sista handslaget i varje renovering.</p>
+          </div>
+        </a>
+
+        <!-- Utomhusmålning -->
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
+          <div class="flex items-start justify-between">
+            <span class="text-xs tracking-[.3em] text-mist">02</span>
+            <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">Utomhusmålning</h3>
+            <p class="text-mist text-sm leading-relaxed">Fasader och fönster som står emot det norrländska klimatet.</p>
+          </div>
+        </a>
+
+        <!-- Tapetsering -->
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
+          <div class="flex items-start justify-between">
+            <span class="text-xs tracking-[.3em] text-mist">03</span>
+            <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">Tapetsering</h3>
+            <p class="text-mist text-sm leading-relaxed">Millimeterpassade våder — från klassiska mönster till moderna väggpapper.</p>
+          </div>
+        </a>
+
+        <!-- Accentblock: Totalentreprenad -->
+        <a href="#kontakt" class="bento-card group md:col-span-2 md:row-span-2 bg-ink text-paper rounded-[2rem] p-9 flex flex-col justify-between relative overflow-hidden" data-reveal>
+          <div class="card-swatch absolute -left-12 -bottom-12 w-56 h-56 rounded-full bg-clay/50 blur-2xl" aria-hidden="true"></div>
+          <div class="relative flex items-start justify-between">
+            <span class="text-xs tracking-[.3em] text-paper/50">04</span>
+            <svg class="card-arrow w-6 h-6 text-paper/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </div>
+          <div class="relative">
+            <h3 class="font-serif text-3xl mb-4">Totalentreprenad</h3>
+            <p class="text-paper/70 leading-relaxed">Ett samtal, ett ansvar. Tillsammans med våra samarbetspartners inom bygg och el driver vi hela projektet — från första skiss till sista penseldraget.</p>
+          </div>
+        </a>
+
+        <!-- Golv & industri -->
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
+          <div class="flex items-start justify-between">
+            <span class="text-xs tracking-[.3em] text-mist">05</span>
+            <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">Golv &amp; industri</h3>
+            <p class="text-mist text-sm leading-relaxed">Slitstarka beläggningar för lokaler, garage och industrimiljöer.</p>
+          </div>
+        </a>
+
+        <!-- Statblock -->
+        <div class="bento-card md:col-span-2 rounded-[2rem] p-8 border border-ink/10 flex flex-col justify-between" data-reveal>
+          <p class="font-serif text-5xl">0 <span class="text-clay text-3xl">kr</span></p>
+          <p class="text-mist text-sm leading-relaxed">Offerten kostar ingenting — ett tydligt pris innan första burken öppnas.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FÖRE / EFTER ===== -->
+  <section id="galleri" class="py-28 lg:py-36 bg-linen/60">
+    <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+
+      <div class="grid lg:grid-cols-12 gap-8 mb-16 items-end" data-reveal>
+        <div class="lg:col-span-7">
+          <p class="text-xs uppercase tracking-[.4em] text-clay mb-6">Före / Efter</p>
+          <h2 class="font-serif font-medium leading-[1.05] tracking-tight text-[clamp(2.25rem,4.5vw,4rem)]">
+            Skillnaden sitter<br>i detaljerna.
+          </h2>
+        </div>
+        <p class="lg:col-span-4 lg:col-start-9 text-mist leading-relaxed">
+          Dra i reglaget och se förvandlingen. <span class="text-ink/70">(Platshållare — ersätts med projektfoton.)</span>
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <figure data-reveal>
+          <div class="ba-frame relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-ew-resize shadow-[0_30px_60px_-35px_rgba(26,26,26,.3)]" style="--split:50%">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#B9B2A6] via-[#8F887C] to-[#6B655B]">
+              <span class="absolute top-5 left-5 text-[10px] uppercase tracking-[.3em] bg-ink/70 text-paper px-4 py-2 rounded-full">Före</span>
+            </div>
+            <div class="ba-after absolute inset-0 bg-gradient-to-br from-[#F3E6D8] via-[#E3C4A8] to-[#B96A3F]">
+              <span class="absolute top-5 right-5 text-[10px] uppercase tracking-[.3em] bg-clay text-paper px-4 py-2 rounded-full">Efter</span>
+            </div>
+            <div class="ba-handle absolute top-0 bottom-0 w-px bg-paper -translate-x-1/2 pointer-events-none">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper shadow-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
+              </span>
+            </div>
+          </div>
+          <figcaption class="flex items-baseline justify-between mt-5 px-1">
+            <span class="font-serif text-xl">Vardagsrum, sekelskiftesvåning</span>
+            <span class="text-xs uppercase tracking-[.25em] text-mist">Örnsköldsvik</span>
+          </figcaption>
+        </figure>
+
+        <figure data-reveal>
+          <div class="ba-frame relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-ew-resize shadow-[0_30px_60px_-35px_rgba(26,26,26,.3)]" style="--split:50%">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#A8A49B] via-[#7C776D] to-[#57534A]">
+              <span class="absolute top-5 left-5 text-[10px] uppercase tracking-[.3em] bg-ink/70 text-paper px-4 py-2 rounded-full">Före</span>
+            </div>
+            <div class="ba-after absolute inset-0 bg-gradient-to-br from-[#EFE8D8] via-[#C9CDBB] to-[#5C6E4B]">
+              <span class="absolute top-5 right-5 text-[10px] uppercase tracking-[.3em] bg-clay text-paper px-4 py-2 rounded-full">Efter</span>
+            </div>
+            <div class="ba-handle absolute top-0 bottom-0 w-px bg-paper -translate-x-1/2 pointer-events-none">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper shadow-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
+              </span>
+            </div>
+          </div>
+          <figcaption class="flex items-baseline justify-between mt-5 px-1">
+            <span class="font-serif text-xl">Fasad, villa i Bjästa</span>
+            <span class="text-xs uppercase tracking-[.25em] text-mist">Utomhusmålning</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CITAT ===== -->
+  <section class="py-28 lg:py-40">
+    <div class="max-w-[1100px] mx-auto px-6 sm:px-10 text-center" data-reveal>
+      <span class="font-serif text-clay text-7xl leading-none block mb-6" aria-hidden="true">&ldquo;</span>
+      <blockquote class="font-serif italic font-medium leading-snug text-[clamp(1.75rem,3.5vw,3rem)]">
+        Färg är det sista handslaget i ett projekt — det som avgör hur allt annat uppfattas.
+      </blockquote>
+      <p class="mt-8 text-xs uppercase tracking-[.4em] text-mist">Åberg &amp; Söner Måleri — sedan 1987</p>
+    </div>
+  </section>
+
+  <!-- ===== KONTAKT ===== -->
+  <section id="kontakt" class="pb-28 lg:pb-36">
+    <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16">
+      <div class="bg-ink text-paper rounded-[2.5rem] px-8 py-16 sm:px-14 lg:px-20 lg:py-24 relative overflow-hidden" data-reveal>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-clay/30 blur-3xl" aria-hidden="true"></div>
+
+        <div class="grid lg:grid-cols-12 gap-14 relative">
+          <div class="lg:col-span-7">
+            <p class="text-xs uppercase tracking-[.4em] text-clay mb-8">Kontakt</p>
+            <h2 class="font-serif font-medium leading-[1.05] tracking-tight text-[clamp(2.5rem,5vw,4.5rem)]">
+              Redo att måla om?<br><em class="italic text-paper/60">Vi tar det från början.</em>
+            </h2>
+            <p class="mt-8 text-paper/70 max-w-md leading-relaxed">
+              Berätta om ditt projekt så återkommer vi med en kostnadsfri offert — utan förpliktelser, med ett pris som håller.
+            </p>
+            <!-- Ersätt mailto-adressen nedan med företagets riktiga e-post -->
+            <a href="mailto:" class="btn-liquid mt-12 inline-flex items-center gap-3 border border-paper/40 rounded-full px-9 py-4 text-sm tracking-wide">
+              Skicka en förfrågan
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="#projekt" class="btn btn-line">Se vårt arbete</a>
           </div>
-        </div>
-      </div>
-      <div class="hero-strip reveal" style="--d:.22s;">
-        <div class="item"><strong>1987</strong><span>Grundat</span></div>
-        <div class="item"><strong>100%</strong><span>Hantverk i fokus</span></div>
-        <div class="item"><strong>Ö-vik</strong><span>Verksamhetsområde</span></div>
-        <div class="item"><strong>0 kr</strong><span>Kostnadsfri offert</span></div>
-      </div>
-    </div>
-    <div class="scroll-cue"><span class="line"></span>Scrolla</div>
-  </section>
 
-  <!-- TJÄNSTER -->
-  <section id="tjanster">
-    <div class="wrap">
-      <div class="index-label reveal"><span class="no">I.</span>Tjänster</div>
-      <div class="section-head reveal" style="--d:.05s;">
-        <h2>Vad vi målar</h2>
-        <p class="lede">Från ett enskilt rum till en hel fastighet — för privatpersoner, bostadsrättsföreningar och företag.</p>
-      </div>
-
-      <div class="service-list reveal" style="--d:.1s;">
-        <div class="service-row">
-          <span class="num">01</span>
-          <h3>Inomhusmålning</h3>
-          <p>Väggar, tak och snickerier målade med precision och rent, städat utförande.</p>
-          <span class="swatch" style="background:#B8471E;" aria-hidden="true"></span>
-        </div>
-        <div class="service-row">
-          <span class="num">02</span>
-          <h3>Utomhusmålning</h3>
-          <p>Fasader, fönster och trädetaljer som klarar det norrländska klimatet.</p>
-          <span class="swatch" style="background:#5C6E4B;" aria-hidden="true"></span>
-        </div>
-        <div class="service-row">
-          <span class="num">03</span>
-          <h3>Tapetsering</h3>
-          <p>Noggrann tapetsering, från klassiska mönster till moderna väggpapper.</p>
-          <span class="swatch" style="background:#4A5A6E;" aria-hidden="true"></span>
-        </div>
-        <div class="service-row">
-          <span class="num">04</span>
-          <h3>Golv &amp; industrimålning</h3>
-          <p>Slitstarka golvbeläggningar för lokaler, garage och industrimiljöer.</p>
-          <span class="swatch" style="background:#3A3532;" aria-hidden="true"></span>
-        </div>
-        <div class="service-row">
-          <span class="num">05</span>
-          <h3>Totalentreprenad</h3>
-          <p>Tillsammans med samarbetspartners inom bygg och el tar vi helhetsansvaret.</p>
-          <span class="swatch" style="background:#C9A24A;" aria-hidden="true"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OM OSS -->
-  <section id="om" style="background:var(--paper-2);">
-    <div class="wrap">
-      <div class="index-label reveal"><span class="no">II.</span>Om oss</div>
-      <div class="about-grid">
-        <p class="pull reveal" style="--d:.05s;">"Färg är det sista handslaget i ett projekt — det som avgör hur allt annat uppfattas."</p>
-        <div class="about-body reveal" style="--d:.1s;">
-          <p>Åberg &amp; Söner Måleri har målat hem och lokaler i Örnsköldsvik sedan 1987. Genom åren har vi hållit fast vid samma princip: inget jobb är för litet eller för stort, och resultatet ska hålla långt efter att vi lämnat platsen.</p>
-          <p>Vi arbetar nära våra kunder genom hela processen — från första offert till sista penseldraget — och tar via samarbetspartners även ansvar för byggnation och el när ett projekt kräver mer än färg.</p>
-          <ul class="about-checks">
-            <li><span>Erfarna målare</span><span>Gedigen branschkunskap sedan 1987.</span></li>
-            <li><span>Kostnadsfri offert</span><span>Tydligt pris innan arbetet startar.</span></li>
-            <li><span>Kvalitetsmaterial</span><span>Vi kompromissar inte med färg eller utförande.</span></li>
-            <li><span>Städat arbete</span><span>Vi lämnar platsen som vi vill hitta den.</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJEKT -->
-  <section id="projekt">
-    <div class="wrap">
-      <div class="index-label reveal"><span class="no">III.</span>Projekt</div>
-      <div class="section-head reveal" style="--d:.05s;">
-        <h2>Ett urval av vårt arbete</h2>
-        <p class="lede">Exempel som visar bredden i vad vi målar. Klicka på en bild för att se den större.</p>
-      </div>
-    </div>
-    <div class="project-grid reveal" style="--d:.1s;" id="projectGrid">
-      <div class="project-tile" data-title="Fasadmålning, villa" data-meta="Örnsköldsvik · Utomhusmålning">
-        <div class="ph" style="background:linear-gradient(150deg,#E9CBB4,#B8471E);"></div>
-        <div class="cap"><strong>Fasadmålning, villa</strong><span>Örnsköldsvik · Utomhusmålning</span></div>
-      </div>
-      <div class="project-tile" data-title="Trapphusmålning" data-meta="Domsjö · Inomhusmålning">
-        <div class="ph" style="background:linear-gradient(150deg,#EFE8D8,#4A5A6E);"></div>
-        <div class="cap"><strong>Trapphusmålning</strong><span>Domsjö · Inomhusmålning</span></div>
-      </div>
-      <div class="project-tile" data-title="Kontorslokal" data-meta="Örnsköldsvik · Inomhusmålning">
-        <div class="ph" style="background:linear-gradient(150deg,#D8D2C2,#5C6E4B);"></div>
-        <div class="cap"><strong>Ommålad kontorslokal</strong><span>Örnsköldsvik · Inomhusmålning</span></div>
-      </div>
-      <div class="project-tile" data-title="Tapetsering, sovrum" data-meta="Husum · Tapetsering">
-        <div class="ph" style="background:linear-gradient(150deg,#E9CBB4,#C9A24A);"></div>
-        <div class="cap"><strong>Tapetsering, sovrum</strong><span>Husum · Tapetsering</span></div>
-      </div>
-      <div class="project-tile" data-title="Industrigolv" data-meta="Örnsköldsvik · Golvbeläggning">
-        <div class="ph" style="background:linear-gradient(150deg,#3A3532,#7A2A11);"></div>
-        <div class="cap"><strong>Industrigolv, lager</strong><span>Örnsköldsvik · Golvbeläggning</span></div>
-      </div>
-      <div class="project-tile" data-title="Altan &amp; fasad" data-meta="Bjästa · Utomhusmålning">
-        <div class="ph" style="background:linear-gradient(150deg,#EFE8D8,#B8471E);"></div>
-        <div class="cap"><strong>Altan &amp; fasad</strong><span>Bjästa · Utomhusmålning</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OMDÖMEN -->
-  <section>
-    <div class="wrap">
-      <div class="index-label reveal"><span class="no">IV.</span>Omdömen</div>
-      <div class="quote-stage reveal" style="--d:.05s;">
-        <div class="quote-track" id="quoteTrack">
-          <div class="quote-slide">
-            <blockquote>"Fantastiskt noggrant arbete och alltid rent och snyggt efter varje dag."</blockquote>
-            <div class="who">Karin, Örnsköldsvik</div>
-          </div>
-          <div class="quote-slide">
-            <blockquote>"Höll tidsplanen fullt ut och resultatet blev precis som vi hoppats."</blockquote>
-            <div class="who">Jonas, Husum</div>
-          </div>
-          <div class="quote-slide">
-            <blockquote>"Ärligt och rakt bemötande redan från offerten. Rekommenderas varmt."</blockquote>
-            <div class="who">Sofia, Domsjö</div>
-          </div>
-        </div>
-        <div class="quote-controls">
-          <button id="quotePrev" aria-label="Föregående omdöme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 6 9 12 15 18"/></svg></button>
-          <div class="quote-dots" id="quoteDots"></div>
-          <button id="quoteNext" aria-label="Nästa omdöme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 6 15 12 9 18"/></svg></button>
-        </div>
-      </div>
-      <p class="quote-note reveal" style="--d:.1s;">Exempelcitat som illustrerar den typ av respons vi strävar efter från varje projekt.</p>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section class="contact-section" id="kontakt">
-    <div class="wrap">
-      <div class="index-label reveal"><span class="no">V.</span>Kontakt</div>
-      <div class="contact-grid">
-        <div class="contact-info reveal" style="--d:.05s;">
-          <h2>Redo att måla om?</h2>
-          <p>Berätta om ditt projekt så återkommer vi med en kostnadsfri offert.</p>
-          <div class="contact-detail"><span class="lbl">Telefon</span><span class="val">[Telefonnummer]</span></div>
-          <div class="contact-detail"><span class="lbl">E-post</span><span class="val">[E-postadress]</span></div>
-          <div class="contact-detail"><span class="lbl">Adress</span><a class="val" href="https://www.google.com/maps/search/?api=1&query=L%C3%A5ngv%C3%A4gen+52,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener">Långvägen 52, Örnsköldsvik</a></div>
-        </div>
-        <form class="contact-form reveal" style="--d:.1s;" id="contactForm" novalidate>
-          <div class="row">
-            <div class="field">
-              <label for="cName">Namn *</label>
-              <input type="text" id="cName" name="name" placeholder="Ditt namn" required>
+          <div class="lg:col-span-4 lg:col-start-9 flex flex-col justify-end gap-8 text-sm">
+            <div>
+              <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">Telefon</p>
+              <a href="tel:" class="link-brush text-lg">[Telefonnummer]</a>
             </div>
-            <div class="field">
-              <label for="cPhone">Telefon *</label>
-              <input type="tel" id="cPhone" name="phone" placeholder="07X-XXX XX XX" required>
+            <div>
+              <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">E-post</p>
+              <a href="mailto:" class="link-brush text-lg">[E-postadress]</a>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[.3em] text-paper/40 mb-2">Besök oss</p>
+              <a href="https://www.google.com/maps/search/?api=1&query=L%C3%A5ngv%C3%A4gen+52,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener" class="link-brush text-lg">Långvägen 52, Örnsköldsvik</a>
             </div>
           </div>
-          <div class="field">
-            <label for="cEmail">E-post *</label>
-            <input type="email" id="cEmail" name="email" placeholder="namn@exempel.se" required>
-          </div>
-          <div class="field">
-            <label for="cService">Tjänst</label>
-            <select id="cService" name="service">
-              <option value="" selected>Välj tjänst (valfritt)</option>
-              <option>Inomhusmålning</option>
-              <option>Utomhusmålning</option>
-              <option>Tapetsering</option>
-              <option>Golv &amp; industrimålning</option>
-              <option>Totalentreprenad</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="cMsg">Meddelande *</label>
-            <textarea id="cMsg" name="message" rows="4" placeholder="Berätta om ditt projekt" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-fill" style="align-self:flex-start;">
-            Skicka förfrågan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-          <div class="form-success" id="contactSuccess">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg>
-            <span>Tack, <strong id="successName"></strong>! Din förfrågan är mottagen — vi hör av oss snart.</span>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a href="#hero" class="footer-brand">Åberg &amp; Söner<small>Måleri · Sedan 1987</small></a>
-      </div>
-      <div class="footer-links">
-        <div>
-          <h5>Snabblänkar</h5>
-          <ul>
-            <li><a href="#tjanster">Tjänster</a></li>
-            <li><a href="#projekt">Projekt</a></li>
-            <li><a href="#om">Om oss</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5>Kontakt</h5>
-          <ul>
-            <li><span>[Telefonnummer]</span></li>
-            <li><span>[E-postadress]</span></li>
-            <li><span>Långvägen 52, Örnsköldsvik</span></li>
-            <li><span>Org.nr: [XXXXXX-XXXX]</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Åberg &amp; Söner Måleri AB</span>
-      <span>Designkoncept — ej publicerad sida. Platshållartexter inom [ ] ska ersättas med riktiga uppgifter.</span>
-    </div>
+<!-- ===== SIDFOT ===== -->
+<footer class="border-t border-ink/10">
+  <div class="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="font-serif text-lg">Åberg <em class="text-clay not-italic font-serif italic">&amp;</em> Söner Måleri AB</p>
+    <p class="text-xs text-mist tracking-wide">© 2026 · Örnsköldsvik · Org.nr [XXXXXX-XXXX]</p>
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Projektbild">
-  <div class="lightbox-stage" id="lbStage">
-    <div id="lbImg" style="position:absolute; inset:0;"></div>
-    <div class="lightbox-cap"><strong id="lbTitle"></strong><span id="lbMeta"></span></div>
-  </div>
-  <button class="lb-prev" id="lbPrev" aria-label="Föregående bild"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 6 9 12 15 18"/></svg></button>
-  <button class="lb-next" id="lbNext" aria-label="Nästa bild"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 6 15 12 9 18"/></svg></button>
-  <button class="lb-close" id="lbClose" aria-label="Stäng"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg></button>
-</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
-<script src="abergmaleri.js"></script>
+  /* ---- Intro: rubriken glider upp, resten tonar in mjukt ---- */
+  if (hasGsap && !reduceMotion) {
+    // Startlägena (dolda element) aktiveras först nu — laddar GSAP inte syns allt ändå
+    document.documentElement.classList.add('js-anim');
+    gsap.registerPlugin(ScrollTrigger);
+
+    const intro = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    intro
+      .to('.line-mask > span', { y: 0, duration: 1.4, stagger: 0.12 }, 0.15)
+      .to('.fade-item', { opacity: 1, y: 0, duration: 1.1, stagger: 0.09 }, 0.5);
+
+    /* ---- Scrollavslöjanden ---- */
+    gsap.utils.toArray('[data-reveal]').forEach((el) => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    /* ---- Diskret parallax på herobilden ---- */
+    gsap.to('#heroImage', {
+      yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#heroImage', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+
+    // Mät om triggerpositionerna när typsnitt och stilar har landat
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+
+  /* ---- Menyn får rygg när man scrollar ---- */
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    const scrolled = window.scrollY > 24;
+    nav.classList.toggle('bg-paper/85', scrolled);
+    nav.classList.toggle('backdrop-blur-md', scrolled);
+    nav.classList.toggle('shadow-[0_1px_0_rgba(26,26,26,.08)]', scrolled);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Före/Efter-reglage: dra med pekare eller styr med piltangenter ---- */
+  document.querySelectorAll('.ba-frame').forEach((frame) => {
+    const setSplit = (clientX) => {
+      const rect = frame.getBoundingClientRect();
+      const pct = Math.min(96, Math.max(4, ((clientX - rect.left) / rect.width) * 100));
+      frame.style.setProperty('--split', pct + '%');
+    };
+
+    let dragging = false;
+    frame.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      frame.setPointerCapture(e.pointerId);
+      setSplit(e.clientX);
+    });
+    frame.addEventListener('pointermove', (e) => { if (dragging) setSplit(e.clientX); });
+    frame.addEventListener('pointerup', () => { dragging = false; });
+    frame.addEventListener('pointercancel', () => { dragging = false; });
+
+    frame.setAttribute('tabindex', '0');
+    frame.setAttribute('role', 'slider');
+    frame.setAttribute('aria-label', 'Jämför före och efter');
+    frame.addEventListener('keydown', (e) => {
+      const current = parseFloat(getComputedStyle(frame).getPropertyValue('--split')) || 50;
+      if (e.key === 'ArrowLeft') { frame.style.setProperty('--split', Math.max(4, current - 4) + '%'); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { frame.style.setProperty('--split', Math.min(96, current + 4) + '%'); e.preventDefault(); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
