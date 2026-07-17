@@ -36,8 +36,7 @@
 *{box-sizing:border-box; margin:0; padding:0;}
 html{scroll-behavior:smooth;}
 body{
-  background:linear-gradient(180deg, #FFFFFF 0%, #F2F4F7 42%, #FFFFFF 78%, #F2F4F7 100%);
-  background-attachment:fixed;
+  background:linear-gradient(180deg, #FFFFFF 0%, #E7EAEF 50%, #FFFFFF 100%);
   color:var(--ink);
   font-family:'Inter', sans-serif;
   line-height:1.6;
