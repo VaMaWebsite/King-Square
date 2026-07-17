@@ -118,18 +118,50 @@
       });
       el.addEventListener('mouseleave', () => {
         if (moveX) { moveX(0); moveY(0); } else { el.style.transform = ''; }
+        if (hasGSAP) gsap.to(el, { scale: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
       });
+      if (hasGSAP) {
+        el.addEventListener('mousedown', () => gsap.to(el, { scale: 0.94, duration: 0.18, ease: 'power2.out', overwrite: 'auto' }));
+        el.addEventListener('mouseup', () => gsap.to(el, { scale: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' }));
+      }
     });
   }
 
-  /* ---------------- service card pointer glow ---------------- */
+  /* ---------------- service card pointer glow + tilt ---------------- */
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('pointermove', (e) => {
       const r = card.getBoundingClientRect();
       card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
       card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      if (hasFinePointer && !reduced) {
+        const rx = ((e.clientX - r.left) / r.width - 0.5) * 12;
+        const ry = -((e.clientY - r.top) / r.height - 0.5) * 10;
+        card.style.setProperty('--rx', rx + 'deg');
+        card.style.setProperty('--ry', ry + 'deg');
+      }
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
     });
   });
+
+  /* ---------------- project card parallax ---------------- */
+  if (hasFinePointer && !reduced) {
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = ((e.clientX - r.left) / r.width - 0.5) * 18;
+        const py = ((e.clientY - r.top) / r.height - 0.5) * 18;
+        card.style.setProperty('--px', px + 'px');
+        card.style.setProperty('--py', py + 'px');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--px', '0px');
+        card.style.setProperty('--py', '0px');
+      });
+    });
+  }
 
   /* ---------------- GSAP scroll reveals ---------------- */
   function initReveals() {
@@ -137,9 +169,13 @@
     if (!items.length) return;
     items.forEach((el, i) => {
       gsap.to(el, {
-        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+        duration: 1.05 + (i % 3) * 0.08, ease: 'power3.out',
         delay: parseFloat(el.dataset.delay || 0),
-        scrollTrigger: { trigger: el, start: 'top 88%' }
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        // hand off to .reveal-ready's CSS state so inline styles don't block
+        // hover-driven transforms afterwards (card lift/tilt, parallax, etc.)
+        onComplete: () => { el.classList.add('reveal-ready'); gsap.set(el, { clearProps: 'all' }); }
       });
     });
   }
@@ -152,8 +188,8 @@
     }
     const words = document.querySelectorAll('.hero-copy h1 .word');
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.fromTo(words, { yPercent: 130, opacity: 0, filter: 'blur(10px)' },
-      { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 1.1, stagger: 0.045 })
+    tl.fromTo(words, { yPercent: 130, opacity: 0, filter: 'blur(10px)', rotateX: -40 },
+      { yPercent: 0, opacity: 1, filter: 'blur(0px)', rotateX: 0, duration: 1.15, stagger: 0.045 })
       .fromTo('.hero-copy .eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .7 }, 0)
       .fromTo('.hero-copy .lead', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=0.7')
       .fromTo('.hero-actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
@@ -237,6 +273,40 @@
     const stage = document.querySelector('.t-stage');
     stage.addEventListener('mouseenter', () => clearInterval(timer));
     stage.addEventListener('mouseleave', restart);
+
+    /* swipe / drag support */
+    let draggingT = false, dragStartX = 0, dragDeltaX = 0, stageWidth = 0;
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      draggingT = true;
+      dragStartX = e.clientX;
+      dragDeltaX = 0;
+      stageWidth = stage.getBoundingClientRect().width;
+      track.style.transition = 'none';
+      stage.classList.add('dragging');
+      clearInterval(timer);
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!draggingT) return;
+      dragDeltaX = e.clientX - dragStartX;
+      const pct = (dragDeltaX / stageWidth) * 100;
+      track.style.transform = `translateX(calc(-${index * 100}% + ${pct}%))`;
+    });
+    function endDragT() {
+      if (!draggingT) return;
+      draggingT = false;
+      stage.classList.remove('dragging');
+      track.style.transition = '';
+      const threshold = stageWidth * 0.15;
+      if (dragDeltaX > threshold) goTo(index - 1);
+      else if (dragDeltaX < -threshold) goTo(index + 1);
+      else render();
+      restart();
+    }
+    stage.addEventListener('pointerup', endDragT);
+    stage.addEventListener('pointercancel', endDragT);
+
     render();
     restart();
   }
@@ -386,6 +456,63 @@
       });
     }
 
+    /* ---- direct manipulation: drag to spin, hover to lift, click to pulse ---- */
+    let dragRotY = 0, dragRotX = 0;      // persistent offset applied by the user
+    let velX = 0, velY = 0;              // angular velocity, decays after release
+    let isDragging = false, lastPX = 0, lastPY = 0, downX = 0, downY = 0, downT = 0;
+    let hovered = false, scaleCur = 1, scaleTarget = 1;
+    let pulse = 0; // 0..1, decays each frame, drives an emissive/opacity flash
+
+    const baseWireOpacity = wireMat.opacity;
+    const baseGlassOpacity = glassMat.opacity;
+    const baseEmissive = accentMat.emissiveIntensity;
+
+    function setHover(on) {
+      hovered = on;
+      scaleTarget = on ? 1.055 : 1;
+    }
+    function firePulse() {
+      pulse = 1;
+      stageEl.classList.remove('pulse');
+      void stageEl.offsetWidth; // restart CSS ring animation
+      stageEl.classList.add('pulse');
+      velY += (Math.random() - 0.5) * 0.14;
+      velX += (Math.random() - 0.5) * 0.08;
+      if (reduced) renderFrame();
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      lastPX = downX = e.clientX;
+      lastPY = downY = e.clientY;
+      downT = performance.now();
+      velX = 0; velY = 0;
+      stageEl.classList.add('grabbing');
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastPX, dy = e.clientY - lastPY;
+      lastPX = e.clientX; lastPY = e.clientY;
+      const k = 0.009;
+      dragRotY += dx * k;
+      dragRotX = Math.max(-0.9, Math.min(0.9, dragRotX + dy * k));
+      velX = dy * k; velY = dx * k;
+      if (reduced) renderFrame();
+    });
+    function endDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      stageEl.classList.toggle('grabbing', false);
+      const moved = Math.hypot(e.clientX - downX, e.clientY - downY);
+      const elapsed = performance.now() - downT;
+      if (moved < 6 && elapsed < 400) firePulse();
+    }
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+    stageEl.addEventListener('pointerenter', () => setHover(true));
+    stageEl.addEventListener('pointerleave', () => setHover(false));
+
     const clock = new THREE.Clock();
     let visible = true;
 
@@ -394,14 +521,31 @@
       targetX += (mouseX - targetX) * 0.04;
       targetY += (mouseY - targetY) * 0.04;
 
+      if (!isDragging) {
+        // inertia: velocity keeps spinning the piece and settles smoothly
+        dragRotY += velY;
+        dragRotX = Math.max(-0.9, Math.min(0.9, dragRotX + velX));
+        velX *= 0.93; velY *= 0.93;
+      }
+      scaleCur += (scaleTarget - scaleCur) * 0.12;
+      pulse *= 0.94;
+
+      group.scale.setScalar(scaleCur);
+      wireMat.opacity = baseWireOpacity + pulse * 0.4 + (hovered ? 0.12 : 0);
+      glassMat.opacity = baseGlassOpacity + pulse * 0.18;
+      accentMat.emissiveIntensity = baseEmissive + pulse * 1.1;
+
       if (!reduced) {
-        group.rotation.y = t * 0.12 + targetX * 0.35;
-        group.rotation.x = t * 0.05 + targetY * 0.22;
+        group.rotation.y = t * 0.12 + targetX * 0.35 + dragRotY;
+        group.rotation.x = t * 0.05 + targetY * 0.22 + dragRotX;
         particles.rotation.y = t * 0.02;
         orbiters.forEach(o => {
-          const a = t * o.speed + o.offset;
+          const a = t * o.speed * (1 + pulse * 0.6) + o.offset;
           o.mesh.position.set(Math.cos(a) * o.radius, Math.sin(a * 0.8) * o.radius * 0.6, Math.sin(a) * o.radius);
         });
+      } else {
+        group.rotation.y = dragRotY;
+        group.rotation.x = dragRotX;
       }
       renderer.render(scene, camera);
       if (!reduced) raf = requestAnimationFrame(renderFrame);
