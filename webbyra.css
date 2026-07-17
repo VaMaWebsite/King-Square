@@ -251,8 +251,6 @@ section{position:relative; padding:150px 0;}
 .service-card::before{content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%), var(--accent-soft), transparent 65%);}
 .service-card:hover{transform:translateY(-8px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)); box-shadow:var(--shadow-md); border-color:var(--accent-soft);}
 .service-card:hover::before{opacity:.7;}
-.service-card .ic{position:relative; width:22px; height:22px; display:flex; align-items:center; justify-content:center; color:var(--accent-deep); margin-bottom:16px; transition:color .4s, transform .5s var(--ease-soft);}
-.service-card:hover .ic{color:var(--accent-deep); transform:translateZ(18px) scale(1.08);}
 .service-card h3{position:relative; font-size:1.18rem; margin-bottom:10px;}
 .service-card p{position:relative; color:var(--ink-dim); font-size:.94rem;}
 .service-card .num{position:absolute; top:22px; right:26px; font-family:'Plus Jakarta Sans',sans-serif; font-size:.78rem; color:var(--ink-faint);}
