@@ -233,8 +233,7 @@ section{position:relative; padding:150px 0;}
 .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:center;}
 @media (max-width:900px){.about-grid{grid-template-columns:1fr; gap:40px;}}
 .about-visual{position:relative; aspect-ratio:4/5; border-radius:var(--radius-lg); background:linear-gradient(160deg,var(--bg-soft-2),var(--accent-soft)); overflow:hidden; box-shadow:var(--shadow-md);}
-.about-visual .grid-lines{position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg,var(--line) 1px, transparent 1px); background-size:34px 34px; opacity:.6;}
-.about-visual .core{position:absolute; top:50%; left:50%; width:120px; height:120px; transform:translate(-50%,-50%); border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); box-shadow:0 40px 80px -20px rgba(47,143,209,.5);}
+.about-visual img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
 .about-text p{color:var(--ink-dim); font-size:1.05rem; margin-bottom:18px; max-width:560px;}
 .about-points{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px;}
 .about-points li{display:flex; gap:10px; align-items:flex-start; font-size:.94rem;}
@@ -252,8 +251,8 @@ section{position:relative; padding:150px 0;}
 .service-card::before{content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s; background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%), var(--accent-soft), transparent 65%);}
 .service-card:hover{transform:translateY(-8px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)); box-shadow:var(--shadow-md); border-color:var(--accent-soft);}
 .service-card:hover::before{opacity:.7;}
-.service-card .ic{position:relative; width:52px; height:52px; border-radius:15px; background:var(--bg-soft-2); display:flex; align-items:center; justify-content:center; color:var(--accent-deep); margin-bottom:22px; transition:background .4s, transform .5s var(--ease-soft);}
-.service-card:hover .ic{background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#fff; transform:rotate(-6deg) scale(1.06) translateZ(18px);}
+.service-card .ic{position:relative; width:22px; height:22px; display:flex; align-items:center; justify-content:center; color:var(--accent-deep); margin-bottom:16px; transition:color .4s, transform .5s var(--ease-soft);}
+.service-card:hover .ic{color:var(--accent-deep); transform:translateZ(18px) scale(1.08);}
 .service-card h3{position:relative; font-size:1.18rem; margin-bottom:10px;}
 .service-card p{position:relative; color:var(--ink-dim); font-size:.94rem;}
 .service-card .num{position:absolute; top:22px; right:26px; font-family:'Plus Jakarta Sans',sans-serif; font-size:.78rem; color:var(--ink-faint);}
