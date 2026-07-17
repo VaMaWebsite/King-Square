@@ -118,18 +118,50 @@
       });
       el.addEventListener('mouseleave', () => {
         if (moveX) { moveX(0); moveY(0); } else { el.style.transform = ''; }
+        if (hasGSAP) gsap.to(el, { scale: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
       });
+      if (hasGSAP) {
+        el.addEventListener('mousedown', () => gsap.to(el, { scale: 0.94, duration: 0.18, ease: 'power2.out', overwrite: 'auto' }));
+        el.addEventListener('mouseup', () => gsap.to(el, { scale: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' }));
+      }
     });
   }
 
-  /* ---------------- service card pointer glow ---------------- */
+  /* ---------------- service card pointer glow + tilt ---------------- */
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('pointermove', (e) => {
       const r = card.getBoundingClientRect();
       card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
       card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      if (hasFinePointer && !reduced) {
+        const rx = ((e.clientX - r.left) / r.width - 0.5) * 12;
+        const ry = -((e.clientY - r.top) / r.height - 0.5) * 10;
+        card.style.setProperty('--rx', rx + 'deg');
+        card.style.setProperty('--ry', ry + 'deg');
+      }
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
     });
   });
+
+  /* ---------------- project card parallax ---------------- */
+  if (hasFinePointer && !reduced) {
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = ((e.clientX - r.left) / r.width - 0.5) * 18;
+        const py = ((e.clientY - r.top) / r.height - 0.5) * 18;
+        card.style.setProperty('--px', px + 'px');
+        card.style.setProperty('--py', py + 'px');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--px', '0px');
+        card.style.setProperty('--py', '0px');
+      });
+    });
+  }
 
   /* ---------------- GSAP scroll reveals ---------------- */
   function initReveals() {
@@ -140,7 +172,10 @@
         opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
         duration: 1.05 + (i % 3) * 0.08, ease: 'power3.out',
         delay: parseFloat(el.dataset.delay || 0),
-        scrollTrigger: { trigger: el, start: 'top 88%' }
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        // hand off to .reveal-ready's CSS state so inline styles don't block
+        // hover-driven transforms afterwards (card lift/tilt, parallax, etc.)
+        onComplete: () => { el.classList.add('reveal-ready'); gsap.set(el, { clearProps: 'all' }); }
       });
     });
   }
@@ -238,6 +273,40 @@
     const stage = document.querySelector('.t-stage');
     stage.addEventListener('mouseenter', () => clearInterval(timer));
     stage.addEventListener('mouseleave', restart);
+
+    /* swipe / drag support */
+    let draggingT = false, dragStartX = 0, dragDeltaX = 0, stageWidth = 0;
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      draggingT = true;
+      dragStartX = e.clientX;
+      dragDeltaX = 0;
+      stageWidth = stage.getBoundingClientRect().width;
+      track.style.transition = 'none';
+      stage.classList.add('dragging');
+      clearInterval(timer);
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!draggingT) return;
+      dragDeltaX = e.clientX - dragStartX;
+      const pct = (dragDeltaX / stageWidth) * 100;
+      track.style.transform = `translateX(calc(-${index * 100}% + ${pct}%))`;
+    });
+    function endDragT() {
+      if (!draggingT) return;
+      draggingT = false;
+      stage.classList.remove('dragging');
+      track.style.transition = '';
+      const threshold = stageWidth * 0.15;
+      if (dragDeltaX > threshold) goTo(index - 1);
+      else if (dragDeltaX < -threshold) goTo(index + 1);
+      else render();
+      restart();
+    }
+    stage.addEventListener('pointerup', endDragT);
+    stage.addEventListener('pointercancel', endDragT);
+
     render();
     restart();
   }
