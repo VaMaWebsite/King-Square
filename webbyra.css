@@ -266,7 +266,7 @@ section{position:relative; padding:150px 0;}
   border:1px solid var(--line); box-shadow:var(--shadow-sm); transition:transform .6s var(--ease-soft), box-shadow .6s var(--ease-soft);
 }
 .project-card:hover{transform:translateY(-5px); box-shadow:var(--shadow-md);}
-.project-card .bg{position:absolute; inset:-6%; transition:transform .5s var(--ease-soft); transform:translate3d(var(--px,0),var(--py,0),0) scale(1);}
+.project-card .bg{position:absolute; inset:-6%; background-size:cover; background-position:center; transition:transform .5s var(--ease-soft); transform:translate3d(var(--px,0),var(--py,0),0) scale(1);}
 .project-card:hover .bg{transform:translate3d(var(--px,0),var(--py,0),0) scale(1.06);}
 .project-card .overlay{
   position:absolute; inset:0; background:linear-gradient(200deg, rgba(12,15,20,.05) 15%, rgba(12,15,20,.8) 100%);
