@@ -1,11 +1,13 @@
 # Bilder för abergmaleri.html
 
-Före/efter-galleriet letar efter dessa filnamn:
+Sidan letar efter dessa filnamn. Saknas en fil visas en färggradient som reserv.
 
-| Fil | Innehåll |
-|---|---|
-| `vardagsrum-fore.jpg` | Vardagsrummet med mönstrad tapet (före) |
-| `vardagsrum-efter.jpg` | Vardagsrummet med vita nymålade väggar (efter) |
+| Fil | Var på sidan | Innehåll |
+|---|---|---|
+| `malare-portratt.jpg` | Hero (första bilden) | Målaren vid röda fasaden med hamnutsikt |
+| `vitmalning.jpg` | Hantverk → Inomhusmålning | Färgrulle mot vit vägg |
+| `tapetsering.jpg` | Hantverk → Tapetsering | Tapetsering med spackelspade |
+| `vardagsrum-fore.jpg` | Före/Efter (före) | Vardagsrum med mönstrad tapet |
+| `vardagsrum-efter.jpg` | Före/Efter (efter) | Vardagsrum med vita nymålade väggar |
 
 Lägg bildfilerna här med exakt dessa namn så visas de automatiskt.
-Saknas filerna visas en färggradient som reserv.
