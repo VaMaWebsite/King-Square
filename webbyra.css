@@ -229,6 +229,28 @@ section{position:relative; padding:150px 0;}
 .scroll-cue .dot-track::after{content:''; position:absolute; top:0; left:0; width:100%; height:14px; background:var(--accent-deep); animation:cueMove 2.4s var(--ease-soft) infinite;}
 @keyframes cueMove{0%{transform:translateY(-100%);} 60%{transform:translateY(300%);} 100%{transform:translateY(300%);}}
 
+/* ---------- hero headline glitch ("störd") ---------- */
+/* Occasional chromatic RGB-split + digital tear on the hero heading.
+   Bursts twice per ~7s loop and stays calm/legible the rest of the time.
+   Disabled automatically by the global prefers-reduced-motion rule. */
+.hero-copy h1.glitch{animation:heroGlitch 7s steps(1,end) infinite;}
+@keyframes heroGlitch{
+  /* calm — most of the loop */
+  0%, 6%, 12%, 100%{transform:translate(0,0) skewX(0deg); text-shadow:none; clip-path:inset(0 0 0 0); opacity:1;}
+  /* burst 1 */
+  6.6%{transform:translate(-2px,1px) skewX(-1.2deg); text-shadow:-2px 0 rgba(47,143,209,.85), 2px 0 rgba(255,90,122,.8); clip-path:inset(8% 0 78% 0);}
+  7.6%{transform:translate(3px,-1px) skewX(1deg); text-shadow:2px 0 rgba(47,143,209,.85), -2px 0 rgba(255,90,122,.8); clip-path:inset(64% 0 12% 0); opacity:.92;}
+  8.6%{transform:translate(-3px,0) skewX(-.6deg); text-shadow:-3px 0 rgba(124,200,255,.9), 3px 0 rgba(255,90,122,.75); clip-path:inset(34% 0 44% 0);}
+  9.6%{transform:translate(2px,1px) skewX(.8deg); text-shadow:2px 0 rgba(47,143,209,.8), -2px 0 rgba(255,90,122,.7); clip-path:inset(0 0 0 0); opacity:.96;}
+  /* burst 2 */
+  62%{transform:translate(0,0) skewX(0deg); text-shadow:none; clip-path:inset(0 0 0 0);}
+  62.7%{transform:translate(3px,-1px) skewX(1.4deg); text-shadow:3px 0 rgba(47,143,209,.85), -3px 0 rgba(255,90,122,.8); clip-path:inset(52% 0 26% 0); opacity:.9;}
+  63.6%{transform:translate(-2px,1px) skewX(-1deg); text-shadow:-2px 0 rgba(124,200,255,.9), 2px 0 rgba(255,90,122,.75); clip-path:inset(14% 0 70% 0);}
+  64.6%{transform:translate(2px,0) skewX(.6deg); text-shadow:2px 0 rgba(47,143,209,.8), -2px 0 rgba(255,90,122,.7); clip-path:inset(0 0 0 0); opacity:1;}
+}
+/* keep the accent word legible during the tear */
+.hero-copy h1.glitch em{text-shadow:none;}
+
 /* ---------- about ---------- */
 .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:center;}
 @media (max-width:900px){.about-grid{grid-template-columns:1fr; gap:40px;}}
