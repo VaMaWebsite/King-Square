@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fura Restaurang &amp; Konferens — Örnsköldsvik</title>
+<meta name="description" content="Fura Restaurang & Konferens i Örnsköldsvik — husmanskost, veckans lunch, catering och konferensrum på anrik Hägglunds-industrimark.">
+<meta name="theme-color" content="#F6F2EA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%232F5D45'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='%23F6F2EA' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#F6F2EA; --panel:#EFE9DD; --panel-2:#E7E0D1;
+    --ink:#211F1C; --muted:#6E675C; --line:#DED7C8;
+    --pine:#2F5D45; --pine-lt:#3C7256; --dark:#1B1A17;
+    --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--pine);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+  /* ---------- Header / flikmeny ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,242,234,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 0}
+  .logo{display:flex;align-items:baseline;gap:12px;line-height:1}
+  .logo .mark{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:.14em}
+  .logo .sub{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+  nav{display:flex;flex-wrap:wrap;gap:4px}
+  .tab{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+       padding:10px 16px;border-radius:999px;cursor:pointer;background:none;border:0;font-family:var(--sans);
+       transition:color .25s,background .25s}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--pine);background:var(--panel)}
+
+  /* ---------- Sidor ---------- */
+  main{min-height:60vh}
+  .page{display:none;animation:fade .5s ease both}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  section.pad{padding:72px 0}
+
+  .eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--pine);margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.01em}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,3rem);line-height:1.06;letter-spacing:-.01em}
+  h3{font-family:var(--serif);font-weight:600;font-size:1.4rem;margin-bottom:6px}
+  p{color:#3a362f}
+  .lead{font-size:1.15rem;color:var(--muted);max-width:52ch}
+  .muted{color:var(--muted)}
+
+  /* Hero (Hem) */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:76px 0}
+  .hero .copy p{margin-top:18px;max-width:46ch}
+  .badge{display:inline-block;margin-top:26px;font-size:.92rem;color:var(--pine);border:1px solid var(--pine);
+          padding:8px 16px;border-radius:999px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;letter-spacing:.02em;padding:14px 26px;border-radius:999px;
+       cursor:pointer;font-family:var(--sans);border:1px solid var(--ink);background:none;color:var(--ink);
+       transition:background .3s,color .3s,border-color .3s}
+  .btn:hover{background:var(--ink);color:var(--cream)}
+  .btn.solid{background:var(--pine);border-color:var(--pine);color:var(--cream)}
+  .btn.solid:hover{background:var(--pine-lt);border-color:var(--pine-lt)}
+  .btn svg{width:16px;height:16px}
+
+  /* Bild-platshållare */
+  .ph{position:relative;border-radius:22px;overflow:hidden;background:var(--panel-2)}
+  .ph::after{content:attr(data-label);position:absolute;left:14px;bottom:12px;font-size:10px;letter-spacing:.24em;
+             text-transform:uppercase;color:rgba(33,31,28,.45)}
+  .ph.warm{background:linear-gradient(135deg,#E9DcC8,#C9A67E 60%,#8f6a49)}
+  .ph.wood{background:linear-gradient(135deg,#D8C3A3,#A9814f)}
+  .ph.hall{background:linear-gradient(150deg,#cfd3cb,#7f8a7d 70%,#3f4a3e)}
+  .ph.buffet{background:linear-gradient(135deg,#E6D6bd,#b98c55)}
+  .ph.door{background:linear-gradient(160deg,#c9bfb0,#8a7d6c)}
+  .ph.map{background:linear-gradient(135deg,#e5e7df,#c3c8bb)}
+  .hero .ph{aspect-ratio:5/4}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  .stack>*+*{margin-top:16px}
+
+  /* Konferens bento */
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:190px;gap:14px}
+  .bento .ph:nth-child(1){grid-column:span 2;grid-row:span 2}
+  .bento .ph:nth-child(4){grid-row:span 2}
+
+  /* Veckans lunch */
+  .menu-card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:34px 36px}
+  .menu-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
+  .menu-row:last-child{border-bottom:0}
+  .menu-row .day{font-family:var(--serif);font-size:1.1rem}
+  .menu-row .dish{color:var(--muted);text-align:right}
+  .note{background:var(--pine);color:var(--cream);border-radius:18px;padding:22px 26px;margin-bottom:26px}
+  .note strong{display:block;font-family:var(--serif);font-size:1.25rem;margin-bottom:4px;font-weight:600}
+  .incl{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{font-size:.85rem;background:var(--panel);border:1px solid var(--line);padding:8px 16px;border-radius:999px}
+
+  /* Formulär */
+  .form{display:flex;flex-direction:column;gap:16px;max-width:460px}
+  label{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block}
+  input,textarea{width:100%;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--cream);
+    border:1px solid var(--line);border-radius:12px;padding:13px 15px;transition:border-color .25s}
+  input:focus,textarea:focus{outline:none;border-color:var(--pine)}
+  textarea{resize:vertical;min-height:120px}
+  .form-note{font-size:.82rem;color:var(--pine);display:none}
+  .form-note.show{display:block}
+
+  /* Om oss */
+  .center{text-align:center;max-width:60ch;margin:0 auto}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--dark);color:#cfc9bd;margin-top:40px}
+  .fgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;padding:66px 0 30px}
+  footer h4{font-family:var(--serif);color:var(--cream);font-size:1.5rem;font-weight:600;margin-bottom:22px}
+  .frow{display:flex;align-items:center;gap:13px;margin-bottom:14px;font-size:.95rem}
+  .frow .ic{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+            display:flex;align-items:center;justify-content:center}
+  .frow svg{width:15px;height:15px;stroke:#cfc9bd}
+  .hours div{margin-bottom:8px;font-size:.95rem}
+  .hours b{color:var(--cream);font-weight:500}
+  .social{display:flex;gap:10px;margin-top:20px}
+  .social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;
+            align-items:center;justify-content:center;transition:background .25s,border-color .25s}
+  .social a:hover{background:var(--pine);border-color:var(--pine)}
+  .social svg{width:16px;height:16px;fill:#cfc9bd}
+  .fbottom{border-top:1px solid rgba(255,255,255,.1);padding:20px 0;font-size:.8rem;color:#8f887b;text-align:center}
+
+  @media(max-width:820px){
+    .hero,.two{grid-template-columns:1fr;gap:34px}
+    .bento{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+    .bento .ph:nth-child(1){grid-column:span 2}
+    .fgrid{grid-template-columns:1fr;gap:36px}
+    .bar{flex-direction:column;align-items:flex-start;gap:14px}
+    nav{width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){.page{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#" data-go="hem" aria-label="Fura Restaurang & Konferens">
+      <span class="mark">FURA</span>
+      <span class="sub">Restaurang<br>/ Konferens</span>
+    </a>
+    <nav id="nav">
+      <button class="tab active" data-go="hem">Hem</button>
+      <button class="tab" data-go="lunch">Veckans lunch</button>
+      <button class="tab" data-go="konferens">Konferens</button>
+      <button class="tab" data-go="kontakt">Bokning &amp; kontakt</button>
+      <button class="tab" data-go="om">Om oss</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== HEM ===== -->
+  <div class="page active" id="hem">
+    <div class="wrap">
+      <div class="hero">
+        <div class="copy">
+          <p class="eyebrow">Örnsköldsvik · Husmanskost &amp; konferens</p>
+          <h1>Välkomna!</h1>
+          <p>Här äter du lunch och konfererar i en fräsch miljö. God husmanskost med hembakat bröd och fika — samt catering — lagat av våra egna kockar.</p>
+          <p>Du hittar enkelt till oss på Hägglunds entreprenörernas område (Centrumvägen 5A, Gullänget). Parkera utanför restaurangen eller på andra sidan Björnavägen.</p>
+          <span class="badge">Vi erbjuder take away från dagens lunch</span>
+          <div class="cta-row">
+            <button class="btn solid" data-go="lunch">Veckans lunch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn" data-go="konferens">Boka konferens</button>
+          </div>
+        </div>
+        <div class="ph warm" data-label="Foto · Restaurangen"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VECKANS LUNCH ===== -->
+  <div class="page" id="lunch">
+    <section class="wrap pad">
+      <p class="eyebrow">Måndag–Fredag · 10:30–13:30</p>
+      <h2>Veckans lunch</h2>
+      <div class="two" style="margin-top:40px">
+        <div>
+          <div class="note">
+            <strong>Trevlig sommar!</strong>
+            Vi har sommarstängt — välkommen åter den 3 augusti.
+          </div>
+          <p>Varje dag dukar vi upp en stor salladsbuffé med hembakat mjukt bröd. Ett prisvärt och mättande lunchstopp mitt i arbetsdagen.</p>
+          <div class="incl">
+            <span class="chip">Stor salladsbuffé</span>
+            <span class="chip">Hembakat bröd</span>
+            <span class="chip">Måltidsdryck ingår</span>
+            <span class="chip">Kaffe &amp; te ingår</span>
+          </div>
+        </div>
+        <div class="menu-card">
+          <h3 style="margin-bottom:14px">Dagens rätter</h3>
+          <div class="menu-row"><span class="day">Måndag</span><span class="dish">Husmanskost · uppdateras veckovis</span></div>
+          <div class="menu-row"><span class="day">Tisdag</span><span class="dish">Husmanskost · uppdateras veckovis</span></div>
+          <div class="menu-row"><span class="day">Onsdag</span><span class="dish">Husmanskost · uppdateras veckovis</span></div>
+          <div class="menu-row"><span class="day">Torsdag</span><span class="dish">Soppa &amp; smörgås</span></div>
+          <div class="menu-row"><span class="day">Fredag</span><span class="dish">Veckans specialare</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== KONFERENS ===== -->
+  <div class="page" id="konferens">
+    <section class="wrap pad">
+      <div class="two" style="align-items:start">
+        <div class="stack">
+          <p class="eyebrow">Möten &amp; konferens</p>
+          <h2>Konferens</h2>
+          <p>Företag utvecklas genom möten och är sällan en isolerad verkstad. Vi hoppas att historiens vingslag kan bidra till nya, spännande och givande samtal här hos oss.</p>
+          <p>Boka mötesrum för 8–10 personer med skärmar, eller konferensrum för upp till 50 personer med projektor. I alla rum ingår grundutrustning och wi-fi.</p>
+          <p>Beställ gärna våra halv- eller heldagspaket med fika, smörgås och lunch från restaurangen.</p>
+          <div class="cta-row"><button class="btn solid" data-go="kontakt">Kontakta oss för prisförslag</button></div>
+        </div>
+        <div class="bento">
+          <div class="ph hall" data-label="Konferensrum"></div>
+          <div class="ph wood" data-label="Mötesrum"></div>
+          <div class="ph warm" data-label="Grupprum"></div>
+          <div class="ph wood" data-label="Styrelserum"></div>
+          <div class="ph hall" data-label="Utbildning"></div>
+          <div class="ph warm" data-label="Loungen"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== BOKNING & KONTAKT ===== -->
+  <div class="page" id="kontakt">
+    <section class="wrap pad">
+      <div class="two" style="align-items:start">
+        <div class="ph door" data-label="Foto · Entré Centrumvägen 5A" style="aspect-ratio:4/5"></div>
+        <div>
+          <p class="eyebrow">Bokning &amp; kontakt</p>
+          <h2>Kontakt</h2>
+          <p style="margin:16px 0 28px">Kontakta oss gärna med era önskemål så återkommer vi så snart vi kan med ett prisförslag.</p>
+          <form class="form" id="contactForm" novalidate>
+            <div><label for="n">Namn *</label><input id="n" type="text" placeholder="Ditt namn" required></div>
+            <div><label for="e">E-post *</label><input id="e" type="email" placeholder="namn@exempel.se" required></div>
+            <div><label for="t">Meddelande *</label><textarea id="t" placeholder="Berätta om er förfrågan" required></textarea></div>
+            <button class="btn solid" type="submit" style="align-self:flex-start">Skicka
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="form-note" id="fnote">Tack! Din förfrågan är mottagen — vi hör av oss inom kort.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== OM OSS ===== -->
+  <div class="page" id="om">
+    <section class="wrap pad">
+      <p class="eyebrow" style="text-align:center">Om oss</p>
+      <h2 style="text-align:center;max-width:16ch;margin:0 auto">En lokal aktör på anrik industrimark</h2>
+      <p class="center" style="margin-top:26px">Vi erbjuder våra kunder välagad husmanskost och catering samt möjlighet till en modern och bekväm konferensmiljö. Vi befinner oss på anrik industrimark med fastigheter som byggts upp och länge huserats av Hägglunds &amp; Söner — här har många kreativa idéer väckts, som tillsammans med gedigen ingenjörskonst och avancerad mekanisk verkstad gett produkter liv.</p>
+      <h2 style="text-align:center;margin:48px 0 26px">Välkommen till oss!</h2>
+      <a class="ph map" data-label="Karta · Centrumvägen 5, Örnsköldsvik" style="display:block;aspect-ratio:16/7;max-width:820px;margin:0 auto"
+         href="https://www.google.com/maps/search/?api=1&query=Centrumv%C3%A4gen+5,+%C3%96rnsk%C3%B6ldsvik" target="_blank" rel="noopener"></a>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <h4>Kontakta oss</h4>
+      <div class="frow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.8.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c1 .3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:066098700">0660-987 00</a></div>
+      <div class="frow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@furarestaurang.se">info@furarestaurang.se</a></div>
+      <div class="frow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Centrumvägen 5A, Örnsköldsvik</span></div>
+      <div class="social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.4a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8zm0 10.5a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2zm6.6-10.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
+      </div>
+    </div>
+    <div class="hours">
+      <h4>Öppettider</h4>
+      <div><b>Måndag – Fredag</b></div>
+      <div>Café · <b>08:30 – 15:00</b></div>
+      <div>Lunch · <b>10:30 – 13:30</b></div>
+      <div style="margin-top:14px;color:#8f887b">Lördag &amp; söndag stängt</div>
+    </div>
+  </div>
+  <div class="fbottom">© 2026 Fura Restaurang &amp; Konferens · Centrumvägen 5A, Örnsköldsvik</div>
+</footer>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  const tabs = document.querySelectorAll('.tab');
+  function go(id){
+    pages.forEach(p=>p.classList.toggle('active', p.id===id));
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.go===id));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  document.querySelectorAll('[data-go]').forEach(el=>{
+    el.addEventListener('click', e=>{ e.preventDefault(); go(el.dataset.go); });
+  });
+  document.getElementById('contactForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    if(e.target.checkValidity()){ document.getElementById('fnote').classList.add('show'); e.target.reset(); }
+    else e.target.reportValidity();
+  });
+</script>
+</body>
+</html>
