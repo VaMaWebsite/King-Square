@@ -175,13 +175,15 @@ tailwind.config = {
 
         <div class="lg:col-span-5 xl:col-span-5 relative">
           <div id="heroImage" class="fade-item relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-40px_rgba(26,26,26,.35)]">
-            <!-- Platshållare: ersätt med foto av ett färdigmålat rum -->
+            <!-- Reservgradient bakom fotot ifall bilden saknas -->
             <div class="absolute inset-0 bg-gradient-to-br from-[#EFD6CC] via-[#DCA79B] to-[#B72A20]"></div>
-            <div class="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_30%_20%,rgba(250,249,246,.8),transparent_55%)]"></div>
+            <img src="img/malare-portratt.jpg" alt="Målare från Åberg Måleri målar en röd fasad med utsikt över Örnsköldsviks hamn"
+                 class="absolute inset-0 w-full h-full object-cover [object-position:38%_center]" loading="eager" onerror="this.remove()">
+            <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/50 to-transparent"></div>
             <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
               <div class="bg-paper/90 backdrop-blur rounded-2xl px-5 py-4">
                 <p class="text-[10px] uppercase tracking-[.3em] text-mist">Utvalt projekt</p>
-                <p class="font-serif text-lg mt-1">Sekelskiftesvåning, Örnsköldsvik</p>
+                <p class="font-serif text-lg mt-1">Fasadmålning, Örnsköldsvik</p>
               </div>
             </div>
           </div>
@@ -236,7 +238,10 @@ tailwind.config = {
 
         <!-- Stort block: Inomhusmålning -->
         <a href="#kontakt" class="bento-card group md:col-span-4 md:row-span-2 bg-linen rounded-[2rem] p-9 lg:p-12 flex flex-col justify-between relative overflow-hidden" data-reveal>
-          <div class="card-swatch absolute -right-16 -top-16 w-72 h-72 rounded-full bg-gradient-to-br from-[#EFD6CC] to-[#C0121D]/60 blur-[1px]" aria-hidden="true"></div>
+          <div class="absolute inset-0" aria-hidden="true">
+            <img src="img/vitmalning.jpg" alt="" class="absolute right-0 top-0 h-full w-3/5 object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-r from-linen via-linen/95 to-linen/40"></div>
+          </div>
           <div class="relative flex items-start justify-between">
             <span class="text-xs tracking-[.3em] text-mist">01</span>
             <svg class="card-arrow w-6 h-6 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -248,24 +253,32 @@ tailwind.config = {
         </a>
 
         <!-- Utomhusmålning -->
-        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
-          <div class="flex items-start justify-between">
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between relative overflow-hidden" data-reveal>
+          <div class="absolute inset-0" aria-hidden="true">
+            <img src="img/utomhusmalning.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-t from-linen via-linen/85 to-linen/25"></div>
+          </div>
+          <div class="relative flex items-start justify-between">
             <span class="text-xs tracking-[.3em] text-mist">02</span>
             <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </div>
-          <div>
+          <div class="relative">
             <h3 class="font-serif text-2xl mb-2">Utomhusmålning</h3>
             <p class="text-mist text-sm leading-relaxed">Fasader och fönster som står emot det norrländska klimatet.</p>
           </div>
         </a>
 
         <!-- Tapetsering -->
-        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
-          <div class="flex items-start justify-between">
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between relative overflow-hidden" data-reveal>
+          <div class="absolute inset-0" aria-hidden="true">
+            <img src="img/tapetsering.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-t from-linen via-linen/85 to-linen/25"></div>
+          </div>
+          <div class="relative flex items-start justify-between">
             <span class="text-xs tracking-[.3em] text-mist">03</span>
             <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </div>
-          <div>
+          <div class="relative">
             <h3 class="font-serif text-2xl mb-2">Tapetsering</h3>
             <p class="text-mist text-sm leading-relaxed">Millimeterpassade våder — från klassiska mönster till moderna väggpapper.</p>
           </div>
@@ -285,12 +298,16 @@ tailwind.config = {
         </a>
 
         <!-- Golv & industri -->
-        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between" data-reveal>
-          <div class="flex items-start justify-between">
+        <a href="#kontakt" class="bento-card group md:col-span-2 bg-linen rounded-[2rem] p-8 flex flex-col justify-between relative overflow-hidden" data-reveal>
+          <div class="absolute inset-0" aria-hidden="true">
+            <img src="img/industrigolv.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" onerror="this.remove()">
+            <div class="absolute inset-0 bg-gradient-to-t from-linen via-linen/85 to-linen/25"></div>
+          </div>
+          <div class="relative flex items-start justify-between">
             <span class="text-xs tracking-[.3em] text-mist">05</span>
             <svg class="card-arrow w-5 h-5 text-ink/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
           </div>
-          <div>
+          <div class="relative">
             <h3 class="font-serif text-2xl mb-2">Golv &amp; industri</h3>
             <p class="text-mist text-sm leading-relaxed">Slitstarka beläggningar för lokaler, garage och industrimiljöer.</p>
           </div>
@@ -322,7 +339,7 @@ tailwind.config = {
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="max-w-3xl mx-auto">
 
         <figure data-reveal>
           <div class="ba-frame relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-ew-resize shadow-[0_30px_60px_-35px_rgba(26,26,26,.3)]" style="--split:50%">
@@ -345,26 +362,6 @@ tailwind.config = {
           <figcaption class="flex items-baseline justify-between mt-5 px-1">
             <span class="font-serif text-xl">Vardagsrum — från tapet till ljusa väggar</span>
             <span class="text-xs uppercase tracking-[.25em] text-mist">Örnsköldsvik</span>
-          </figcaption>
-        </figure>
-
-        <figure data-reveal>
-          <div class="ba-frame relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-ew-resize shadow-[0_30px_60px_-35px_rgba(26,26,26,.3)]" style="--split:50%">
-            <div class="absolute inset-0 bg-gradient-to-br from-[#A8A49B] via-[#7C776D] to-[#57534A]">
-              <span class="absolute top-5 left-5 text-[10px] uppercase tracking-[.3em] bg-ink/70 text-paper px-4 py-2 rounded-full">Före</span>
-            </div>
-            <div class="ba-after absolute inset-0 bg-gradient-to-br from-[#EFE8D8] via-[#C9CDBB] to-[#5C6E4B]">
-              <span class="absolute top-5 right-5 text-[10px] uppercase tracking-[.3em] bg-clay text-paper px-4 py-2 rounded-full">Efter</span>
-            </div>
-            <div class="ba-handle absolute top-0 bottom-0 w-px bg-paper -translate-x-1/2 pointer-events-none">
-              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper shadow-lg flex items-center justify-center">
-                <svg class="w-4 h-4 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m9 6-4 6 4 6M15 6l4 6-4 6"/></svg>
-              </span>
-            </div>
-          </div>
-          <figcaption class="flex items-baseline justify-between mt-5 px-1">
-            <span class="font-serif text-xl">Fasad, villa i Bjästa</span>
-            <span class="text-xs uppercase tracking-[.25em] text-mist">Utomhusmålning</span>
           </figcaption>
         </figure>
 
