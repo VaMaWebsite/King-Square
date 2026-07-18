@@ -9,7 +9,7 @@ Sidan letar efter dessa filnamn. Saknas en fil visas en färggradient som reserv
 | `utomhusmalning.jpg` | Hantverk → Utomhusmålning | Skrapning/förarbete på fasad |
 | `tapetsering.jpg` | Hantverk → Tapetsering | Tapetsering med spackelspade |
 | `industrigolv.jpg` | Hantverk → Golv & industri | Blankt industrigolv i epoxi |
-| `vardagsrum-fore.jpg` | Före/Efter (före) | Vardagsrum med mönstrad tapet |
-| `vardagsrum-efter.jpg` | Före/Efter (efter) | Vardagsrum med vita nymålade väggar |
+| `fore.jpg` | Före/Efter (före) | Vägg före ommålning |
+| `efter.jpg` | Före/Efter (efter) | Samma vägg i ny kulör |
 
 Lägg bildfilerna här med exakt dessa namn så visas de automatiskt.
