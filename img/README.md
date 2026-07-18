@@ -8,7 +8,7 @@ Sidan letar efter dessa filnamn. Saknas en fil visas en färggradient som reserv
 | `vitmalning.jpg` | Hantverk → Inomhusmålning | Färgrulle mot vit vägg |
 | `utomhusmalning.jpg` | Hantverk → Utomhusmålning | Skrapning/förarbete på fasad |
 | `tapetsering.jpg` | Hantverk → Tapetsering | Tapetsering med spackelspade |
-| `golv-industri.jpg` | Hantverk → Golv & industri | Blankt industrigolv i epoxi |
+| `industrigolv.jpg` | Hantverk → Golv & industri | Blankt industrigolv i epoxi |
 | `vardagsrum-fore.jpg` | Före/Efter (före) | Vardagsrum med mönstrad tapet |
 | `vardagsrum-efter.jpg` | Före/Efter (efter) | Vardagsrum med vita nymålade väggar |
 
