@@ -187,14 +187,20 @@
       return;
     }
     const words = document.querySelectorAll('.hero-copy h1 .word');
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.fromTo(words, { yPercent: 130, opacity: 0, filter: 'blur(10px)', rotateX: -40 },
-      { yPercent: 0, opacity: 1, filter: 'blur(0px)', rotateX: 0, duration: 1.15, stagger: 0.045 })
+    // clean, minimal fade-in-up — words glide up into view, no blur/3D flourish
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.fromTo(words, { yPercent: 100, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: .9, stagger: 0.06 })
       .fromTo('.hero-copy .eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .7 }, 0)
-      .fromTo('.hero-copy .lead', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=0.7')
-      .fromTo('.hero-actions', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
-      .fromTo('.hero-meta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
-      .fromTo('.hero-stage', { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: 1.2 }, 0.15);
+      .fromTo('.hero-copy .lead', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
+      .fromTo('.hero-actions', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
+      .fromTo('.hero-meta', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .8 }, '-=0.6')
+      .fromTo('.hero-stage', { opacity: 0, scale: .94 }, { opacity: 1, scale: 1, duration: 1.1 }, 0.15);
+
+    // once settled, let the 3D stage drift with a very slow, subtle float
+    if (!reduced) {
+      gsap.to('.hero-stage', { y: -12, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.3 });
+    }
 
     initReveals();
     initProcessLine();
