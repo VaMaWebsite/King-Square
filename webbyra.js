@@ -182,16 +182,12 @@
 
   /* ---------------- hero intro timeline ---------------- */
   function runHeroIntro() {
-    const heroHeading = document.querySelector('.hero-copy h1');
-    // turn on the periodic "störd" glitch once the intro has settled
-    const armGlitch = () => { if (heroHeading) heroHeading.classList.add('glitch'); };
     if (!hasGSAP) {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal-ready'));
-      armGlitch();
       return;
     }
     const words = document.querySelectorAll('.hero-copy h1 .word');
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, onComplete: armGlitch });
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
     tl.fromTo(words, { yPercent: 130, opacity: 0, filter: 'blur(10px)', rotateX: -40 },
       { yPercent: 0, opacity: 1, filter: 'blur(0px)', rotateX: 0, duration: 1.15, stagger: 0.045 })
       .fromTo('.hero-copy .eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .7 }, 0)
