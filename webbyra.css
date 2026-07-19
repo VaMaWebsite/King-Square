@@ -197,11 +197,17 @@ section{position:relative; padding:150px 0;}
 .magnetic{will-change:transform;}
 
 /* ---------- hero ---------- */
-.hero{min-height:100vh; display:flex; align-items:center; padding-top:140px; overflow:hidden;}
+.hero{
+  min-height:100vh; display:flex; align-items:center; padding-top:140px; overflow:hidden;
+  /* subtle soft light-blue → light-grey gradient, fading into the page background */
+  background:linear-gradient(180deg,#E6F2FD 0%,#F1F7FC 38%,rgba(238,240,243,0) 88%);
+}
 .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center; position:relative; z-index:2;}
 @media (max-width:1000px){.hero-grid{grid-template-columns:1fr;}}
-.hero-copy h1{font-size:clamp(2.6rem,6.4vw,5rem); margin:20px 0 24px;}
-.hero-copy h1 .line{display:block; overflow:hidden; perspective:700px;}
+.hero-copy h1{font-size:clamp(2.6rem,6.4vw,5rem); margin:20px 0 24px; line-height:1.16;}
+/* padding gives ascenders/descenders room inside the overflow mask; the
+   negative margin pulls the lines back so the spacing stays tight */
+.hero-copy h1 .line{display:block; overflow:hidden; perspective:700px; padding:.12em 0; margin:-.06em 0;}
 .hero-copy h1 .word{display:inline-block; will-change:transform; transform-style:preserve-3d;}
 .hero-copy h1 em{font-style:normal; background:linear-gradient(100deg,var(--accent-deep),var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
 .hero-copy p.lead{font-size:1.18rem; line-height:1.6; color:var(--ink-dim); max-width:480px; margin-bottom:40px;}
