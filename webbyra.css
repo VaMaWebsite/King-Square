@@ -241,42 +241,10 @@ section{position:relative; padding:150px 0;}
 /* ---------- about ---------- */
 .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:center;}
 @media (max-width:900px){.about-grid{grid-template-columns:1fr; gap:40px;}}
-.about-visual{position:relative; aspect-ratio:4/5; border-radius:var(--radius-lg); background:linear-gradient(160deg,#EAF3FD,#CFE8FB); overflow:hidden; box-shadow:var(--shadow-md);}
-
-/* ---- coded UI mockup (replaces the old stock photo) ---- */
-.ui-mock{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:clamp(22px,4.5%,38px); animation:softFloat 9s ease-in-out infinite;}
-/* very slow, subtle vertical drift */
-@keyframes softFloat{0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);}}
-
-/* main browser window — frosted glass */
-.ui-browser{position:relative; width:100%; border-radius:18px; overflow:hidden;
-  background:rgba(255,255,255,.86); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.7); box-shadow:0 34px 64px -30px rgba(20,60,110,.42);}
-.ui-browser-bar{display:flex; align-items:center; gap:7px; padding:13px 16px; background:rgba(255,255,255,.5); border-bottom:1px solid rgba(20,60,110,.08);}
-.ui-dot{width:10px; height:10px; border-radius:50%; background:#CBD9E8;}
-.ui-dot:nth-child(1){background:#FF6B6B;} .ui-dot:nth-child(2){background:#FDBC40;} .ui-dot:nth-child(3){background:#34C759;}
-.ui-url{margin-left:10px; height:16px; flex:1; max-width:150px; border-radius:8px; background:rgba(20,60,110,.08);}
-.ui-browser-body{padding:18px; display:flex; flex-direction:column; gap:14px;}
-.ui-head{display:flex; align-items:center; gap:12px;}
-.ui-avatar{flex:none; width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-deep));}
-.ui-head-lines{flex:1; display:flex; flex-direction:column; gap:7px;}
-.ui-l{height:8px; border-radius:4px; background:rgba(20,60,110,.13);}
-.ui-l.w60{width:62%;} .ui-l.w40{width:40%;}
-.ui-feature{height:33%; min-height:110px; border-radius:14px; position:relative; overflow:hidden;
-  background:linear-gradient(135deg,var(--accent-2),var(--accent-deep));}
-.ui-feature::after{content:''; position:absolute; inset:0; background:radial-gradient(140px 90px at 78% 18%, rgba(255,255,255,.4), transparent 62%);}
-.ui-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
-.ui-card{height:50px; border-radius:10px; background:rgba(20,60,110,.05); border:1px solid rgba(20,60,110,.06);}
-.ui-bars{display:flex; align-items:flex-end; gap:8px; height:56px;}
-.ui-bars span{flex:1; border-radius:5px 5px 3px 3px; background:linear-gradient(var(--accent),var(--accent-deep)); opacity:.85;}
-
-/* floating glass stat card — adds depth over the window */
-.ui-glass{position:absolute; right:18px; bottom:24px; width:36%; min-width:118px; max-width:150px; padding:14px 15px; border-radius:16px;
-  background:rgba(255,255,255,.55); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,.75); box-shadow:0 22px 46px -20px rgba(20,60,110,.48);}
-.ui-glass-num{display:block; width:46px; height:18px; border-radius:6px; background:linear-gradient(120deg,var(--accent-deep),var(--accent)); margin-bottom:9px;}
-.ui-glass-l{display:block; height:6px; border-radius:3px; background:rgba(20,60,110,.15); margin-bottom:6px;}
-.ui-glass-l.s{width:68%;}
+.about-visual{position:relative; aspect-ratio:4/5; border-radius:var(--radius-lg); background:linear-gradient(160deg,var(--bg-soft-2),var(--accent-soft)); overflow:hidden; box-shadow:var(--shadow-md);}
+.about-visual img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; animation:softFloat 8s ease-in-out infinite;}
+/* very slow, subtle vertical drift; the slight scale keeps edges from showing */
+@keyframes softFloat{0%,100%{transform:translateY(0) scale(1.05);} 50%{transform:translateY(-8px) scale(1.05);}}
 .about-text p{color:var(--ink-dim); font-size:1.05rem; margin-bottom:18px; max-width:560px;}
 .about-points{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px;}
 .about-points li{display:flex; gap:10px; align-items:flex-start; font-size:.94rem;}
