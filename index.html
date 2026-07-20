@@ -133,8 +133,29 @@
   <!-- OM OSS -->
   <section id="om">
     <div class="wrap about-grid">
-      <div class="about-visual reveal">
-        <img src="assets/about-visual.jpg" alt="En av VAMAs utvecklare som kodar på en bärbar dator" loading="lazy">
+      <div class="about-visual reveal" role="img" aria-label="Illustration av ett modernt, rent gränssnitt byggt av VAMA">
+        <div class="ui-mock" aria-hidden="true">
+          <div class="ui-browser">
+            <div class="ui-browser-bar">
+              <span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span>
+              <span class="ui-url"></span>
+            </div>
+            <div class="ui-browser-body">
+              <div class="ui-head">
+                <span class="ui-avatar"></span>
+                <span class="ui-head-lines"><span class="ui-l w60"></span><span class="ui-l w40"></span></span>
+              </div>
+              <div class="ui-feature"></div>
+              <div class="ui-cards"><span class="ui-card"></span><span class="ui-card"></span><span class="ui-card"></span></div>
+              <div class="ui-bars"><span style="height:42%"></span><span style="height:72%"></span><span style="height:54%"></span><span style="height:90%"></span><span style="height:64%"></span></div>
+            </div>
+          </div>
+          <div class="ui-glass">
+            <span class="ui-glass-num"></span>
+            <span class="ui-glass-l"></span>
+            <span class="ui-glass-l s"></span>
+          </div>
+        </div>
       </div>
       <div class="about-text">
         <span class="eyebrow reveal">Om VAMA</span>
@@ -208,21 +229,21 @@
         <h2 class="reveal" data-delay=".05">Så jobbar vi</h2>
         <p class="reveal" data-delay=".1">Fyra tydliga steg, från idé till lansering.</p>
       </div>
-      <div class="process-list reveal" data-delay=".1">
-        <div class="process-line" aria-hidden="true"><div class="process-line-fill" id="processFill"></div></div>
-        <div class="process-step">
+      <div class="process-list">
+        <div class="process-line" aria-hidden="true"></div>
+        <div class="process-step reveal" data-delay="0">
           <div class="node">01</div>
           <div class="body"><h3>Discovery</h3><p>Vi lär känna verksamheten, målgruppen och målen innan en enda pixel ritas.</p></div>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal" data-delay=".1">
           <div class="node">02</div>
           <div class="body"><h3>Design</h3><p>Visuell identitet och gränssnitt tar form — förankrat med er hela vägen.</p></div>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal" data-delay=".2">
           <div class="node">03</div>
           <div class="body"><h3>Development</h3><p>Designen byggs till en snabb, responsiv och tillgänglig webbplats.</p></div>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal" data-delay=".3">
           <div class="node">04</div>
           <div class="body"><h3>Launch</h3><p>Sidan testas, optimeras och lanseras — med support efteråt.</p></div>
         </div>
